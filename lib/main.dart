@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(create: (context)=>GoogleSignInProvider(),
      child: MaterialApp(
-      home: WelcomeScreen(),
+      home: LoginScreen(),
     )
     );
    
