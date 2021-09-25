@@ -5,11 +5,9 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Color(0x14bf61),
+    return Scaffold(
+        backgroundColor: Colors.greenAccent[400],
         body: Body(),
-        ),
-    );
+        );
   }
 }
