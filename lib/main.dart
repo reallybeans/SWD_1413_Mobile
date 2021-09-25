@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:timxe/screens/login/login_screen.dart';
+import 'package:timxe/screens/login/widgets/phone_auth/sign_in_phonenum.dart';
 import 'package:timxe/screens/welcome/welcome_screen.dart';
 
 void main() {
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: WelcomeScreen(),
+      home: LoginByPhone(),
     );
   }
 }
