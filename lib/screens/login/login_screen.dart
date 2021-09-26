@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:timxe/screens/logged/logged_screen.dart';
 import 'package:timxe/screens/login/widgets/body.dart';
+import 'package:timxe/screens/login/widgets/splash_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -15,8 +16,7 @@ class LoginScreen extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
           } else if(snapshot.hasData){
-            ////Check co mat tren database
-            return LoggedScreen();
+            return SplashR();
           }else if(snapshot.hasError){
             return Center(child: Text('Some thing wrong!'),);
           }
