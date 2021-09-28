@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:timxe/common/rounded_button.dart';
+import 'package:timxe/screens/logged/logged_screen.dart';
+import 'package:timxe/screens/login/login_screen.dart';
 import 'package:timxe/screens/welcome/widgets/background.dart';
 
 class Body extends StatelessWidget {
@@ -23,9 +25,12 @@ class Body extends StatelessWidget {
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              child: RoundedButton(
-                text: "Bắt Đầu",
-                press: () {},
+              child: RaisedButton(
+                child: Text('Bắt Đầu'),
+                onPressed: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => LoginScreen()));
+                },
               ),
             ),
           ),
