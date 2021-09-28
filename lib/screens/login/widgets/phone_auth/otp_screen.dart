@@ -1,17 +1,18 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:pinput/pin_put/pin_put.dart';
+import 'package:timxe/screens/welcome/welcome_screen.dart';
 
 class OTPScreen extends StatefulWidget {
   final String phone;
-  // ignore: use_key_in_widget_constructors
-  const OTPScreen(this.phone);
+  OTPScreen(this.phone);
   @override
   _OTPScreenState createState() => _OTPScreenState();
 }
 
 class _OTPScreenState extends State<OTPScreen> {
   final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
+  late String _verificationCode;
   final TextEditingController _pinPutController = TextEditingController();
   final FocusNode _pinPutFocusNode = FocusNode();
   final BoxDecoration pinPutDecoration = BoxDecoration(
@@ -24,8 +25,9 @@ class _OTPScreenState extends State<OTPScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldkey,
       appBar: AppBar(
-        title: Text('Nhập mã OTP'),
+        title: Text('OTP Verification'),
       ),
       body: Column(
         children: [
@@ -33,11 +35,8 @@ class _OTPScreenState extends State<OTPScreen> {
             margin: EdgeInsets.only(top: 40),
             child: Center(
               child: Text(
-                'Mã xác thực +84-${widget.phone}',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 26,
-                ),
+                'Verify +84-${widget.phone}',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
               ),
             ),
           ),
@@ -54,10 +53,70 @@ class _OTPScreenState extends State<OTPScreen> {
               selectedFieldDecoration: pinPutDecoration,
               followingFieldDecoration: pinPutDecoration,
               pinAnimationType: PinAnimationType.fade,
+              onSubmit: (pin) async {
+                try {
+                  await FirebaseAuth.instance
+                      .signInWithCredential(PhoneAuthProvider.credential(
+                          verificationId: _verificationCode, smsCode: pin))
+                      .then((value) async {
+                    if (value.user != null) {
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => WelcomeScreen()),
+                          (route) => false);
+                    }
+                  });
+                } catch (e) {
+                  FocusScope.of(context).unfocus();
+                  _scaffoldkey.currentState!
+                      // ignore: deprecated_member_use
+                      .showSnackBar(
+                          const SnackBar(content: Text('invalid OTP')));
+                }
+              },
             ),
-          ),
+          )
         ],
       ),
     );
+  }
+
+  _verifyPhone() async {
+    await FirebaseAuth.instance.verifyPhoneNumber(
+        phoneNumber: '+84${widget.phone}',
+        verificationCompleted: (PhoneAuthCredential credential) async {
+          await FirebaseAuth.instance
+              .signInWithCredential(credential)
+              .then((value) async {
+            if (value.user != null) {
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => WelcomeScreen()),
+                  (route) => false);
+            }
+          });
+        },
+        verificationFailed: (FirebaseAuthException e) {
+          print(e.message);
+        },
+        codeSent: (verficationID, resendToken) async {
+          setState(() {
+            _verificationCode = verficationID;
+          });
+        },
+        codeAutoRetrievalTimeout: (String verificationID) {
+          setState(() {
+            _verificationCode = verificationID;
+          });
+        },
+        timeout: Duration(seconds: 120));
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _verifyPhone();
   }
 }
