@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:timxe/screens/logged/logged_screen.dart';
 import 'package:timxe/screens/login/widgets/google_auth/google_sign_in.dart';
 
-Future<bool> apiCheckLogin(BuildContext context)async{
+Future apiCheckLogin(BuildContext context)async{
       final user = FirebaseAuth.instance.currentUser!;
       var name = user.email;
       try {
@@ -20,16 +20,18 @@ Future<bool> apiCheckLogin(BuildContext context)async{
           if (response.statusCode == 200) {
             ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text('Đăng nhập thành công!')));
-             Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) =>LoggedScreen()));
+           Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(builder: (context) => LoggedScreen()),
+                        (route) => false);
+          return true;
           }else{
             ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text('Tài khoản chưa được cấp phép!')));
             final provider =
                 Provider.of<GoogleSignInProvider>(context, listen: false);
             provider.logout();
+            return false;
           }
         });
       } on FirebaseAuthException catch (e) {}
-      return false;
   }

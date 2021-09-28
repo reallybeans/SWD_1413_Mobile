@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:timxe/screens/login/login_screen.dart';
 import 'package:timxe/screens/login/widgets/google_auth/google_sign_in.dart';
@@ -21,7 +22,7 @@ class _LoggedScreen extends State<LoggedScreen> {
             actions: [
               ElevatedButton(
                 child: Text('No'),
-                onPressed: () => Navigator.pop(context,true),
+                onPressed: () => Navigator.pop(context,false),
               ),
                ElevatedButton(
                 child: Text('Yes'),
