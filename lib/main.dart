@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:timxe/screens/login/login_screen.dart';
 import 'package:timxe/screens/login/widgets/google_auth/google_sign_in.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(create: (context)=>GoogleSignInProvider(),
-     child: MaterialApp(
+     child: GetMaterialApp(
       home: StartScreen(),
     )
     );
