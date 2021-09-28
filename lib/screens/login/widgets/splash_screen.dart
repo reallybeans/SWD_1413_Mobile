@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashR> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(Duration(seconds: 1), () {
+    Timer(Duration(seconds: 2), () {
       apiCheckLogin(context);
     });
 
@@ -35,7 +35,7 @@ class _SplashScreenState extends State<SplashR> {
           children: [
             // logo here
             SvgPicture.asset(
-              'assets/logo_welcome.svg',
+              'assets/icons/logo_welcome.svg',
               width: 150,
               height: 150,
             ),
