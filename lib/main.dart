@@ -1,30 +1,20 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
-import 'package:timxe/screens/login/login_screen.dart';
-import 'package:timxe/screens/login/widgets/google_auth/google_sign_in.dart';
-import 'package:timxe/screens/login/widgets/splash_screen.dart';
-import 'package:timxe/screens/start_screen.dart';
-import 'package:timxe/screens/welcome/welcome_screen.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:timxe/routes/app_pages.dart';
+import 'package:timxe/screens/login/binding/home_binding.dart';
+
 
 void main() async {
-   WidgetsFlutterBinding.ensureInitialized();
-   await Firebase.initializeApp();
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return ChangeNotifierProvider(create: (context)=>GoogleSignInProvider(),
-     child: GetMaterialApp(
-      home: StartScreen(),
-    )
-    );
-   
-  }
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  HomeBinding().dependencies();
+  runApp(
+    GetMaterialApp(
+      title: "Application",
+      initialRoute: AppPages.INITIAL,
+      getPages: AppPages.routes,
+      debugShowCheckedModeBanner: false,
+    ),
+  );
 }
