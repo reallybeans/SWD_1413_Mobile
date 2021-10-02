@@ -1,9 +1,11 @@
 import 'package:get/get.dart';
 import 'package:timxe/screens/login/binding/home_binding.dart';
 import 'package:timxe/screens/login/binding/login_binding.dart';
+import 'package:timxe/screens/login/binding/phone_login_binding.dart';
 import 'package:timxe/screens/login/binding/start_binding.dart';
 import 'package:timxe/screens/login/binding/welcome_binding.dart';
 import 'package:timxe/screens/login/views/home_view.dart';
+import 'package:timxe/screens/login/views/login_phone_view.dart';
 import 'package:timxe/screens/login/views/login_screen.dart';
 import 'package:timxe/screens/login/views/start_view.dart';
 import 'package:timxe/screens/login/views/welcome.dart';
@@ -21,21 +23,25 @@ class AppPages {
       page: () => LoginScreen(),
       binding: LoginBinding(),
     ),
-      GetPage(
+    GetPage(
       name: _Paths.HOME,
       page: () => HomeView(),
       binding: HomeBinding(),
     ),
-      GetPage(
+    GetPage(
       name: _Paths.WELCOME,
       page: () => WelcomeView(),
       binding: WelcomeBinding(),
     ),
-         GetPage(
+    GetPage(
       name: _Paths.START,
       page: () => StartView(),
       binding: StartBinding(),
     ),
-    
+    GetPage(
+      name: _Paths.PHONELOGIN,
+      page: () => PhoneLoginView(),
+      binding: PhoneLoginBinding(),
+    ),
   ];
 }
