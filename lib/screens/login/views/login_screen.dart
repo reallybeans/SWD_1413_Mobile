@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:timxe/screens/login/controller/login_controller.dart';
-import 'package:timxe/screens/login/widgets/phone_login_button.dart';
+
 
 class LoginScreen extends GetView<LoginController> {
   @override
@@ -21,7 +21,7 @@ class LoginScreen extends GetView<LoginController> {
                 alignment: Alignment.bottomCenter,
                 child: Column(
                   children: [
-                    PhoneButton(),
+                    // PhoneButton(),
                     Row(
                       children: [
                         Expanded(
