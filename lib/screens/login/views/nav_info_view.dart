@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:timxe/screens/login/controller/home_controller.dart';
 import 'package:timxe/screens/login/controller/welcome_controller.dart';
-class NavInfoView extends GetView<WelcomeController> {
+class NavInfoView extends GetView<WelcomeController>{
 
   @override
   Widget build(BuildContext context) {
