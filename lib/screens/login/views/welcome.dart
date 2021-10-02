@@ -11,7 +11,7 @@ import 'package:timxe/screens/login/views/nav_shedule_view.dart';
 class WelcomeView extends GetView<WelcomeController> {
   @override
   Widget build(BuildContext context) {
-    var index = 1.obs;
+    var index = 0.obs;
     final iconItems = <Widget>[
       Icon(
         Icons.schedule,
@@ -43,7 +43,7 @@ class WelcomeView extends GetView<WelcomeController> {
     ];
     return Scaffold(
         extendBody: true,
-        backgroundColor: Colors.greenAccent[700],
+        backgroundColor: Colors.greenAccent[400],
         body: Obx(() =>views[index.value] ),
         bottomNavigationBar: Theme(
           data: Theme.of(context).copyWith(
