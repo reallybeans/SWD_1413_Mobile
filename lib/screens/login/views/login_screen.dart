@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:timxe/routes/app_pages.dart';
 import 'package:timxe/screens/login/controller/login_controller.dart';
-
 
 class LoginScreen extends GetView<LoginController> {
   @override
@@ -22,6 +22,26 @@ class LoginScreen extends GetView<LoginController> {
                 child: Column(
                   children: [
                     // PhoneButton(),
+                    Container(
+                      padding: EdgeInsets.all(4),
+                      child: ElevatedButton.icon(
+                        onPressed: () {
+                          Get.toNamed(Routes.PHONELOGIN);
+                        },
+                        icon: FaIcon(
+                          FontAwesomeIcons.phone,
+                          color: Colors.black,
+                        ),
+                        label: Text(
+                          'Tiếp tục với số điện thoại',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.white,
+                            onPrimary: Colors.black,
+                            minimumSize: Size(double.infinity, 50)),
+                      ),
+                    ),
                     Row(
                       children: [
                         Expanded(

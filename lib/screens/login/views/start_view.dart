@@ -26,11 +26,21 @@ class StartView extends GetView<HomeController> {
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
-                child: RaisedButton(
-                  child: Text('Bắt Đầu'),
-                  onPressed: () {
-                    Get.toNamed(Routes.LOGIN);
-                  },
+                margin: EdgeInsets.symmetric(vertical: 50),
+                width: size.width * 0.8,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(17),
+                  child: FlatButton(
+                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                    color: Colors.greenAccent[400],
+                    onPressed: () {
+                      Get.toNamed(Routes.LOGIN);
+                    },
+                    child: Text(
+                      'Bắt đầu',
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    ),
+                  ),
                 ),
               ),
             ),
