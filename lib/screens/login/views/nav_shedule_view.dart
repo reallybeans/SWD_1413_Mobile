@@ -11,10 +11,12 @@ import 'package:timxe/screens/login/controller/home_controller.dart';
 import 'package:timxe/screens/login/controller/nav_shedule_controller.dart';
 import 'package:timxe/screens/login/controller/welcome_controller.dart';
 import 'package:timxe/screens/login/services/search_schedule_api.dart';
+import 'package:timxe/screens/login/widgets/user_title.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class NavSheduleView extends GetView<NavSheduleController> {
   WelcomeController welcomeController = Get.find<WelcomeController>();
+  final NavSheduleController userController=Get.put(NavSheduleController());
   final listSchedule = [
     Schedule1(nameCustomer: 'nameCustomer1'),
     Schedule1(nameCustomer: 'nameCustomer2'),
@@ -108,38 +110,39 @@ class NavSheduleView extends GetView<NavSheduleController> {
               )),
         ),
         Spacer(),
-        CarouselSlider.builder(
-          itemCount: listSchedule.length,
-          itemBuilder: (context, index, realIndex) {
-            Schedule1 _schedule = listSchedule[index];
-            return formSchedule(_schedule);
-          },
-          options: CarouselOptions(
-            height: size.height * 0.6,
-            enableInfiniteScroll: false,
-            enlargeCenterPage: true,
+        Obx(
+          () => CarouselSlider.builder(
+            itemCount: userController.scheduleList.length,
+            itemBuilder: (context, index, realIndex) {
+              // Schedule1 _schedule = listSchedule[index];
+              return UserTitle(userController.scheduleList[index]);
+            },
+            options: CarouselOptions(
+              height: size.height * 0.5,
+              enableInfiniteScroll: false,
+              enlargeCenterPage: true,
+            ),
           ),
         ),
         Spacer(),
-       
       ],
     ));
   }
-  Widget formSchedule(Schedule1 schedule){
-    return   Stack(clipBehavior: Clip.none, 
-    children: [
+
+  Widget formSchedule(Schedule1 schedule) {
+    return Stack(clipBehavior: Clip.none, children: [
       Container(
-          // margin: EdgeInsets.symmetric(horizontal: 12, vertical: 30),
-           margin: EdgeInsets.only(top: 30),
-          // width: double.infinity,
-          // height: double.infinity,
-          decoration: new BoxDecoration(
-              color: Colors.white,
-              borderRadius: new BorderRadius.all(
-                const Radius.circular(20.0),
-              )),
-              child: Center(child: Container(child: Text(schedule.nameCustomer))),
-              ),
+        // margin: EdgeInsets.symmetric(horizontal: 12, vertical: 30),
+        margin: EdgeInsets.only(top: 30),
+        // width: double.infinity,
+        // height: double.infinity,
+        decoration: new BoxDecoration(
+            color: Colors.white,
+            borderRadius: new BorderRadius.all(
+              const Radius.circular(20.0),
+            )),
+        child: Center(child: Container(child: Text(schedule.nameCustomer))),
+      ),
       Positioned(
         top: 0,
         left: 30,
@@ -154,27 +157,32 @@ class NavSheduleView extends GetView<NavSheduleController> {
           ),
         ),
       ),
-       Positioned(
+      Positioned(
           bottom: -20,
           right: -30,
-          child: 
-            FlatButton(
-              onPressed:()async{
-                launch('tel://+84794219080');
-                // await FlutterPhoneDirectCaller.callNumber('0794219080');
-              },
-              child: CircleAvatar(
-                backgroundColor: Colors.grey.withOpacity(0.7),
-                radius: 50,
-                child: Container(
-                  width: 80,
-                  height: 80,
-                  // color: Colors.greenAccent[400],
-                  decoration: BoxDecoration(color: Colors.greenAccent[400],borderRadius: new BorderRadius.all(Radius.circular(50))),child: Icon(Icons.phone,color: Colors.white,size: 30,),
+          child: FlatButton(
+            onPressed: () async {
+              launch('tel://+84794219080');
+              // await FlutterPhoneDirectCaller.callNumber('0794219080');
+            },
+            child: CircleAvatar(
+              backgroundColor: Colors.grey.withOpacity(0.7),
+              radius: 50,
+              child: Container(
+                width: 80,
+                height: 80,
+                // color: Colors.greenAccent[400],
+                decoration: BoxDecoration(
+                    color: Colors.greenAccent[400],
+                    borderRadius: new BorderRadius.all(Radius.circular(50))),
+                child: Icon(
+                  Icons.phone,
+                  color: Colors.white,
+                  size: 30,
                 ),
               ),
-            )
-              ),
+            ),
+          )),
     ]);
   }
 }
