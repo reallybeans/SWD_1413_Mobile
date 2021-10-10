@@ -49,7 +49,7 @@ dependencies:
   flutter_typeahead: ^3.2.1
   url_launcher: ^6.0.12
   flutter_phone_direct_caller: ^2.0.0
-
+  geocoder: ^0.2.1
   #State Management
   provider: ^5.0.0
 dev_dependencies:

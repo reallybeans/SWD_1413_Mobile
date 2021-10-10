@@ -51,7 +51,6 @@ class WelcomeView extends GetView<WelcomeController> {
           ),
           child: CurvedNavigationBar(
               backgroundColor: Colors.transparent,
-              // buttonBackgroundColor: Colors.greenAccent,
               animationCurve: Curves.easeInOut,
               animationDuration: Duration(milliseconds: 300),
               height: 60,

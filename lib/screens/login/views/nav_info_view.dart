@@ -28,15 +28,15 @@ class NavInfoView extends GetView<WelcomeController> {
               height: 32,
             ),
             CircleAvatar(
-              radius: 40,
+              radius: 50,
               backgroundImage: NetworkImage(controller.user.photoURL!),
             ),
             SizedBox(
               height: 12,
             ),
-            Text(
+            Text (
               controller.user.displayName!,
-              style: TextStyle(color: Colors.black, fontSize: 16),
+              style: TextStyle(color: Colors.black, fontSize: 20),
             ),
             SizedBox(
               height: 8,
@@ -46,27 +46,27 @@ class NavInfoView extends GetView<WelcomeController> {
             //   style: TextStyle(color: Colors.black, fontSize: 16),
             // ),
             ProfileMenu(
-              icon: "assets/icons/User Icon.svg",
+              icon: Icon(Icons.person,color: Colors.orange.shade200,),
               press: () {},
               text: 'Hồ sơ cá nhân',
             ),
             ProfileMenu(
-              icon: "assets/icons/bell nofi.svg",
+        icon: Icon(Icons.notifications,color: Colors.orange.shade200,),
               press: () {},
               text: 'Thông báo',
             ),
             ProfileMenu(
-              icon: "assets/icons/settings.svg",
+         icon: Icon(Icons.settings,color: Colors.orange.shade200,),
               press: () {},
               text: 'Cài đặt',
             ),
             ProfileMenu(
-              icon: 'assets/icons/question-mark.svg',
+        icon: Icon(Icons.headset_mic_outlined,color: Colors.orange.shade200,),
               press: () {},
               text: 'Hỗ trợ',
             ),
             ProfileMenu(
-              icon: "assets/icons/exit.svg",
+         icon: Icon(Icons.logout_outlined,color: Colors.orange.shade200,),
               press: () {
                 controller.logout();
               },
