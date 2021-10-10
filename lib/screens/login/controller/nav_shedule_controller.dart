@@ -20,7 +20,9 @@ class NavSheduleController extends GetxController {
 
   @override
   void onReady() {
+    fetchUsers();
     super.onReady();
+    update();
   }
 
   @override
