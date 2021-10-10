@@ -141,21 +141,7 @@ class ScheduleContainer extends StatelessWidget {
                 ],
               ),
               Spacer(),
-              Row(
-                children: [
-                  InkWell(
-                    child: Expanded(
-                      child: Text('Xem thêm ...',
-                          style: TextStyle(
-                              fontSize: 12,
-                              decoration: TextDecoration.underline,
-                              color: Colors.greenAccent.shade400)),
-                    ),
-                    onTap: () => {},
-                  ),
-                ],
-              ),
-              Spacer(),
+             SizedBox(height: 30,),
               Spacer(),
             ],
           ),
