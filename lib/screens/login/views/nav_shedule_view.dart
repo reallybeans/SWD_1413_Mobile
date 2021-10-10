@@ -17,13 +17,6 @@ import 'package:url_launcher/url_launcher.dart';
 class NavSheduleView extends GetView<NavSheduleController> {
   WelcomeController welcomeController = Get.find<WelcomeController>();
   final NavSheduleController userController=Get.put(NavSheduleController());
-  final listSchedule = [
-    Schedule1(nameCustomer: 'nameCustomer1'),
-    Schedule1(nameCustomer: 'nameCustomer2'),
-    Schedule1(nameCustomer: 'nameCustomer3'),
-    Schedule1(nameCustomer: 'nameCustomer4'),
-    Schedule1(nameCustomer: 'nameCustomer5'),
-  ];
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -109,6 +102,11 @@ class NavSheduleView extends GetView<NavSheduleController> {
                 style: TextStyle(fontSize: 34),
               )),
         ),
+        RaisedButton(
+          onPressed: (){},
+          child: Text("Click"),
+        )
+        ,
         Spacer(),
         Obx(
           () => CarouselSlider.builder(
@@ -129,60 +127,60 @@ class NavSheduleView extends GetView<NavSheduleController> {
     ));
   }
 
-  Widget formSchedule(Schedule1 schedule) {
-    return Stack(clipBehavior: Clip.none, children: [
-      Container(
-        // margin: EdgeInsets.symmetric(horizontal: 12, vertical: 30),
-        margin: EdgeInsets.only(top: 30),
-        // width: double.infinity,
-        // height: double.infinity,
-        decoration: new BoxDecoration(
-            color: Colors.white,
-            borderRadius: new BorderRadius.all(
-              const Radius.circular(20.0),
-            )),
-        child: Center(child: Container(child: Text(schedule.nameCustomer))),
-      ),
-      Positioned(
-        top: 0,
-        left: 30,
-        child: CircleAvatar(
-          backgroundColor: Colors.grey.withOpacity(0.6),
-          radius: 50,
-          child: CircleAvatar(
-            // backgroundImage: AssetImage(urlImage),
-            backgroundColor: Colors.transparent,
-            // backgroundImage: AssetImage('assets/images/iconMoney.png'),
-            radius: 50,
-          ),
-        ),
-      ),
-      Positioned(
-          bottom: -20,
-          right: -30,
-          child: FlatButton(
-            onPressed: () async {
-              launch('tel://+84794219080');
-              // await FlutterPhoneDirectCaller.callNumber('0794219080');
-            },
-            child: CircleAvatar(
-              backgroundColor: Colors.grey.withOpacity(0.7),
-              radius: 50,
-              child: Container(
-                width: 80,
-                height: 80,
-                // color: Colors.greenAccent[400],
-                decoration: BoxDecoration(
-                    color: Colors.greenAccent[400],
-                    borderRadius: new BorderRadius.all(Radius.circular(50))),
-                child: Icon(
-                  Icons.phone,
-                  color: Colors.white,
-                  size: 30,
-                ),
-              ),
-            ),
-          )),
-    ]);
-  }
+  // Widget formSchedule(Schedule1 schedule) {
+  //   return Stack(clipBehavior: Clip.none, children: [
+  //     Container(
+  //       // margin: EdgeInsets.symmetric(horizontal: 12, vertical: 30),
+  //       margin: EdgeInsets.only(top: 30),
+  //       // width: double.infinity,
+  //       // height: double.infinity,
+  //       decoration: new BoxDecoration(
+  //           color: Colors.white,
+  //           borderRadius: new BorderRadius.all(
+  //             const Radius.circular(20.0),
+  //           )),
+  //       child: Center(child: Container(child: Text(schedule.nameCustomer))),
+  //     ),
+  //     Positioned(
+  //       top: 0,
+  //       left: 30,
+  //       child: CircleAvatar(
+  //         backgroundColor: Colors.grey.withOpacity(0.6),
+  //         radius: 50,
+  //         child: CircleAvatar(
+  //           // backgroundImage: AssetImage(urlImage),
+  //           backgroundColor: Colors.transparent,
+  //           // backgroundImage: AssetImage('assets/images/iconMoney.png'),
+  //           radius: 50,
+  //         ),
+  //       ),
+  //     ),
+  //     Positioned(
+  //         bottom: -20,
+  //         right: -30,
+  //         child: FlatButton(
+  //           onPressed: () async {
+  //             launch('tel://+84794219080');
+  //             // await FlutterPhoneDirectCaller.callNumber('0794219080');
+  //           },
+  //           child: CircleAvatar(
+  //             backgroundColor: Colors.grey.withOpacity(0.7),
+  //             radius: 50,
+  //             child: Container(
+  //               width: 80,
+  //               height: 80,
+  //               // color: Colors.greenAccent[400],
+  //               decoration: BoxDecoration(
+  //                   color: Colors.greenAccent[400],
+  //                   borderRadius: new BorderRadius.all(Radius.circular(50))),
+  //               child: Icon(
+  //                 Icons.phone,
+  //                 color: Colors.white,
+  //                 size: 30,
+  //               ),
+  //             ),
+  //           ),
+  //         )),
+  //   ]);
+  // }
 }

@@ -10,16 +10,13 @@ class UserTitle extends StatelessWidget{
   Widget build(BuildContext context){
     return Stack(clipBehavior: Clip.none, children: [
       Container(
-        // margin: EdgeInsets.symmetric(horizontal: 12, vertical: 30),
         margin: EdgeInsets.only(top: 30),
-        // width: double.infinity,
-        // height: double.infinity,
         decoration: new BoxDecoration(
             color: Colors.white,
             borderRadius: new BorderRadius.all(
               const Radius.circular(20.0),
             )),
-        child: Center(child: Container(child: Text(user.first_name+user.last_name))),
+        child: Center(child: Container(child: Text(user.company.name))),
       ),
       Positioned(
         top: 0,
@@ -30,7 +27,7 @@ class UserTitle extends StatelessWidget{
           child: CircleAvatar(
             // backgroundImage: AssetImage(urlImage),
             backgroundColor: Colors.transparent,
-             backgroundImage: NetworkImage(user.avt),
+             backgroundImage: NetworkImage(user.phone),
             radius: 50,
           ),
         ),
@@ -40,8 +37,16 @@ class UserTitle extends StatelessWidget{
           right: -30,
           child: FlatButton(
             onPressed: () async {
-              launch('tel://+84794219080');
+              // launch('tel://+84794219080');
               // await FlutterPhoneDirectCaller.callNumber('0794219080');
+
+              //  String googleUrl = 'https://www.google.com/maps/search/?api=1&query=11.084732443891067, 107.68383795664876';
+                String googleUrl = 'https://www.google.com/maps/dir/?api=1&origin=10.8465751,106.7861366&destination=10.8415,106.8100&travelmode=driving&dir_action=navigate';
+    if (await canLaunch(googleUrl)) {
+      await launch(googleUrl);
+    } else {
+      throw 'Could not open the map.';
+    }
             },
             child: CircleAvatar(
               backgroundColor: Colors.grey.withOpacity(0.7),

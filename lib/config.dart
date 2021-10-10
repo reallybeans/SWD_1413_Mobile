@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 const kPrimaryColor =Colors.greenAccent;
 const kBackgroundColor=Colors.green;
+
 class Config {
+  static String host="http://3.138.105.45/";
  static MediaQueryData? _mediaQueryData;
   static double? screenWidth;
   static double? screenHeight;
