@@ -18,11 +18,13 @@ class ScheduleDetails extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.green[900],
           title: const Text('Thông tin chi tiết'),
         ),
-        body: ListView(
+        body:
+         ListView(
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(20),
@@ -32,7 +34,7 @@ class ScheduleDetails extends StatelessWidget {
                   Text(
                     scheduleItem.nameCustomer,
                     style: Theme.of(context).textTheme.headline5!.copyWith(
-                          color: Colors.black54,
+                          color: Colors.black,
                           fontSize: 30,
                         ),
                   ),
@@ -44,12 +46,13 @@ class ScheduleDetails extends StatelessWidget {
                         'Số điện thoại: ',
                         style: TextStyle(
                           fontSize: 18,
+                          fontWeight: FontWeight.bold
                         ),
                       ),
                       Text(
                         scheduleItem.phone.toString(),
                         style: TextStyle(
-                          color: Colors.black54,
+                          color: Colors.black,
                           fontSize: 18,
                         ),
                       ),
@@ -71,12 +74,13 @@ class ScheduleDetails extends StatelessWidget {
                         'Ngày đón: ',
                         style: TextStyle(
                           fontSize: 18,
+                          fontWeight: FontWeight.bold
                         ),
                       ),
                       Text(
                         scheduleItem.start,
                         style: TextStyle(
-                          color: Colors.black54,
+                          color: Colors.black,
                           fontSize: 18,
                         ),
                       ),
@@ -98,13 +102,14 @@ class ScheduleDetails extends StatelessWidget {
                         'Điểm đón: ',
                         style: TextStyle(
                           fontSize: 18,
+                          fontWeight: FontWeight.bold
                         ),
                       ),
                       Expanded(
                         child: Text(
                           scheduleItem.schedule.address.origin.toString(),
                           style: TextStyle(
-                            color: Colors.black54,
+                            color: Colors.black,
                             fontSize: 18,
                           ),
                         ),
@@ -127,13 +132,14 @@ class ScheduleDetails extends StatelessWidget {
                         'Điểm dừng chân: ',
                         style: TextStyle(
                           fontSize: 18,
+                          fontWeight: FontWeight.bold
                         ),
                       ),
                       Expanded(
                         // Text(
                         //   schedule.schedule.address.waypoint.forEach((element) {wa}),
                         //   style: TextStyle(
-                        //     color: Colors.black54,
+                        //     color: Colors.black,
                         //     fontSize: 18,
                         //   ),
                         // ),
@@ -150,7 +156,7 @@ class ScheduleDetails extends StatelessWidget {
                                   '${i + 1} '
                                   '${scheduleItem.schedule.address.waypoint[i]}',
                                   style: TextStyle(
-                                    color: Colors.black54,
+                                    color: Colors.black,
                                     fontSize: 18,
                                   ),
                                 ),
@@ -177,13 +183,14 @@ class ScheduleDetails extends StatelessWidget {
                         'Điểm đến: ',
                         style: TextStyle(
                           fontSize: 18,
+                          fontWeight: FontWeight.bold
                         ),
                       ),
                       Expanded(
                         child: Text(
                           scheduleItem.schedule.address.destination.toString(),
                           style: TextStyle(
-                            color: Colors.black54,
+                            color: Colors.black,
                             fontSize: 18,
                           ),
                         ),
@@ -206,18 +213,19 @@ class ScheduleDetails extends StatelessWidget {
                         '2 chiều: ',
                         style: TextStyle(
                           fontSize: 18,
+                          fontWeight: FontWeight.bold
                         ),
                       ),
                       if (scheduleItem.mode ? true : false)
                         Text(
-                          "có",
+                          "Có",
                           style: TextStyle(
-                            color: Colors.black54,
+                            color: Colors.black,
                             fontSize: 18,
                           ),
                         )
                       else
-                        Text("Khong"),
+                        Text("Không"),
                     ],
                   ),
                   Row(
@@ -236,19 +244,20 @@ class ScheduleDetails extends StatelessWidget {
                         'Thời gian chờ: ',
                         style: TextStyle(
                           fontSize: 18,
+                          fontWeight: FontWeight.bold
                         ),
                       ),
                       Text(
                         scheduleItem.timeWait.toString(),
                         style: TextStyle(
-                          color: Colors.black54,
+                          color: Colors.black,
                           fontSize: 18,
                         ),
                       ),
                       Text(
                         " Ngày",
                         style: TextStyle(
-                          color: Colors.black54,
+                          color: Colors.black,
                           fontSize: 18,
                         ),
                       )
@@ -274,7 +283,7 @@ class ScheduleDetails extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        scheduleItem.price.toString(),
+                       '${scheduleItem.price.toString()}'' VNĐ',
                         style: TextStyle(
                           color: Colors.green[800],
                           fontSize: 18,

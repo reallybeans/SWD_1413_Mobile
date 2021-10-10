@@ -21,6 +21,7 @@ class NavSheduleView extends GetView<NavSheduleController> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    final transitionType = ContainerTransitionType.fade;
     return SafeArea(
         child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -108,7 +109,10 @@ class NavSheduleView extends GetView<NavSheduleController> {
         Obx(
           () => CarouselSlider.builder(
             itemCount: controller.scheduleList.length,
-            itemBuilder: (context, index, realIndex) => OpenContainer(
+            itemBuilder: (context, index, realIndex) => 
+            OpenContainer(
+              openColor: Colors.transparent,
+              closedColor: Colors.greenAccent.shade400,
               transitionType: transitionType,
               transitionDuration: Duration(seconds: 1),
               openBuilder: (context, _) =>
@@ -116,6 +120,9 @@ class NavSheduleView extends GetView<NavSheduleController> {
               closedBuilder: (context, VoidCallback openContainer) =>
                   ScheduleContainer(userController.scheduleList[index]),
             ),
+        //     itemBuilder: (context,index,realIndex){
+        //  return   ScheduleContainer(userController.scheduleList[index]);
+        //     },
             options: CarouselOptions(
               height: size.height * 0.55,
               enableInfiniteScroll: false,
