@@ -1,18 +1,15 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
-import 'package:timxe/config.dart';
-import 'package:timxe/data/schedule.dart';
-import 'package:timxe/screens/login/controller/home_controller.dart';
+
 import 'package:timxe/screens/login/controller/nav_shedule_controller.dart';
 import 'package:timxe/screens/login/controller/welcome_controller.dart';
-import 'package:timxe/screens/login/services/search_schedule_api.dart';
+
 import 'package:timxe/screens/login/widgets/user_title.dart';
-import 'package:url_launcher/url_launcher.dart';
+
 
 class NavSheduleView extends GetView<NavSheduleController> {
   WelcomeController welcomeController = Get.find<WelcomeController>();
@@ -36,59 +33,59 @@ class NavSheduleView extends GetView<NavSheduleController> {
                 backgroundColor: Colors.red,
                 backgroundImage: NetworkImage(welcomeController.user.photoURL!),
               ),
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.only(
-                    left: 10,
-                  ),
-                  height: 40,
-                  child: TypeAheadField<Schedule?>(
-                    hideSuggestionsOnKeyboardHide: false,
-                    textFieldConfiguration: TextFieldConfiguration(
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(top: 5),
-                        prefixIcon: Icon(
-                          Icons.search,
-                          color: Colors.greenAccent[700],
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        hintText: 'Search Username',
-                        filled: true,
-                        fillColor: Colors.white,
-                      ),
-                    ),
-                    suggestionsCallback: ScheduleApi.getSchedule,
-                    itemBuilder: (context, Schedule? suggestion) {
-                      final schedule = suggestion!;
+        //       Expanded(
+        //         child: Container(
+        //           padding: EdgeInsets.only(
+        //             left: 10,
+        //           ),
+        //           height: 40,
+        //           child: TypeAheadField<Schedule?>(
+        //             hideSuggestionsOnKeyboardHide: false,
+        //             textFieldConfiguration: TextFieldConfiguration(
+        //               decoration: InputDecoration(
+        //                 contentPadding: EdgeInsets.only(top: 5),
+        //                 prefixIcon: Icon(
+        //                   Icons.search,
+        //                   color: Colors.greenAccent[700],
+        //                 ),
+        //                 border: OutlineInputBorder(
+        //                   borderRadius: BorderRadius.circular(10.0),
+        //                 ),
+        //                 hintText: 'Search Username',
+        //                 filled: true,
+        //                 fillColor: Colors.white,
+        //               ),
+        //             ),
+        //             suggestionsCallback: ScheduleApi.getSchedule,
+        //             itemBuilder: (context, Schedule? suggestion) {
+        //               final schedule = suggestion!;
 
-                      return ListTile(
-                        title: Container(child: Text(schedule.nameCustomer)),
-                      );
-                    },
-                    noItemsFoundBuilder: (context) => Container(
-                      height: size.height * 0.05,
-                      child: Center(
-                        child: Text(
-                          'No Users Found.',
-                          style: TextStyle(fontSize: 24),
-                        ),
-                      ),
-                    ),
-                    onSuggestionSelected: (Schedule? suggestion) {
-                      final schedule = suggestion!;
+        //               return ListTile(
+        //                 title: Container(child: Text(schedule.nameCustomer)),
+        //               );
+        //             },
+        //             noItemsFoundBuilder: (context) => Container(
+        //               height: size.height * 0.05,
+        //               child: Center(
+        //                 child: Text(
+        //                   'No Users Found.',
+        //                   style: TextStyle(fontSize: 24),
+        //                 ),
+        //               ),
+        //             ),
+        //             onSuggestionSelected: (Schedule? suggestion) {
+        //               final schedule = suggestion!;
 
-                      ScaffoldMessenger.of(context)
-                        ..removeCurrentSnackBar()
-                        ..showSnackBar(SnackBar(
-                          content:
-                              Text('Selected user: ${schedule.nameCustomer}'),
-                        ));
-                    },
-                  ),
-                ),
-              ),
+        //               ScaffoldMessenger.of(context)
+        //                 ..removeCurrentSnackBar()
+        //                 ..showSnackBar(SnackBar(
+        //                   content:
+        //                       Text('Selected user: ${schedule.nameCustomer}'),
+        //                 ));
+        //             },
+        //           ),
+        //         ),
+        //       ),
             ],
           ),
         ),
