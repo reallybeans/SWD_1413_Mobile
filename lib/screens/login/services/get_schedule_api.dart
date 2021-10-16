@@ -19,7 +19,7 @@ class GetScheduleApi {
         "start": "12-11-2021",
         "timeWait": 3,
         "mode": true,
-        "price": 2000000,
+        "price": 2230000,
         "status": 2,
         "schedule": {
           "total": 4,
@@ -45,7 +45,7 @@ class GetScheduleApi {
         "start": "23-11-2021",
         "timeWait": 3,
         "mode": false,
-        "price": 2000000,
+        "price": 1500000,
         "status": 2,
         "schedule": {
           "total": 2,

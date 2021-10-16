@@ -1,4 +1,6 @@
 // ignore_for_file: prefer_collection_literals
+import 'dart:async';
+
 
 import 'package:get/get.dart';
 
@@ -14,13 +16,16 @@ class NavSheduleController extends GetxController {
 
   @override
   void onInit() async {
-    fetchUsers();
+    Timer.periodic(Duration(seconds: 2), (Timer t) =>{
+      print("TEST THỬ CHƠI TRONG NAVCONTROLLER"),
+      fetchUsers()
+      });
+   
     super.onInit();
   }
 
   @override
   void onReady() {
-    fetchUsers();
     super.onReady();
     update();
   }

@@ -17,6 +17,8 @@ class LoginScreen extends GetView<LoginController> {
         child: Column(
           children: [
             Spacer(),
+            Image.asset("assets/images/logo.png"),
+            Spacer(),
             Align(
                 alignment: Alignment.bottomCenter,
                 child: Column(

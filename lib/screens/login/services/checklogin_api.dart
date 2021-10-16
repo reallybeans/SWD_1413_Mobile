@@ -14,26 +14,26 @@ class apiService {
   String token = "";
   
   Future<bool> apiCheckLogin() async {
-    user!.getIdTokenResult().then((value) => {
-          token = value.token!,
-          print("Token ne: " '${token}'),
-        });
+    // user!.getIdTokenResult().then((value) => {
+    //       token = value.token!,
+    //       print("Token ne: " '${token}'),
+    //     });
 
-    var body = jsonEncode(
-        {'email': user!.email, 'phone': '${null}', 'token': '${token}'});
-    var response = await http.post(
-        Uri.parse('${Config.host}' "api/v1/logins/logindriver"),
-        body: body,
-        headers: {
-          "Accept": "application/json",
-          "content-type": "application/json"
-        });
-    print(response.body);
-    if (response.body == 'true' && response.statusCode == 200)
+    // var body = jsonEncode(
+    //     {'email': user!.email, 'phone': '${null}', 'token': '${token}'});
+    // var response = await http.post(
+    //     Uri.parse('${Config.host}' "api/v1/logins/logindriver"),
+    //     body: body,
+    //     headers: {
+    //       "Accept": "application/json",
+    //       "content-type": "application/json"
+    //     });
+    // print(response.body);
+    // if (response.body == 'true' && response.statusCode == 200)
       return Future<bool>.value(true);
-    else {
-      return Future<bool>.value(false);
-    }
+    // else {
+    //   return Future<bool>.value(false);
+    // }
   }
 
   Future<bool> apiCheckLoginPhone(String phone) async {
