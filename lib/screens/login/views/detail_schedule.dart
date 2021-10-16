@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
-import 'package:timxe/data/schedulev1.dart';
+import 'package:timxe/data/schedule.dart';
 import 'package:timxe/screens/login/controller/nav_shedule_controller.dart';
 import 'package:timxe/screens/login/widgets/schedule_container.dart';
 

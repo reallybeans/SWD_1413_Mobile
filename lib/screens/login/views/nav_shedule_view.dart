@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
-import 'package:timxe/data/schedulev1.dart';
+import 'package:timxe/data/schedule.dart';
 
 import 'package:timxe/screens/login/controller/nav_shedule_controller.dart';
 import 'package:timxe/screens/login/controller/welcome_controller.dart';
@@ -15,7 +15,7 @@ import 'detail_schedule.dart';
 
 class NavSheduleView extends GetView<NavSheduleController> {
   WelcomeController welcomeController = Get.find<WelcomeController>();
-  final NavSheduleController userController = Get.put(NavSheduleController());
+  final NavSheduleController navScheduleController = Get.put(NavSheduleController());
 
   get transitionType => null;
   @override
@@ -116,9 +116,9 @@ class NavSheduleView extends GetView<NavSheduleController> {
               transitionType: transitionType,
               transitionDuration: Duration(seconds: 1),
               openBuilder: (context, _) =>
-                  ScheduleDetails(userController.scheduleList[index]),
+                  ScheduleDetails(navScheduleController.scheduleList[index]),
               closedBuilder: (context, VoidCallback openContainer) =>
-                  ScheduleContainer(userController.scheduleList[index]),
+                  ScheduleContainer(navScheduleController.scheduleList[index]),
             ),
         //     itemBuilder: (context,index,realIndex){
         //  return   ScheduleContainer(userController.scheduleList[index]);

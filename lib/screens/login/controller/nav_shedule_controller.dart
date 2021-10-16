@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 
 
 import 'package:get/state_manager.dart';
-import 'package:timxe/data/schedulev1.dart';
+import 'package:timxe/data/schedule.dart';
 import 'package:timxe/screens/login/controller/home_controller.dart';
 import 'package:timxe/screens/login/services/get_schedule_api.dart';
 class NavSheduleController extends GetxController {
