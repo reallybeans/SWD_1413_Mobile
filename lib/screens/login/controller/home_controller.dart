@@ -19,10 +19,10 @@ class HomeController extends GetxController {
 
   @override
   void onReady() async {
-    final coordinates= new Coordinates(10.7950178,106.7196648);
-    var address=await Geocoder.local.findAddressesFromCoordinates(coordinates);
-    print("Dòng số 1: "'${address.first.featureName}');
-     print("Dòng số 2: "'${address.first.addressLine}');
+    // final coordinates= new Coordinates(10.7950178,106.7196648);
+    // var address=await Geocoder.local.findAddressesFromCoordinates(coordinates);
+    // print("Dòng số 1: "'${address.first.featureName}');
+    //  print("Dòng số 2: "'${address.first.addressLine}');
     googleSign = GoogleSignIn();
     ever(isSignIn, handleAuthStateChanged);
     isSignIn.value = await firebaseAuth.currentUser != null;
@@ -39,7 +39,7 @@ class HomeController extends GetxController {
   void handleAuthStateChanged(isLoggedIn) async {
     apiService sv=new apiService();
     if (isLoggedIn) {
-    var check = await sv.apiCheckLogin();
+    var check = await sv.apiCheckLogin(await firebaseAuth.currentUser!.getIdToken());
       if (check)
         Get.offAllNamed(Routes.WELCOME, arguments: firebaseAuth.currentUser);
       else {

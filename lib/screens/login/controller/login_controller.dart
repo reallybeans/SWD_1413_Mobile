@@ -32,7 +32,7 @@ class LoginController extends GetxController {
           accessToken: googleSignInAuthentication.accessToken,
           idToken: googleSignInAuthentication.idToken
           );
-          // print(googleSignInAuthentication.accessToken);
+          print(googleSignInAuthentication.idToken);
           // print("Tesst");
       await homeController.firebaseAuth.signInWithCredential(oAuthCredential);
       CustomFullScreenDialog.cancelDialog();
