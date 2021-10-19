@@ -13,9 +13,10 @@ class apiService {
   final user = FirebaseAuth.instance.currentUser;
 
   Future<bool> apiCheckLogin(String token) async {
+    print("Tao ne: "'${token}');
     var body = jsonEncode({'token': token});
     var response = await http.post(
-        Uri.parse("${Config.host}""/api/v1/logins/logindriver"),
+        Uri.parse("http://3.138.105.45/api/v1/logins/logindriver"),
         body: body,
         headers: {
           "Accept": "application/json",
