@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:timxe/screens/login/controller/home_controller.dart';
 import 'package:timxe/screens/login/controller/welcome_controller.dart';
+import 'package:timxe/screens/login/views/nav_info_detail_view.dart';
 import 'package:timxe/screens/login/widgets/profile_menu.dart';
 
 class NavInfoView extends GetView<WelcomeController> {
@@ -34,7 +35,7 @@ class NavInfoView extends GetView<WelcomeController> {
             SizedBox(
               height: 12,
             ),
-            Text (
+            Text(
               controller.user.displayName!,
               style: TextStyle(color: Colors.black, fontSize: 20),
             ),
@@ -46,27 +47,44 @@ class NavInfoView extends GetView<WelcomeController> {
             //   style: TextStyle(color: Colors.black, fontSize: 16),
             // ),
             ProfileMenu(
-              icon: Icon(Icons.person,color: Colors.orange.shade200,),
-              press: () {},
+              icon: Icon(
+                Icons.person,
+                color: Colors.orange.shade200,
+              ),
+              press: () {
+                Get.to(const InfomationDetail());
+              },
               text: 'Hồ sơ cá nhân',
             ),
             ProfileMenu(
-        icon: Icon(Icons.notifications,color: Colors.orange.shade200,),
+              icon: Icon(
+                Icons.notifications,
+                color: Colors.orange.shade200,
+              ),
               press: () {},
               text: 'Thông báo',
             ),
             ProfileMenu(
-         icon: Icon(Icons.settings,color: Colors.orange.shade200,),
+              icon: Icon(
+                Icons.settings,
+                color: Colors.orange.shade200,
+              ),
               press: () {},
               text: 'Cài đặt',
             ),
             ProfileMenu(
-        icon: Icon(Icons.headset_mic_outlined,color: Colors.orange.shade200,),
+              icon: Icon(
+                Icons.headset_mic_outlined,
+                color: Colors.orange.shade200,
+              ),
               press: () {},
               text: 'Hỗ trợ',
             ),
             ProfileMenu(
-         icon: Icon(Icons.logout_outlined,color: Colors.orange.shade200,),
+              icon: Icon(
+                Icons.logout_outlined,
+                color: Colors.orange.shade200,
+              ),
               press: () {
                 controller.logout();
               },
