@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:timxe/data/schedulev1.dart';
+import 'package:timxe/data/schedule.dart';
 import 'package:timxe/models/user.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -171,17 +171,17 @@ class ScheduleContainer extends StatelessWidget {
           right: -10,
           child: FlatButton(
             onPressed: () async {
-              launch('tel://${scheduleItem.phone}');
+              // launch('tel://${scheduleItem.phone}');
               // await FlutterPhoneDirectCaller.callNumber('0794219080');
 
               //  String googleUrl = 'https://www.google.com/maps/search/?api=1&query=11.084732443891067, 107.68383795664876';
-              // String googleUrl =
-              //     'https://www.google.com/maps/dir/?api=1&origin=${scheduleItem.schedule.latlng.origin}&destination=10.8415,106.8100&travelmode=driving&dir_action=navigate';
-              // if (await canLaunch(googleUrl)) {
-              //   await launch(googleUrl);
-              // } else {
-              //   throw 'Could not open the map.';
-              // }
+              String googleUrl =
+                  'https://www.google.com/maps/dir/?api=1&origin=${scheduleItem.schedule.latlng.origin}&waypoints=${scheduleItem.schedule.latlng.waypoint[0]}|${scheduleItem.schedule.latlng.waypoint[1]}&destination=${scheduleItem.schedule.latlng.destination}&travelmode=driving&dir_action=navigate';
+              if (await canLaunch(googleUrl)) {
+                await launch(googleUrl);
+              } else {
+                throw 'Could not open the map.';
+              }
             },
             child: CircleAvatar(
               backgroundColor: Colors.grey.withOpacity(0.7),
@@ -194,7 +194,7 @@ class ScheduleContainer extends StatelessWidget {
                     color: Colors.greenAccent[400],
                     borderRadius: new BorderRadius.all(Radius.circular(50))),
                 child: Icon(
-                  Icons.phone,
+                  Icons.map_sharp,
                   color: Colors.white,
                   size: 30,
                 ),

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:timxe/data/schedulev1.dart';
+import 'package:timxe/data/schedule.dart';
 import 'package:timxe/models/user.dart';
 
 class GetScheduleApi {
@@ -32,13 +32,16 @@ class GetScheduleApi {
             ]
           },
           "latlng": {
-            "origin": "10.8449184,106.7905202",
-            "destination": "10.8449184,106.7905202",
-            "waypoint": ["10.8449184,106.7905202", "10.8449184,106.7905202"]
+            "origin": "10.846743686764038, 106.78613659757532",
+            "destination": "10.746686724329491, 107.87721206873913",
+            "waypoint": [
+              "10.841611040296401, 106.81005712641063",
+              "10.942435594042163, 107.21535174643958"
+            ]
           }
         }
       },
-        {
+      {
         "id": 2,
         "nameCustomer": "Duy Nguyen",
         "phone": "0794219089",
@@ -58,9 +61,12 @@ class GetScheduleApi {
             ]
           },
           "latlng": {
-            "origin": "10.8449184,106.7905202",
-            "destination": "10.8449184,106.7905202",
-            "waypoint": ["10.8449184,106.7905202", "10.8449184,106.7905202"]
+            "origin": "10.846743686764038, 106.78613659757532",
+            "destination": "10.746686724329491, 107.87721206873913",
+            "waypoint": [
+              "10.841611040296401, 106.81005712641063",
+              "10.942435594042163, 107.21535174643958"
+            ]
           }
         }
       },
@@ -84,14 +90,17 @@ class GetScheduleApi {
             ]
           },
           "latlng": {
-            "origin": "10.8449184,106.7905202",
-            "destination": "10.8449184,106.7905202",
-            "waypoint": ["10.8449184,106.7905202", "10.8449184,106.7905202"]
+            "origin": "10.846743686764038, 106.78613659757532",
+            "destination": "10.746686724329491, 107.87721206873913",
+            "waypoint": [
+              "10.841611040296401, 106.81005712641063",
+              "10.942435594042163, 107.21535174643958"
+            ]
           }
         }
       }
     ];
-    
+
     final schedules = list.cast<Map<String, dynamic>>();
     final listofschedules = await schedules.map<Schedule>((json) {
       return Schedule.fromJson(json);
