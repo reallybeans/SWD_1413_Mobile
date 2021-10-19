@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 import 'package:timxe/data/schedule.dart';
-import 'package:timxe/models/user.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ScheduleContainer extends StatelessWidget {
@@ -90,20 +88,8 @@ class ScheduleContainer extends StatelessWidget {
                   Text("Khứ hồi: ",
                       style:
                           TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+                           Checkbox(value: scheduleItem.mode,onChanged: (bool){},activeColor: Colors.green,),
                   Spacer(),
-                  if (scheduleItem.mode ? true : false)
-                    Text('Có',
-                        style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.greenAccent.shade400))
-                  else
-                    Text('Không',
-                        style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.red)),
-                  Spacer()
                 ],
               ),
               SizedBox(
