@@ -1,8 +1,6 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 import 'package:timxe/data/schedule.dart';
-import 'package:timxe/models/user.dart';
 
 class GetScheduleApi {
   static var client = http.Client();
