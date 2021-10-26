@@ -12,26 +12,27 @@ class PhoneLoginView extends GetView<PhoneLoginController> {
   getMobileFormWidget(context) {
     return Column(
       children: [
-        Spacer(),
+        const Spacer(),
         TextField(
           controller: phoneController,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             hintText: "Nhập số điện thoại",
             prefix: Padding(
               padding: EdgeInsets.all(4),
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 16,
         ),
         Container(
-          margin: EdgeInsets.all(10),
+          margin: const EdgeInsets.all(10),
           width: double.infinity,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(17),
+            // ignore: deprecated_member_use
             child: FlatButton(
-              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
               color: Colors.greenAccent[400],
               onPressed: () {
                 controller.login(phoneController);
@@ -41,7 +42,7 @@ class PhoneLoginView extends GetView<PhoneLoginController> {
             ),
           ),
         ),
-        Spacer(),
+        const Spacer(),
       ],
     );
   }
@@ -49,25 +50,26 @@ class PhoneLoginView extends GetView<PhoneLoginController> {
   getOtpFormWidget(context) {
     return Column(
       children: [
-        Spacer(),
+        const Spacer(),
         TextField(
           controller: otpController,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             hintText: "nhập OTP",
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 16,
         ),
+        // ignore: deprecated_member_use
         FlatButton(
           onPressed: () {
             controller.otp(otpController);
           },
-          child: Text('Đăng Nhập'),
+          child: const Text('Đăng Nhập'),
           color: Colors.blue,
           textColor: Colors.white,
         ),
-        Spacer(),
+        const Spacer(),
       ],
     );
   }

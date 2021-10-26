@@ -1,19 +1,16 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:timelines/timelines.dart';
 import 'package:timxe/data/schedule.dart';
 import 'package:timxe/screens/login/controller/nav_shedule_controller.dart';
-import 'package:timxe/screens/login/widgets/schedule_container.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ScheduleDetails extends StatelessWidget {
   final NavSheduleController navSheduleController =
       Get.put(NavSheduleController());
   final Schedule scheduleItem;
-  ScheduleDetails(this.scheduleItem);
+  ScheduleDetails(this.scheduleItem, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     // final scheduleItem = navSheduleController.scheduleList[0];
@@ -39,18 +36,18 @@ class ScheduleDetails extends StatelessWidget {
                           fontSize: 30,
                         ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   // SDT
                   Row(
                     children: [
-                      Text(
+                      const Text(
                         'Số điện thoại: ',
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       Text(
                         scheduleItem.phone.toString(),
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.black,
                           fontSize: 18,
                         ),
@@ -58,8 +55,9 @@ class ScheduleDetails extends StatelessWidget {
                     ],
                   ),
                   Row(
+                    // ignore: prefer_const_literals_to_create_immutables
                     children: [
-                      Expanded(
+                      const Expanded(
                           child: Divider(
                         height: 40,
                         color: Colors.black,
@@ -69,14 +67,14 @@ class ScheduleDetails extends StatelessWidget {
                   //Ngày đón
                   Row(
                     children: [
-                      Text(
+                      const Text(
                         'Ngày đón: ',
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       Text(
                         scheduleItem.start,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.black,
                           fontSize: 18,
                         ),
@@ -84,8 +82,9 @@ class ScheduleDetails extends StatelessWidget {
                     ],
                   ),
                   Row(
+                    // ignore: prefer_const_literals_to_create_immutables
                     children: [
-                      Expanded(
+                      const Expanded(
                           child: Divider(
                         height: 40,
                         color: Colors.black,
@@ -95,7 +94,7 @@ class ScheduleDetails extends StatelessWidget {
                   // Điểm đón
                   Row(
                     children: [
-                      Text(
+                      const Text(
                         'Điểm đón: ',
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
@@ -103,7 +102,7 @@ class ScheduleDetails extends StatelessWidget {
                       Expanded(
                         child: Text(
                           scheduleItem.schedule.address.origin.toString(),
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.black,
                             fontSize: 18,
                           ),
@@ -112,8 +111,9 @@ class ScheduleDetails extends StatelessWidget {
                     ],
                   ),
                   Row(
+                    // ignore: prefer_const_literals_to_create_immutables
                     children: [
-                      Expanded(
+                      const Expanded(
                           child: Divider(
                         height: 40,
                         color: Colors.black,
@@ -123,7 +123,6 @@ class ScheduleDetails extends StatelessWidget {
                   // Điểm dừng chân
                   Row(
                     children: [
-                     
                       Expanded(
                         child: FixedTimeline.tileBuilder(
                           builder: TimelineTileBuilder.connectedFromStyle(
@@ -131,14 +130,14 @@ class ScheduleDetails extends StatelessWidget {
                             oppositeContentsBuilder: (context, index) =>
                                 Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                  '${scheduleItem.schedule.address.waypoint[index]}'),
+                              child: Text(scheduleItem
+                                  .schedule.address.waypoint[index]),
                             ),
                             contentsBuilder: (context, index) => Card(
                               child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: ElevatedButton.icon(
-                                    label: Text(""),
+                                    label: const Text(""),
                                     onPressed: () async {
                                       String googleUrl =
                                           'https://www.google.com/maps/search/?api=1&query=${scheduleItem.schedule.address.waypoint[index]}';
@@ -148,7 +147,8 @@ class ScheduleDetails extends StatelessWidget {
                                         throw 'Could not open the map.';
                                       }
                                     },
-                                    icon: Icon(Icons.location_on_outlined),
+                                    icon:
+                                        const Icon(Icons.location_on_outlined),
                                   )),
                             ),
                             connectorStyleBuilder: (context, index) =>
@@ -192,8 +192,9 @@ class ScheduleDetails extends StatelessWidget {
                     ],
                   ),
                   Row(
+                    // ignore: prefer_const_literals_to_create_immutables
                     children: [
-                      Expanded(
+                      const Expanded(
                           child: Divider(
                         height: 40,
                         color: Colors.black,
@@ -203,7 +204,7 @@ class ScheduleDetails extends StatelessWidget {
                   // điểm đến
                   Row(
                     children: [
-                      Text(
+                      const Text(
                         'Điểm đến: ',
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
@@ -211,7 +212,7 @@ class ScheduleDetails extends StatelessWidget {
                       Expanded(
                         child: Text(
                           scheduleItem.schedule.address.destination.toString(),
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.black,
                             fontSize: 18,
                           ),
@@ -220,8 +221,9 @@ class ScheduleDetails extends StatelessWidget {
                     ],
                   ),
                   Row(
+                    // ignore: prefer_const_literals_to_create_immutables
                     children: [
-                      Expanded(
+                      const Expanded(
                           child: Divider(
                         height: 40,
                         color: Colors.black,
@@ -231,7 +233,7 @@ class ScheduleDetails extends StatelessWidget {
                   // 2 chiều
                   Row(
                     children: [
-                      Text(
+                      const Text(
                         'Khứ hồi: ',
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
@@ -244,8 +246,9 @@ class ScheduleDetails extends StatelessWidget {
                     ],
                   ),
                   Row(
+                    // ignore: prefer_const_literals_to_create_immutables
                     children: [
-                      Expanded(
+                      const Expanded(
                           child: Divider(
                         height: 40,
                         color: Colors.black,
@@ -255,19 +258,19 @@ class ScheduleDetails extends StatelessWidget {
                   // Thời gian chờ
                   Row(
                     children: [
-                      Text(
+                      const Text(
                         'Thời gian chờ: ',
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       Text(
                         scheduleItem.timeWait.toString(),
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.black,
                           fontSize: 18,
                         ),
                       ),
-                      Text(
+                      const Text(
                         " Ngày",
                         style: TextStyle(
                           color: Colors.black,
@@ -277,8 +280,9 @@ class ScheduleDetails extends StatelessWidget {
                     ],
                   ),
                   Row(
+                    // ignore: prefer_const_literals_to_create_immutables
                     children: [
-                      Expanded(
+                      const Expanded(
                           child: Divider(
                         height: 40,
                         color: Colors.black,
