@@ -9,27 +9,26 @@ import 'package:timxe/screens/login/views/nav_setting_view.dart';
 import 'package:timxe/screens/login/views/nav_shedule_view.dart';
 
 class WelcomeView extends GetView<WelcomeController> {
+  const WelcomeView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     var index = 0.obs;
     final iconItems = <Widget>[
-      Icon(
+      const Icon(
         Icons.schedule,
         size: 30,
       ),
-      Icon(
+      const Icon(
         Icons.notifications,
         size: 30,
       ),
-      Icon(
+      const Icon(
         Icons.history_outlined,
         size: 30,
       ),
-      Icon(
-        Icons.settings,
-        size: 30,
-      ),
-      Icon(
+  
+      const Icon(
         Icons.person,
         size: 30,
       ),
@@ -37,9 +36,8 @@ class WelcomeView extends GetView<WelcomeController> {
     final views=[
       NavSheduleView(),
       NavNotifyView(),
-      NavHistoryView(),
-      NavSettingView(),
-      NavInfoView(),
+      const NavHistoryView(),
+      const NavInfoView(),
     ];
     return Scaffold(
         extendBody: true,
@@ -47,12 +45,12 @@ class WelcomeView extends GetView<WelcomeController> {
         body: Obx(() =>views[index.value] ),
         bottomNavigationBar: Theme(
           data: Theme.of(context).copyWith(
-            iconTheme: IconThemeData(color: Colors.black)
+            iconTheme: const IconThemeData(color: Colors.black)
           ),
           child: CurvedNavigationBar(
               backgroundColor: Colors.transparent,
               animationCurve: Curves.easeInOut,
-              animationDuration: Duration(milliseconds: 300),
+              animationDuration: const Duration(milliseconds: 300),
               height: 60,
               index: index.value,
               items: iconItems,
