@@ -1,11 +1,8 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:timxe/data/schedule.dart';
 import 'package:timxe/screens/login/controller/nav_shedule_controller.dart';
-import 'package:timxe/screens/login/widgets/schedule_container.dart';
 
 class CustomerDetails extends StatelessWidget {
   final NavSheduleController navSheduleController =
@@ -15,13 +12,14 @@ class CustomerDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final scheduleItem = navSheduleController.scheduleList[0];
+    String appBarTitle = 'Thông tin chi tiết';
 
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.green[900],
-          title: const Text('Thông tin chi tiết'),
+          title: Text(appBarTitle),
         ),
         body: ListView(
           children: <Widget>[
@@ -37,18 +35,18 @@ class CustomerDetails extends StatelessWidget {
                           fontSize: 30,
                         ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   // SDT
                   Row(
                     children: [
-                      Text(
+                      const Text(
                         'Số điện thoại: ',
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       Text(
                         scheduleItem.phone.toString(),
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.black,
                           fontSize: 18,
                         ),
@@ -56,9 +54,11 @@ class CustomerDetails extends StatelessWidget {
                     ],
                   ),
                   Row(
+                    // ignore: prefer_const_literals_to_create_immutables
                     children: [
+                      // ignore: prefer_const_constructors
                       Expanded(
-                          child: Divider(
+                          child: const Divider(
                         height: 40,
                         color: Colors.black,
                       )),
@@ -67,14 +67,14 @@ class CustomerDetails extends StatelessWidget {
                   //Ngày đón
                   Row(
                     children: [
-                      Text(
+                      const Text(
                         'Ngày đón: ',
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       Text(
                         scheduleItem.start,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.black,
                           fontSize: 18,
                         ),
@@ -82,8 +82,11 @@ class CustomerDetails extends StatelessWidget {
                     ],
                   ),
                   Row(
+                    // ignore: prefer_const_literals_to_create_immutables
                     children: [
+                      // ignore: prefer_const_constructors
                       Expanded(
+                          // ignore: prefer_const_constructors
                           child: Divider(
                         height: 40,
                         color: Colors.black,
@@ -93,7 +96,7 @@ class CustomerDetails extends StatelessWidget {
                   // Điểm đón
                   Row(
                     children: [
-                      Text(
+                      const Text(
                         'Điểm đón: ',
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
@@ -101,7 +104,7 @@ class CustomerDetails extends StatelessWidget {
                       Expanded(
                         child: Text(
                           scheduleItem.schedule.address.origin.toString(),
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.black,
                             fontSize: 18,
                           ),
@@ -110,23 +113,27 @@ class CustomerDetails extends StatelessWidget {
                     ],
                   ),
                   Row(
+                    // ignore: prefer_const_literals_to_create_immutables
                     children: [
+                      // ignore: prefer_const_constructors
                       Expanded(
-                          child: Divider(
+                          child: const Divider(
                         height: 40,
                         color: Colors.black,
                       )),
                     ],
                   ),
                   // Điểm dừng chân
-                  Text(
+                  const Text(
                     'Điểm dừng chân: ',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   Row(
+                    // ignore: prefer_const_literals_to_create_immutables
                     children: [
+                      // ignore: prefer_const_constructors
                       Expanded(
-                          child: Divider(
+                          child: const Divider(
                         height: 40,
                         color: Colors.black,
                       )),
@@ -145,11 +152,11 @@ class CustomerDetails extends StatelessWidget {
                                           .schedule.address.waypoint.length;
                                   i++)
                                 Container(
-                                  margin: EdgeInsets.only(bottom: 8),
+                                  margin: const EdgeInsets.only(bottom: 8),
                                   child: Text(
                                     '${i + 1} '
                                     '${scheduleItem.schedule.address.waypoint[i]}',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.black,
                                       fontSize: 18,
                                     ),
@@ -163,8 +170,9 @@ class CustomerDetails extends StatelessWidget {
                   ),
 
                   Row(
+                    // ignore: prefer_const_literals_to_create_immutables
                     children: [
-                      Expanded(
+                      const Expanded(
                           child: Divider(
                         height: 40,
                         color: Colors.black,
@@ -174,7 +182,7 @@ class CustomerDetails extends StatelessWidget {
                   // điểm đến
                   Row(
                     children: [
-                      Text(
+                      const Text(
                         'Điểm đến: ',
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
@@ -182,7 +190,7 @@ class CustomerDetails extends StatelessWidget {
                       Expanded(
                         child: Text(
                           scheduleItem.schedule.address.destination.toString(),
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.black,
                             fontSize: 18,
                           ),
@@ -191,8 +199,9 @@ class CustomerDetails extends StatelessWidget {
                     ],
                   ),
                   Row(
+                    // ignore: prefer_const_literals_to_create_immutables
                     children: [
-                      Expanded(
+                      const Expanded(
                           child: Divider(
                         height: 40,
                         color: Colors.black,
@@ -202,13 +211,13 @@ class CustomerDetails extends StatelessWidget {
                   // 2 chiều
                   Row(
                     children: [
-                      Text(
+                      const Text(
                         '2 chiều: ',
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       if (scheduleItem.mode ? true : false)
-                        Text(
+                        const Text(
                           "Có",
                           style: TextStyle(
                             color: Colors.black,
@@ -216,7 +225,7 @@ class CustomerDetails extends StatelessWidget {
                           ),
                         )
                       else
-                        Text(
+                        const Text(
                           "Không",
                           style: TextStyle(
                             color: Colors.black,
@@ -226,8 +235,9 @@ class CustomerDetails extends StatelessWidget {
                     ],
                   ),
                   Row(
+                    // ignore: prefer_const_literals_to_create_immutables
                     children: [
-                      Expanded(
+                      const Expanded(
                           child: Divider(
                         height: 40,
                         color: Colors.black,
@@ -237,19 +247,19 @@ class CustomerDetails extends StatelessWidget {
                   // Thời gian chờ
                   Row(
                     children: [
-                      Text(
+                      const Text(
                         'Thời gian chờ: ',
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       Text(
                         scheduleItem.timeWait.toString(),
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.black,
                           fontSize: 18,
                         ),
                       ),
-                      Text(
+                      const Text(
                         " Ngày",
                         style: TextStyle(
                           color: Colors.black,
@@ -259,8 +269,9 @@ class CustomerDetails extends StatelessWidget {
                     ],
                   ),
                   Row(
+                    // ignore: prefer_const_literals_to_create_immutables
                     children: [
-                      Expanded(
+                      const Expanded(
                           child: Divider(
                         height: 40,
                         color: Colors.black,
@@ -286,7 +297,7 @@ class CustomerDetails extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Align(
@@ -295,29 +306,31 @@ class CustomerDetails extends StatelessWidget {
                       children: [
                         ClipRRect(
                           borderRadius: BorderRadius.circular(17),
+                          // ignore: deprecated_member_use
                           child: FlatButton(
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 vertical: 10, horizontal: 20),
                             color: Colors.greenAccent[700],
                             onPressed: () {},
-                            child: Text(
+                            child: const Text(
                               'Chấp nhận',
                               style:
                                   TextStyle(color: Colors.white, fontSize: 20),
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         ClipRRect(
                           borderRadius: BorderRadius.circular(17),
+                          // ignore: deprecated_member_use
                           child: FlatButton(
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 vertical: 10, horizontal: 20),
                             color: Colors.amber.shade300,
                             onPressed: () {},
-                            child: Text(
+                            child: const Text(
                               'Từ chối',
                               style:
                                   TextStyle(color: Colors.white, fontSize: 20),

@@ -6,6 +6,8 @@ import 'package:timxe/routes/app_pages.dart';
 import 'package:timxe/screens/login/controller/login_controller.dart';
 
 class LoginScreen extends GetView<LoginController> {
+  const LoginScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -16,44 +18,45 @@ class LoginScreen extends GetView<LoginController> {
         width: double.infinity,
         child: Column(
           children: [
-            Spacer(),
+            const Spacer(),
             Image.asset("assets/images/logo.png"),
-            Spacer(),
+            const Spacer(),
             Align(
                 alignment: Alignment.bottomCenter,
                 child: Column(
                   children: [
                     // PhoneButton(),
                     Container(
-                      padding: EdgeInsets.all(4),
+                      padding: const EdgeInsets.all(4),
                       child: ElevatedButton.icon(
                         onPressed: () {
                           Get.toNamed(Routes.PHONELOGIN);
                         },
-                        icon: FaIcon(
+                        icon: const FaIcon(
                           FontAwesomeIcons.phone,
                           color: Colors.black,
                         ),
-                        label: Text(
+                        label: const Text(
                           'Tiếp tục với số điện thoại',
                           style: TextStyle(fontSize: 20),
                         ),
                         style: ElevatedButton.styleFrom(
                             primary: Colors.white,
                             onPrimary: Colors.black,
-                            minimumSize: Size(double.infinity, 50)),
+                            minimumSize: const Size(double.infinity, 50)),
                       ),
                     ),
                     Row(
+                      // ignore: prefer_const_literals_to_create_immutables
                       children: [
-                        Expanded(
+                        const Expanded(
                           child: Divider(
                             height: 40,
                             color: Colors.white,
                           ),
                         ),
-                        Text("OR", style: TextStyle(color: Colors.white)),
-                        Expanded(
+                        const Text("OR", style: TextStyle(color: Colors.white)),
+                        const Expanded(
                             child: Divider(
                           height: 40,
                           color: Colors.white,
@@ -61,26 +64,26 @@ class LoginScreen extends GetView<LoginController> {
                       ],
                     ),
                     Container(
-                      padding: EdgeInsets.all(4),
+                      padding: const EdgeInsets.all(4),
                       child: ElevatedButton.icon(
                         onPressed: () {
                           controller.login();
                         },
-                        icon: FaIcon(
+                        icon: const FaIcon(
                           FontAwesomeIcons.google,
                           color: Colors.red,
                         ),
-                        label: Text(
+                        label: const Text(
                           'Tiếp tục với Google',
                           style: TextStyle(fontSize: 20),
                         ),
                         style: ElevatedButton.styleFrom(
                             primary: Colors.white,
                             onPrimary: Colors.black,
-                            minimumSize: Size(double.infinity, 50)),
+                            minimumSize: const Size(double.infinity, 50)),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     )
                   ],
