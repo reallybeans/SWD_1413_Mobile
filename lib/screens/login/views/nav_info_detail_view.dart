@@ -18,29 +18,29 @@ class InfomationDetail extends GetView<WelcomeController> {
         alignment: Alignment.center,
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 32,
             ),
             CircleAvatar(
               radius: 50,
               backgroundImage: NetworkImage(controller.user.photoURL!),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             InfomationTextField(
               lbtxt: 'Họ và tên',
-              initValue: 'Nguyễn Huy Trí Cường',
+              initValue: '${controller.user.displayName}',
               Icons: Icons.account_circle,
             ),
             InfomationTextField(
               lbtxt: 'Số điện thoại',
-              initValue: "+8425136644",
+              initValue: "${controller.user.phoneNumber}",
               Icons: Icons.phone,
             ),
             InfomationTextField(
               lbtxt: 'Gmail',
-              initValue: "cuong123@gmail.com",
+              initValue: "${controller.user.email}",
               Icons: Icons.email,
             ),
           ],
@@ -55,6 +55,7 @@ class InfomationTextField extends StatelessWidget {
     Key? key,
     required this.lbtxt,
     required this.initValue,
+    // ignore: non_constant_identifier_names
     required this.Icons,
   }) : super(key: key);
 
@@ -64,15 +65,15 @@ class InfomationTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(15, 5, 15, 10),
+      padding: const EdgeInsets.fromLTRB(15, 5, 15, 10),
       child: TextFormField(
         initialValue: initValue,
         enabled: false,
-        style: TextStyle(fontSize: 18, color: Colors.black),
+        style: const TextStyle(fontSize: 18, color: Colors.black),
         decoration: InputDecoration(
             labelText: lbtxt,
             prefixIcon: Icon(Icons),
-            border: OutlineInputBorder(
+            border: const OutlineInputBorder(
                 borderSide: BorderSide(color: Color(0xffCED0D2), width: 1),
                 borderRadius: BorderRadius.all(Radius.circular(6)))),
       ),
