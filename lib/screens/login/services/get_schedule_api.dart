@@ -22,13 +22,13 @@ class GetScheduleApi {
         "price": 2230000,
         "status": 2,
         "schedule": {
-          "total": 4,
+          "total": 2,
           "address": {
             "origin": "157 đường 265, quận 9, HCM",
-            "destination": "64 Lũy Bán Bích, Tân Bình, HCM",
+            "destination": "Decal Luân Nguyễn, Đường tỉnh 712, Tân Thuận, Hàm Thuận Nam District, Bình Thuận Province",
             "waypoint": [
-              "Đường DT,Cần Thơ,Thành Phố Cần Thơ",
-              "Đường MD, An Giang, Tỉnh An Giang"
+              "FPT University HCMC, Khu Công Nghệ Cao, Long Thạnh Mỹ, Thành Phố Thủ Đức, Ho Chi Minh City",
+              "Hồ Bơi Hiệp Phước, Đường tỉnh 712, Hiệp Phước, Tân Thuận, Hàm Thuận Nam District, Bình Thuận Province",
             ]
           },
           "latlng": {
@@ -46,7 +46,7 @@ class GetScheduleApi {
         "nameCustomer": "Duy Nguyen",
         "phone": "0794219089",
         "start": "23-11-2021",
-        "timeWait": 3,
+        "timeWait": 0,
         "mode": false,
         "price": 1500000,
         "status": 2,

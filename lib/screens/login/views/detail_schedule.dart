@@ -7,6 +7,7 @@ import 'package:timelines/timelines.dart';
 import 'package:timxe/data/schedule.dart';
 import 'package:timxe/screens/login/controller/nav_shedule_controller.dart';
 import 'package:timxe/screens/login/widgets/schedule_container.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ScheduleDetails extends StatelessWidget {
   final NavSheduleController navSheduleController =
@@ -122,11 +123,7 @@ class ScheduleDetails extends StatelessWidget {
                   // Điểm dừng chân
                   Row(
                     children: [
-                      Text(
-                        'Điểm dừng chân: ',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
+                     
                       Expanded(
                         child: FixedTimeline.tileBuilder(
                           builder: TimelineTileBuilder.connectedFromStyle(
@@ -134,19 +131,32 @@ class ScheduleDetails extends StatelessWidget {
                             oppositeContentsBuilder: (context, index) =>
                                 Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text('${scheduleItem.schedule.address.waypoint[index]}'),
+                              child: Text(
+                                  '${scheduleItem.schedule.address.waypoint[index]}'),
                             ),
                             contentsBuilder: (context, index) => Card(
                               child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text("Điểm: ""${index+1}"),
-                              ),
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: ElevatedButton.icon(
+                                    label: Text(""),
+                                    onPressed: () async {
+                                      String googleUrl =
+                                          'https://www.google.com/maps/search/?api=1&query=${scheduleItem.schedule.address.waypoint[index]}';
+                                      if (await canLaunch(googleUrl)) {
+                                        await launch(googleUrl);
+                                      } else {
+                                        throw 'Could not open the map.';
+                                      }
+                                    },
+                                    icon: Icon(Icons.location_on_outlined),
+                                  )),
                             ),
                             connectorStyleBuilder: (context, index) =>
                                 ConnectorStyle.solidLine,
                             indicatorStyleBuilder: (context, index) =>
                                 IndicatorStyle.dot,
-                            itemCount: scheduleItem.schedule.address.waypoint.length,
+                            itemCount:
+                                scheduleItem.schedule.address.waypoint.length,
                           ),
                         ),
                       ),
@@ -181,7 +191,6 @@ class ScheduleDetails extends StatelessWidget {
                       // ),
                     ],
                   ),
-
                   Row(
                     children: [
                       Expanded(
@@ -227,7 +236,11 @@ class ScheduleDetails extends StatelessWidget {
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
-                      Checkbox(value: scheduleItem.mode,onChanged: (bool){},activeColor: Colors.green,),
+                      Checkbox(
+                        value: scheduleItem.mode,
+                        onChanged: (bool) {},
+                        activeColor: Colors.green,
+                      ),
                     ],
                   ),
                   Row(

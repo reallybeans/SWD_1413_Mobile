@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:timxe/data/schedule.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -88,20 +89,24 @@ class ScheduleContainer extends StatelessWidget {
                   Text("Khứ hồi: ",
                       style:
                           TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
-                           Checkbox(value: scheduleItem.mode,onChanged: (bool){},activeColor: Colors.green,),
+                  Checkbox(
+                    value: scheduleItem.mode,
+                    onChanged: (bool) {},
+                    activeColor: Colors.green,
+                  ),
                   Spacer(),
                 ],
               ),
               SizedBox(
                 height: 5,
               ),
-              Padding(
-                padding: const EdgeInsets.only(right: 20, left: 20),
-                child: Divider(
-                  thickness: 1,
-                  color: Colors.black,
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.only(right: 20, left: 20),
+              //   child: Divider(
+              //     thickness: 1,
+              //     color: Colors.black,
+              //   ),
+              // ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -127,42 +132,56 @@ class ScheduleContainer extends StatelessWidget {
                 ],
               ),
               Spacer(),
-             SizedBox(height: 30,),
+              // SizedBox(
+              //   height: 30,
+              // ),
               Spacer(),
             ],
           ),
         ),
       ),
-      Positioned(
-        top: 0,
-        left: 30,
-        child: CircleAvatar(
-            backgroundColor: Colors.white60.withOpacity(0.3),
-            radius: 40,
-            // child: CircleAvatar(
-            //   backgroundColor: Colors.transparent,
-            //   backgroundImage: AssetImage("assets/images/iconMoney.png"),
-            //   radius: 40,
-            // ),
-            child: ClipOval(
-                child: SvgPicture.asset(
-              "assets/icons/money.svg",
-              fit: BoxFit.cover,
-              width: 50.0,
-              height: 50.0,
-            ))),
-      ),
+      // Positioned(
+      //   top: 0,
+      //   left: 30,
+      //   child: CircleAvatar(
+      //       backgroundColor: Colors.white60.withOpacity(0.3),
+      //       radius: 40,
+      //       // child: CircleAvatar(
+      //       //   backgroundColor: Colors.transparent,
+      //       //   backgroundImage: AssetImage("assets/images/iconMoney.png"),
+      //       //   radius: 40,
+      //       // ),
+      //       child: ClipOval(
+      //           child: SvgPicture.asset(
+      //         "assets/icons/money.svg",
+      //         fit: BoxFit.cover,
+      //         width: 50.0,
+      //         height: 50.0,
+      //       ))),
+      // ),
       Positioned(
           bottom: -10,
-          right: -10,
+          right: 10,
+          child: SpeedDial(
+            backgroundColor: Colors.greenAccent,
+            overlayColor: Colors.transparent,
+            animatedIcon: AnimatedIcons.menu_close,
+            children: [
+              SpeedDialChild(child: Icon(Icons.phone), label: 'Hành trình')
+            ],
+          )),
+      Positioned(
+          // bottom: -10,
+          // right: -10,
+          top: 0,
+          left: 10,
           child: FlatButton(
             onPressed: () async {
               // launch('tel://${scheduleItem.phone}');
               // await FlutterPhoneDirectCaller.callNumber('0794219080');
-
               //  String googleUrl = 'https://www.google.com/maps/search/?api=1&query=11.084732443891067, 107.68383795664876';
               String googleUrl =
-                  'https://www.google.com/maps/dir/?api=1&origin=${scheduleItem.schedule.latlng.origin}&waypoints=${scheduleItem.schedule.latlng.waypoint[0]}|${scheduleItem.schedule.latlng.waypoint[1]}&destination=${scheduleItem.schedule.latlng.destination}&travelmode=driving&dir_action=navigate';
+                  'https://www.google.com/maps/dir/?api=1&origin=${scheduleItem.schedule.address.origin}&waypoints=${scheduleItem.schedule.address.waypoint[0]}|${scheduleItem.schedule.address.waypoint[1]}&destination=${scheduleItem.schedule.address.destination}&travelmode=driving&dir_action=navigate';
               if (await canLaunch(googleUrl)) {
                 await launch(googleUrl);
               } else {

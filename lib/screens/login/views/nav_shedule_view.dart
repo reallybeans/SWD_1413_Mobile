@@ -94,7 +94,7 @@ class NavSheduleView extends GetView<NavSheduleController> {
         //     ],
         //   ),
         // ),
-        Spacer(),
+        SizedBox(height: 40,),
         Container(
           margin: EdgeInsets.only(left: 20),
           child: Align(
