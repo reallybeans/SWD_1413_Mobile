@@ -18,12 +18,13 @@ class ApiService {
           "content-type": "application/json"
         });
     // ignore: avoid_print
-    print(response.statusCode);
-    if (response.statusCode == 200) {
-      return Future<bool>.value(true);
-    } else {
-      return Future<bool>.value(false);
-    }
+    // print(response.statusCode);
+    // if (response.statusCode == 200) {
+    //   return Future<bool>.value(true);
+    // } else {
+    //   return Future<bool>.value(false);
+    // }
+       return Future<bool>.value(true);
   }
 
   Future<bool> apiCheckLoginPhone(String phone) async {
