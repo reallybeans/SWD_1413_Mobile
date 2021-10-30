@@ -37,7 +37,7 @@ class HomeController extends GetxController {
   void onClose() {}
 
   void handleAuthStateChanged(isLoggedIn) async {
-    apiService sv=new apiService();
+    ApiService sv=new ApiService();
     if (isLoggedIn) {
     var check = await sv.apiCheckLogin(await firebaseAuth.currentUser!.getIdToken());
       if (check)
