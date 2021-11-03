@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:timxe/screens/login/controller/welcome_controller.dart';
+import 'package:timxe/screens/login/views/history_view.dart';
 import 'package:timxe/screens/login/views/nav_info_detail_view.dart';
 import 'package:timxe/screens/login/widgets/profile_menu.dart';
 
@@ -11,11 +12,11 @@ class NavInfoView extends GetView<WelcomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
+          centerTitle: true,
           backgroundColor: Colors.green[900],
           title: const Text(
             'Profile',
-            style:  TextStyle(color: Colors.black, fontSize: 16),
+            style: TextStyle(color: Colors.black, fontSize: 16),
             textAlign: TextAlign.center,
           )),
       body: Container(
@@ -40,7 +41,6 @@ class NavInfoView extends GetView<WelcomeController> {
             const SizedBox(
               height: 8,
             ),
-    
             ProfileMenu(
               icon: Icon(
                 Icons.person,
@@ -53,11 +53,15 @@ class NavInfoView extends GetView<WelcomeController> {
             ),
             ProfileMenu(
               icon: Icon(
-                Icons.notifications,
+                Icons.schedule_rounded,
                 color: Colors.orange.shade200,
               ),
-              press: () {},
-              text: 'Thông báo',
+              press: () => Get.to(HistoryView()),
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => HistoryView()),
+              // ),
+              text: 'Lịch sử',
             ),
             ProfileMenu(
               icon: Icon(
