@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:timxe/screens/login/controller/welcome_controller.dart';
-import 'package:timxe/screens/login/views/home_view.dart';
 
 class InfomationDetail extends GetView<WelcomeController> {
   const InfomationDetail({Key? key}) : super(key: key);
@@ -30,12 +29,12 @@ class InfomationDetail extends GetView<WelcomeController> {
             ),
             InfomationTextField(
               lbtxt: 'Họ và tên',
-              initValue: '${controller.user.displayName}',
+              initValue: '${controller.homeController.currentDriver.name}',
               Icons: Icons.account_circle,
             ),
             InfomationTextField(
               lbtxt: 'Số điện thoại',
-              initValue: "${controller.user.phoneNumber}",
+              initValue: "${controller.homeController.currentDriver.phone}",
               Icons: Icons.phone,
             ),
             InfomationTextField(

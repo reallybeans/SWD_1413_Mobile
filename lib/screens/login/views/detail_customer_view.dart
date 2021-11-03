@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get.dart';
+
 import 'package:get/get_instance/src/extension_instance.dart';
-import 'package:timxe/data/schedule.dart';
+import 'package:timelines/timelines.dart';
+import 'package:timxe/data/booking.dart';
+import 'package:timxe/routes/app_pages.dart';
 import 'package:timxe/screens/login/controller/nav_shedule_controller.dart';
+import 'package:timxe/screens/login/services/update_booking_status_api.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CustomerDetails extends StatelessWidget {
   final NavSheduleController navSheduleController =
       Get.put(NavSheduleController());
-  final Schedule scheduleItem;
+  final Booking scheduleItem;
   CustomerDetails(this.scheduleItem, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -19,7 +24,7 @@ class CustomerDetails extends StatelessWidget {
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.green[900],
-          title: Text(appBarTitle),
+          title: const Text('Thông tin chi tiết'),
         ),
         body: ListView(
           children: <Widget>[
@@ -45,7 +50,7 @@ class CustomerDetails extends StatelessWidget {
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        scheduleItem.phone.toString(),
+                        scheduleItem.phoneCustomer.toString(),
                         style: const TextStyle(
                           color: Colors.black,
                           fontSize: 18,
@@ -56,9 +61,8 @@ class CustomerDetails extends StatelessWidget {
                   Row(
                     // ignore: prefer_const_literals_to_create_immutables
                     children: [
-                      // ignore: prefer_const_constructors
-                      Expanded(
-                          child: const Divider(
+                      const Expanded(
+                          child: Divider(
                         height: 40,
                         color: Colors.black,
                       )),
@@ -73,20 +77,34 @@ class CustomerDetails extends StatelessWidget {
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        scheduleItem.start,
+                        '${scheduleItem.startAt.day}' +
+                            "/" +
+                            '${scheduleItem.startAt.month}' +
+                            "/" +
+                            '${scheduleItem.startAt.year}',
                         style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 18,
-                        ),
+                            fontSize: 16, fontWeight: FontWeight.bold),
                       ),
+                      Text(
+                        '${scheduleItem.startAt.hour}' +
+                            "h" +
+                            '${scheduleItem.startAt.minute}',
+                        style: const TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                      // Text(
+                      //   scheduleItem.startAt.toString(),
+                      //   style: const TextStyle(
+                      //     color: Colors.black,
+                      //     fontSize: 18,
+                      //   ),
+                      // ),
                     ],
                   ),
                   Row(
                     // ignore: prefer_const_literals_to_create_immutables
                     children: [
-                      // ignore: prefer_const_constructors
-                      Expanded(
-                          // ignore: prefer_const_constructors
+                      const Expanded(
                           child: Divider(
                         height: 40,
                         color: Colors.black,
@@ -115,60 +133,56 @@ class CustomerDetails extends StatelessWidget {
                   Row(
                     // ignore: prefer_const_literals_to_create_immutables
                     children: [
-                      // ignore: prefer_const_constructors
-                      Expanded(
-                          child: const Divider(
+                      const Expanded(
+                          child: Divider(
                         height: 40,
                         color: Colors.black,
                       )),
                     ],
                   ),
                   // Điểm dừng chân
-                  const Text(
-                    'Điểm dừng chân: ',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
                   Row(
-                    // ignore: prefer_const_literals_to_create_immutables
                     children: [
-                      // ignore: prefer_const_constructors
                       Expanded(
-                          child: const Divider(
-                        height: 40,
-                        color: Colors.black,
-                      )),
-                    ],
-                  ),
-                  Align(
-                    alignment: Alignment.bottomLeft,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Column(
-                            children: [
-                              for (var i = 0;
-                                  i <
-                                      scheduleItem
-                                          .schedule.address.waypoint.length;
-                                  i++)
-                                Container(
-                                  margin: const EdgeInsets.only(bottom: 8),
-                                  child: Text(
-                                    '${i + 1} '
-                                    '${scheduleItem.schedule.address.waypoint[i]}',
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 18,
-                                    ),
-                                  ),
-                                ),
-                            ],
+                        child: FixedTimeline.tileBuilder(
+                          builder: TimelineTileBuilder.connectedFromStyle(
+                            contentsAlign: ContentsAlign.reverse,
+                            oppositeContentsBuilder: (context, index) =>
+                                Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(scheduleItem
+                                  .schedule.address.waypoint[index]),
+                            ),
+                            contentsBuilder: (context, index) => Card(
+                              child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: ElevatedButton.icon(
+                                    label: const Text(""),
+                                    onPressed: () async {
+                                      String googleUrl =
+                                          'https://www.google.com/maps/search/?api=1&query=${scheduleItem.schedule.address.waypoint[index]}';
+                                      if (await canLaunch(googleUrl)) {
+                                        await launch(googleUrl);
+                                      } else {
+                                        throw 'Could not open the map.';
+                                      }
+                                    },
+                                    icon:
+                                        const Icon(Icons.location_on_outlined),
+                                  )),
+                            ),
+                            connectorStyleBuilder: (context, index) =>
+                                ConnectorStyle.solidLine,
+                            indicatorStyleBuilder: (context, index) =>
+                                IndicatorStyle.dot,
+                            itemCount:
+                                scheduleItem.schedule.address.waypoint.length,
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                
+                    ],
                   ),
-
                   Row(
                     // ignore: prefer_const_literals_to_create_immutables
                     children: [
@@ -212,72 +226,65 @@ class CustomerDetails extends StatelessWidget {
                   Row(
                     children: [
                       const Text(
-                        '2 chiều: ',
+                        'Khứ hồi: ',
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
-                      if (scheduleItem.mode ? true : false)
-                        const Text(
-                          "Có",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 18,
-                          ),
+                      Checkbox(
+                        value: scheduleItem.mode,
+                        onChanged: (bool) {},
+                        activeColor: Colors.green,
+                      ),
+                    ],
+                  ),
+                  scheduleItem.mode
+                      ? Row(
+                          // ignore: prefer_const_literals_to_create_immutables
+                          children: [
+                            const Expanded(
+                                child: Divider(
+                              height: 40,
+                              color: Colors.black,
+                            )),
+                          ],
                         )
-                      else
-                        const Text(
-                          "Không",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 18,
-                          ),
-                        ),
-                    ],
-                  ),
-                  Row(
-                    // ignore: prefer_const_literals_to_create_immutables
-                    children: [
-                      const Expanded(
-                          child: Divider(
-                        height: 40,
-                        color: Colors.black,
-                      )),
-                    ],
-                  ),
-                  // Thời gian chờ
-                  Row(
-                    children: [
-                      const Text(
-                        'Thời gian chờ: ',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        scheduleItem.timeWait.toString(),
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 18,
-                        ),
-                      ),
-                      const Text(
-                        " Ngày",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 18,
-                        ),
-                      )
-                    ],
-                  ),
-                  Row(
-                    // ignore: prefer_const_literals_to_create_immutables
-                    children: [
-                      const Expanded(
-                          child: Divider(
-                        height: 40,
-                        color: Colors.black,
-                      )),
-                    ],
-                  ),
+                      :
+                      // Thời gian chờ
+                      scheduleItem.mode
+                          ? Row(
+                              children: [
+                                const Text(
+                                  'Thời gian chờ: ',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  scheduleItem.timeWait.toString(),
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                                const Text(
+                                  " Ngày",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                  ),
+                                )
+                              ],
+                            )
+                          : Row(
+                              // ignore: prefer_const_literals_to_create_immutables
+                              children: [
+                                const Expanded(
+                                    child: Divider(
+                                  height: 40,
+                                  color: Colors.black,
+                                )),
+                              ],
+                            ),
                   // Tổng giá chuyến đi
                   Row(
                     children: [
@@ -289,7 +296,7 @@ class CustomerDetails extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '${scheduleItem.price.toString()}' ' VNĐ',
+                        '${scheduleItem.priceBooking.toString()}' ' VNĐ',
                         style: TextStyle(
                           color: Colors.green[800],
                           fontSize: 18,
@@ -297,10 +304,7 @@ class CustomerDetails extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Align(
+                     Align(
                     alignment: Alignment.bottomRight,
                     child: Row(
                       children: [
@@ -311,7 +315,12 @@ class CustomerDetails extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 vertical: 10, horizontal: 20),
                             color: Colors.greenAccent[700],
-                            onPressed: () {},
+                            onPressed: () {
+                             UpdateBookingStatusApi api=new UpdateBookingStatusApi();
+                             //Status 2 là chấp nhận Cuốc
+                             api.apiUpdateStatusBooking(scheduleItem.id,2);
+                          //  Get.
+                            },
                             child: const Text(
                               'Chấp nhận',
                               style:
@@ -329,7 +338,11 @@ class CustomerDetails extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 vertical: 10, horizontal: 20),
                             color: Colors.amber.shade300,
-                            onPressed: () {},
+                            onPressed: () { UpdateBookingStatusApi api=new UpdateBookingStatusApi();
+                             //Status 3 là chấp nhận Cuốc
+                             api.apiUpdateStatusBooking(scheduleItem.id,3);
+                             Get.offAndToNamed(Routes.WELCOME);
+                             },
                             child: const Text(
                               'Từ chối',
                               style:

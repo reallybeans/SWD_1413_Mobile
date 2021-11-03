@@ -34,7 +34,7 @@ class NavInfoView extends GetView<WelcomeController> {
               height: 12,
             ),
             Text(
-              controller.user.displayName!,
+              controller.homeController.currentDriver.name,
               style: TextStyle(color: Colors.black, fontSize: 20),
             ),
             const SizedBox(

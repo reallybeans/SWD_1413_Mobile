@@ -7,6 +7,7 @@ import 'package:geocoder/geocoder.dart';
 import 'package:geocoder/model.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:timxe/data/driver.dart';
 import 'package:timxe/routes/app_pages.dart';
 import 'package:timxe/screens/login/controller/welcome_controller.dart';
 import 'package:timxe/screens/login/services/checklogin_api.dart';
@@ -15,7 +16,8 @@ class HomeController extends GetxController {
   late GoogleSignIn googleSign;
   var isSignIn = false.obs;
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-
+  String deviceId="";
+   late Driver currentDriver;
 
   static const AndroidNotificationChannel channel = AndroidNotificationChannel(
     'high_importance_channel', // id
@@ -39,9 +41,8 @@ final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     sound: true,
   );
    final FirebaseMessaging _fcm = FirebaseMessaging.instance;
-    _fcm.getToken().then((token) => {print('The token||' + token!)});
+    _fcm.getToken().then((token) => {print('The token||' + token!),deviceId=token});
     
-
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = message.notification?.android;
@@ -95,10 +96,11 @@ final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
   void onClose() {}
 
   void handleAuthStateChanged(isLoggedIn) async {
+    print("Token trong HAM: "+deviceId);
     ApiService sv=new ApiService();
     if (isLoggedIn) {
-    var check = await sv.apiCheckLogin(await firebaseAuth.currentUser!.getIdToken());
-      if (check)
+     currentDriver = await sv.apiCheckLogin(await firebaseAuth.currentUser!.getIdToken(),deviceId);
+      if (currentDriver!=null)
         Get.offAllNamed(Routes.WELCOME, arguments: firebaseAuth.currentUser);
       else {
           await googleSign.disconnect();

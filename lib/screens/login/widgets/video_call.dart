@@ -5,7 +5,7 @@ import 'package:http/http.dart';
 
 // ignore: must_be_immutable
 class VideoCall extends StatefulWidget {
-  String channelName = "test1";
+  String channelName = "test";
 
   // VideoCall({required this.channelName});
   @override
@@ -19,7 +19,6 @@ class _VideoCallState extends State<VideoCall> {
 
   @override
   void initState() {
-    // getToken();
     initAgora();
     super.initState();
   }
@@ -27,6 +26,8 @@ class _VideoCallState extends State<VideoCall> {
   void initAgora() async {
     await _client.initialize();
   }
+
+
   // Future<void> getToken() async {
   //   String link =
   //       "https://agora-node-tokenserver-1.davidcaleb.repl.co/access_token?channelName=${widget.channelName}";
@@ -55,7 +56,7 @@ class _VideoCallState extends State<VideoCall> {
       agoraConnectionData: AgoraConnectionData(
         appId: "c0361d4447854ba8b277b52880484530",
         tempToken:
-            '006c0361d4447854ba8b277b52880484530IAB1O2VSw8f3CdwBufGUJGO87AU7lkwv4o5fZaloxaMO2Ax+f9gAAAAAEACcPzRRSch+YQEAAQBJyH5h',
+            '006c0361d4447854ba8b277b52880484530IAAtTZGoxL25qxqw7ld/420kolujS1YjAUGVnVWpiQXJpAx+f9gAAAAAEADiW+Wx6pyDYQEAAQDnnINh',
         channelName: 'test',
       ),
       enabledPermission: [Permission.camera, Permission.microphone]);

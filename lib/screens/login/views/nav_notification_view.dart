@@ -7,7 +7,7 @@ import 'package:timxe/screens/login/views/detail_customer_view.dart';
 
 class NavNotifyView extends GetView<NavNotificationController> {
   WelcomeController welcomeController = Get.find<WelcomeController>();
-  final NavSheduleController notifyController = Get.put(NavSheduleController());
+  final NavNotificationController notifyController = Get.put(NavNotificationController());
 
   @override
   Widget build(BuildContext context) {
@@ -16,12 +16,12 @@ class NavNotifyView extends GetView<NavNotificationController> {
 
   ListView _buildListCustomers(BuildContext context) {
     return ListView.builder(
-      itemCount: notifyController.scheduleList.length,
+      itemCount: notifyController.bookingWaitProcessList.length,
       itemBuilder: (_, index) {
         return Card(
           child: ListTile(
             title: Text(
-              notifyController.scheduleList[index].nameCustomer,
+              notifyController.bookingWaitProcessList[index].nameCustomer,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
             subtitle: Align(
@@ -29,15 +29,15 @@ class NavNotifyView extends GetView<NavNotificationController> {
               child: Column(
                 children: [
                   Text(
-                    'Số điện thoại: ${notifyController.scheduleList[index].phone}',
+                    'Số điện thoại: ${notifyController.bookingWaitProcessList[index].phoneCustomer}',
                     style: const TextStyle(color: Colors.black, fontSize: 17),
                   ),
                   Text(
-                    'Ngày đón: ${notifyController.scheduleList[index].start}',
+                    'Ngày đón: ${notifyController.bookingWaitProcessList[index].startAt.toString()}',
                     style: const TextStyle(color: Colors.black, fontSize: 17),
                   ),
                   Text(
-                    'Tổng tiền: ${notifyController.scheduleList[index].price.toString()}',
+                    'Tổng tiền: ${notifyController.bookingWaitProcessList[index].priceBooking.toString()}',
                     style:
                         TextStyle(color: Colors.green.shade800, fontSize: 17),
                   ),
@@ -51,7 +51,7 @@ class NavNotifyView extends GetView<NavNotificationController> {
             ),
             trailing: const Icon(Icons.arrow_forward),
             onTap: () =>
-                Get.to(CustomerDetails(notifyController.scheduleList[index])),
+                Get.to(CustomerDetails(notifyController.bookingWaitProcessList[index])),
           ),
         );
       },

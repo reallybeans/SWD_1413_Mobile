@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:timelines/timelines.dart';
-import 'package:timxe/data/schedule.dart';
+import 'package:timxe/config.dart';
+import 'package:timxe/data/booking.dart';
+
 import 'package:timxe/screens/login/controller/nav_shedule_controller.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ScheduleDetails extends StatelessWidget {
   final NavSheduleController navSheduleController =
       Get.put(NavSheduleController());
-  final Schedule scheduleItem;
+  final Booking scheduleItem;
   ScheduleDetails(this.scheduleItem, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -46,7 +48,7 @@ class ScheduleDetails extends StatelessWidget {
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        scheduleItem.phone.toString(),
+                        scheduleItem.phoneCustomer.toString(),
                         style: const TextStyle(
                           color: Colors.black,
                           fontSize: 18,
@@ -73,12 +75,29 @@ class ScheduleDetails extends StatelessWidget {
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        scheduleItem.start,
+                        '${scheduleItem.startAt.day}' +
+                            "/" +
+                            '${scheduleItem.startAt.month}' +
+                            "/" +
+                            '${scheduleItem.startAt.year}',
                         style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 18,
-                        ),
+                            fontSize: 16, fontWeight: FontWeight.bold),
                       ),
+                      SizedBox(width:30,),
+                      Text(
+                        '${scheduleItem.startAt.hour}' +
+                            "h" +
+                            '${scheduleItem.startAt.minute}',
+                        style: const TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                      // Text(
+                      //   scheduleItem.startAt.toString(),
+                      //   style: const TextStyle(
+                      //     color: Colors.black,
+                      //     fontSize: 18,
+                      //   ),
+                      // ),
                     ],
                   ),
                   Row(
@@ -122,6 +141,7 @@ class ScheduleDetails extends StatelessWidget {
                   ),
                   // Điểm dừng chân
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
                         child: FixedTimeline.tileBuilder(
@@ -136,8 +156,7 @@ class ScheduleDetails extends StatelessWidget {
                             contentsBuilder: (context, index) => Card(
                               child: Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: ElevatedButton.icon(
-                                    label: const Text(""),
+                                  child: IconButton(
                                     onPressed: () async {
                                       String googleUrl =
                                           'https://www.google.com/maps/search/?api=1&query=${scheduleItem.schedule.address.waypoint[index]}';
@@ -157,39 +176,13 @@ class ScheduleDetails extends StatelessWidget {
                                 IndicatorStyle.dot,
                             itemCount:
                                 scheduleItem.schedule.address.waypoint.length,
+                                // firstConnectorStyle: Conn
                           ),
                         ),
                       ),
-                      // Expanded(
-                      //   // Text(
-                      //   //   schedule.schedule.address.waypoint.forEach((element) {wa}),
-                      //   //   style: TextStyle(
-                      //   //     color: Colors.black,
-                      //   //     fontSize: 18,
-                      //   //   ),
-                      //   // ),
-                      //   child: Column(
-                      //     children: [
-                      //       for (var i = 0;
-                      //           i <
-                      //               scheduleItem
-                      //                   .schedule.address.waypoint.length;
-                      //           i++)
-                      //         Container(
-                      //           margin: EdgeInsets.only(bottom: 8),
-                      //           child: Text(
-                      //             '${i + 1} '
-                      //             '${scheduleItem.schedule.address.waypoint[i]}',
-                      //             style: TextStyle(
-                      //               color: Colors.black,
-                      //               fontSize: 18,
-                      //             ),
-                      //           ),
-                      //         ),
-                      //     ],
-                      //   ),
-                      // ),
+                      SizedBox(width: MediaQueryData().size.width*1,)
                     ],
+                    
                   ),
                   Row(
                     // ignore: prefer_const_literals_to_create_immutables
@@ -245,50 +238,54 @@ class ScheduleDetails extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Row(
-                    // ignore: prefer_const_literals_to_create_immutables
-                    children: [
-                      const Expanded(
-                          child: Divider(
-                        height: 40,
-                        color: Colors.black,
-                      )),
-                    ],
-                  ),
-                  // Thời gian chờ
-                  Row(
-                    children: [
-                      const Text(
-                        'Thời gian chờ: ',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        scheduleItem.timeWait.toString(),
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 18,
-                        ),
-                      ),
-                      const Text(
-                        " Ngày",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 18,
-                        ),
-                      )
-                    ],
-                  ),
-                  Row(
-                    // ignore: prefer_const_literals_to_create_immutables
-                    children: [
-                      const Expanded(
-                          child: Divider(
-                        height: 40,
-                        color: Colors.black,
-                      )),
-                    ],
-                  ),
+                  scheduleItem.mode
+                      ? Row(
+                          // ignore: prefer_const_literals_to_create_immutables
+                          children: [
+                            const Expanded(
+                                child: Divider(
+                              height: 40,
+                              color: Colors.black,
+                            )),
+                          ],
+                        )
+                      :
+                      // Thời gian chờ
+                      scheduleItem.mode
+                          ? Row(
+                              children: [
+                                const Text(
+                                  'Thời gian chờ: ',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  scheduleItem.timeWait.toString(),
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                                const Text(
+                                  " Ngày",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                  ),
+                                )
+                              ],
+                            )
+                          : Row(
+                              // ignore: prefer_const_literals_to_create_immutables
+                              children: [
+                                const Expanded(
+                                    child: Divider(
+                                  height: 40,
+                                  color: Colors.black,
+                                )),
+                              ],
+                            ),
                   // Tổng giá chuyến đi
                   Row(
                     children: [
@@ -300,7 +297,7 @@ class ScheduleDetails extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '${scheduleItem.price.toString()}' ' VNĐ',
+                        '${scheduleItem.priceBooking.toString()}' ' VNĐ',
                         style: TextStyle(
                           color: Colors.green[800],
                           fontSize: 18,

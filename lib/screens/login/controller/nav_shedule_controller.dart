@@ -4,20 +4,20 @@ import 'dart:async';
 import 'package:get/get.dart';
 
 import 'package:get/state_manager.dart';
-import 'package:timxe/data/schedule.dart';
+import 'package:timxe/data/booking.dart';
 import 'package:timxe/screens/login/controller/home_controller.dart';
 import 'package:timxe/screens/login/services/get_schedule_api.dart';
 
 class NavSheduleController extends GetxController {
   HomeController homeController = Get.find<HomeController>();
   // ignore: deprecated_member_use
-  var scheduleList = List<Schedule>.empty().obs;
+  var scheduleList = List<Booking>.empty().obs;
 
   @override
   void onInit() async {
     // Timer.periodic(Duration(seconds: 2), (Timer t) =>{
     //   print("TEST THỬ CHƠI TRONG NAVCONTROLLER"),
-    //   fetchUsers()
+      fetchSchedule();
     //   });
 
     super.onInit();
@@ -31,10 +31,10 @@ class NavSheduleController extends GetxController {
 
   @override
   void onClose() {}
-  void fetchUsers() async {
-    var schedules = await GetScheduleApi.fetchUser();
-    if (schedules != null) {
-      scheduleList.value = schedules;
+  void fetchSchedule() async {
+    var bookings_accept = await GetScheduleApi.fetchSchedule();
+    if (bookings_accept != null) {
+      scheduleList.value = bookings_accept;
     }
   }
 }
