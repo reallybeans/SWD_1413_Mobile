@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:share/share.dart';
+import 'package:timxe/screens/login/services/get_schedule_api.dart';
 import 'package:timxe/screens/login/widgets/video_call.dart';
 import 'package:uuid/uuid.dart';
 
@@ -73,7 +74,9 @@ class _NavVideoCallViewState extends State<NavVideoCallView> {
             const SizedBox(height: 30),
             OutlinedButton.icon(
               onPressed: () {
-                Get.to(VideoCall());
+                // GetScheduleApi a =new GetScheduleApi();
+              //  String str= a.getToken("test") as String;
+                Get.to(VideoCall( ));
                 // Get.to(MyApp());
               },
               icon: Icon(Icons.video_call),

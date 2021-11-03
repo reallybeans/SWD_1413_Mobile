@@ -8,7 +8,6 @@ import 'package:timxe/screens/login/views/nav_shedule_view.dart';
 import 'package:timxe/screens/login/views/nav_video_call_view.dart';
 
 class WelcomeView extends GetView<WelcomeController> {
-  const WelcomeView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

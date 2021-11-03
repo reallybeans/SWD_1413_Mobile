@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:get/get.dart';
-import 'package:timxe/data/schedule.dart';
+import 'package:timxe/data/booking.dart';
 import 'package:timxe/screens/login/services/get_schedule_api.dart';
 
 class NavNotificationController extends GetxController {
-  var scheduleList = List<Schedule>.empty().obs;
+  var bookingWaitProcessList = List<Booking>.empty().obs;
 
   @override
   void onInit() async {
@@ -13,7 +13,7 @@ class NavNotificationController extends GetxController {
     //     Duration(seconds: 2),
     //     (Timer t) =>
     //         {print("TEST THỬ CHƠI TRONG NAVCONTROLLER"), fetchUsers()});
-
+    fecthBookingWaitProcess();
     super.onInit();
   }
 
@@ -25,10 +25,10 @@ class NavNotificationController extends GetxController {
 
   @override
   void onClose() {}
-  void fetchUsers() async {
-    var schedules = await GetScheduleApi.fetchUser();
-    if (schedules != null) {
-      scheduleList.value = schedules;
+  void fecthBookingWaitProcess() async {
+    var bookingWaitProcesses = await GetScheduleApi.fecthBookingWaitProcess();
+    if (bookingWaitProcesses != null) {
+      bookingWaitProcessList.value = bookingWaitProcesses;
     }
   }
 }

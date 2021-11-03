@@ -52,7 +52,7 @@ class NavSheduleView extends GetView<NavSheduleController> {
                   ScheduleContainer(navScheduleController.scheduleList[index]),
             ),
             options: CarouselOptions(
-              height: size.height * 0.55,
+              height: size.height * 0.7,
               enableInfiniteScroll: false,
               enlargeCenterPage: true,
             ),
