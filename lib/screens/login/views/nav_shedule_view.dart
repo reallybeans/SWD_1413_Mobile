@@ -16,17 +16,54 @@ class NavSheduleView extends GetView<NavSheduleController> {
   // WelcomeController welcomeController = Get.find<WelcomeController>();
   NavSheduleView({Key? key}) : super(key: key);
   get transitionType => null;
+  var tmp = false.obs;
+  var _online = 'Hoạt động';
+  var _off = 'Ngoại tuyến';
+  var status = 'Ngoại tuyến';
   @override
   Widget build(BuildContext context) {
     NavSheduleBinding().dependencies();
     Size size = MediaQuery.of(context).size;
     const transitionType = ContainerTransitionType.fade;
-    return SafeArea(
-        child: Column(
+    return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
+        Obx(
+          () => Container(
+            height: MediaQuery.of(context).size.height * 0.1,
+            decoration: BoxDecoration(color: Colors.green.shade900),
+            child: Align(
+              alignment: Alignment.bottomRight,
+              child: Row(
+                children: [
+                  Spacer(),
+                  Text(
+                    status,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                    ),
+                  ),
+                  CupertinoSwitch(
+                    trackColor: Colors.black,
+                    value: tmp.value,
+                    onChanged: (value) {
+                      if (tmp.value) {
+                        status = _off;
+                      } else {
+                        status = _online;
+                      }
+
+                      tmp.value = value;
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
         const SizedBox(
-          height: 40,
+          height: 10,
         ),
         Container(
           margin: const EdgeInsets.only(left: 20),
@@ -37,18 +74,16 @@ class NavSheduleView extends GetView<NavSheduleController> {
                 style: TextStyle(fontSize: 34, fontWeight: FontWeight.bold),
               )),
         ),
-        const Spacer(),
         Obx(() {
-  
           if (controller.isLoading.value) {
             // return SchedulePlash();
-           return  Center(
+            return Center(
               child: CircularProgressIndicator(
                 color: Colors.yellowAccent,
               ),
             );
           } else {
-           return CarouselSlider.builder(
+            return CarouselSlider.builder(
               itemCount: controller.scheduleList.length,
               itemBuilder: (context, index, realIndex) => OpenContainer(
                 openColor: Colors.transparent,
@@ -70,6 +105,6 @@ class NavSheduleView extends GetView<NavSheduleController> {
         }),
         const Spacer(),
       ],
-    ));
+    );
   }
 }

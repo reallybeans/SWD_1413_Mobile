@@ -55,6 +55,9 @@ class PhoneLoginController extends GetxController {
 
   void login(phoneController) async {
     showLoading.value = true;
+    String sdt = phoneController.text;
+    phoneController.text = '+84' + sdt;
+    print(phoneController.text);
     await _auth.verifyPhoneNumber(
       phoneNumber: phoneController.text,
       verificationCompleted: (phoneAuthCredential) async {

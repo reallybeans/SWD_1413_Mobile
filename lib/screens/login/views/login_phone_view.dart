@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:timxe/screens/login/controller/home_controller.dart';
 import 'package:timxe/screens/login/controller/phone_login_controller.dart';
+import 'package:timxe/screens/login/services/checklogin_api.dart';
 
 class PhoneLoginView extends GetView<PhoneLoginController> {
   final phoneController = TextEditingController();
@@ -14,9 +16,10 @@ class PhoneLoginView extends GetView<PhoneLoginController> {
       children: [
         const Spacer(),
         TextField(
+          maxLength: 10,
           controller: phoneController,
           decoration: const InputDecoration(
-            hintText: "Nhập số điện thoại",
+            hintText: "Nhập số điện thoại || Ex: 818258855",
             prefix: Padding(
               padding: EdgeInsets.all(4),
             ),
@@ -34,8 +37,14 @@ class PhoneLoginView extends GetView<PhoneLoginController> {
             child: FlatButton(
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
               color: Colors.greenAccent[400],
-              onPressed: () {
-                controller.login(phoneController);
+              onPressed: () async {
+                Get.put(HomeController()).currentDriver =
+                    await ApiService().apiCheckLoginPhone(phoneController.text);
+                if (Get.find<HomeController>().currentDriver != null) {
+                  controller.login(phoneController);
+                } else {
+                  Get.back();
+                }
               },
               child: Text('Tiếp tục'),
               textColor: Colors.white,
