@@ -1,15 +1,19 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:timxe/screens/login/binding/nav_notify_binding.dart';
+import 'package:timxe/screens/login/binding/nav_shedule_binding.dart';
 import 'package:timxe/screens/login/controller/welcome_controller.dart';
 import 'package:timxe/screens/login/views/nav_info_view.dart';
 import 'package:timxe/screens/login/views/nav_notification_view.dart';
 import 'package:timxe/screens/login/views/nav_shedule_view.dart';
 import 'package:timxe/screens/login/views/nav_video_call_view.dart';
 
-class WelcomeView extends GetView<WelcomeController> {
+class WelcomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // NavSheduleBinding().dependencies();
+    // NavNotifyBinding().dependencies();
     var index = 0.obs;
     final iconItems = <Widget>[
       const Icon(

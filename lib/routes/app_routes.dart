@@ -8,6 +8,7 @@ abstract class Routes {
   static const START = _Paths.START;
   static const WELCOME = _Paths.WELCOME;
   static const PHONELOGIN = _Paths.PHONELOGIN;
+  static const NAV_NOTIFY = _Paths.NAV_NOTIFY;
 }
 
 abstract class _Paths {
@@ -16,4 +17,5 @@ abstract class _Paths {
   static const HOME = '/home';
   static const START = '/start';
   static const WELCOME = '/welcome';
+  static const NAV_NOTIFY = '/navnotify';
 }

@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:timelines/timelines.dart';
 import 'package:timxe/data/booking.dart';
 import 'package:timxe/routes/app_pages.dart';
+import 'package:timxe/screens/login/controller/nav_notification_controller.dart';
 import 'package:timxe/screens/login/controller/nav_shedule_controller.dart';
+import 'package:timxe/screens/login/services/get_schedule_api.dart';
 import 'package:timxe/screens/login/services/update_booking_status_api.dart';
+import 'package:timxe/screens/login/widgets/schedule_spash.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CustomerDetails extends StatelessWidget {
-  final NavSheduleController navSheduleController =
-      Get.put(NavSheduleController());
   final Booking scheduleItem;
-  CustomerDetails(this.scheduleItem, {Key? key}) : super(key: key);
+  const CustomerDetails(this.scheduleItem, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    // final scheduleItem = navSheduleController.scheduleList[0];
     String appBarTitle = 'Thông tin chi tiết';
 
     return SafeArea(
@@ -180,7 +181,6 @@ class CustomerDetails extends StatelessWidget {
                           ),
                         ),
                       ),
-                
                     ],
                   ),
                   Row(
@@ -304,7 +304,7 @@ class CustomerDetails extends StatelessWidget {
                       ),
                     ],
                   ),
-                     Align(
+                  Align(
                     alignment: Alignment.bottomRight,
                     child: Row(
                       children: [
@@ -315,11 +315,14 @@ class CustomerDetails extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 vertical: 10, horizontal: 20),
                             color: Colors.greenAccent[700],
-                            onPressed: () {
-                             UpdateBookingStatusApi api=new UpdateBookingStatusApi();
-                             //Status 2 là chấp nhận Cuốc
-                             api.apiUpdateStatusBooking(scheduleItem.id,2);
-                          //  Get.
+                            onPressed: () async {
+                              //Status 2 là chấp nhận Cuốc
+                              await UpdateBookingStatusApi()
+                                  .apiUpdateStatusBooking(scheduleItem.id, 2);
+                              Get.find<NavSheduleController>().fetchSchedule();
+                              Get.find<NavNotificationController>()
+                                  .fecthBookingWaitProcess();
+                              Get.back();
                             },
                             child: const Text(
                               'Chấp nhận',
@@ -338,11 +341,15 @@ class CustomerDetails extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 vertical: 10, horizontal: 20),
                             color: Colors.amber.shade300,
-                            onPressed: () { UpdateBookingStatusApi api=new UpdateBookingStatusApi();
-                             //Status 3 là chấp nhận Cuốc
-                             api.apiUpdateStatusBooking(scheduleItem.id,3);
-                             Get.offAndToNamed(Routes.WELCOME);
-                             },
+                            onPressed: () async {
+                              //Status 4 là từ chối Cuốc
+                              await UpdateBookingStatusApi()
+                                  .apiUpdateStatusBooking(scheduleItem.id, 4);
+                              // Get.find<NavSheduleController>().fetchSchedule();
+                              Get.find<NavNotificationController>()
+                                  .fecthBookingWaitProcess();
+                              Get.back();
+                            },
                             child: const Text(
                               'Từ chối',
                               style:

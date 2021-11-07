@@ -10,6 +10,7 @@ class NavInfoView extends GetView<WelcomeController> {
 
   @override
   Widget build(BuildContext context) {
+    // Get.find<WelcomeController>();
     return Scaffold(
       appBar: AppBar(
           centerTitle: true,
