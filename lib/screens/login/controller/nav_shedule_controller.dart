@@ -14,15 +14,15 @@ class NavSheduleController extends GetxController {
   // ignore: deprecated_member_use
   var scheduleList = List<Booking>.empty().obs;
   var isLoading = true.obs;
-  SystemWindowPrefMode prefMode = SystemWindowPrefMode.OVERLAY;
+  // SystemWindowPrefMode prefMode = SystemWindowPrefMode.OVERLAY;
 
   @override
   void onInit() async {
     // Timer.periodic(Duration(seconds: 2), (Timer t) =>{
     //   print("TEST THỬ CHƠI TRONG NAVCONTROLLER"),
     fetchSchedule();
-    _requestPermissions();
-    SystemAlertWindow.registerOnClickListener(callBack);
+    // _requestPermissions();
+    // SystemAlertWindow.registerOnClickListener(callBack);
 
     //   });
     // Timer.periodic(Duration(seconds: 2), (Timer t) =>{
@@ -58,14 +58,14 @@ class NavSheduleController extends GetxController {
     // }
   }
 
-  Future<void> _requestPermissions() async {
-    await SystemAlertWindow.requestPermissions(prefMode: prefMode);
-  }
+  // Future<void> _requestPermissions() async {
+  //   await SystemAlertWindow.requestPermissions(prefMode: prefMode);
+  // }
 
-  void callBack(tag) {
-    print("tag ne" + tag);
-    if (tag == "close") {
-      SystemAlertWindow.closeSystemWindow();
-    }
-  }
+  // void callBack(tag) {
+  //   print("tag ne" + tag);
+  //   if (tag == "close") {
+  //     SystemAlertWindow.closeSystemWindow();
+  //   }
+  // }
 }
