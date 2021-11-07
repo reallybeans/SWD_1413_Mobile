@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:system_alert_window/system_alert_window.dart';
 import 'package:timxe/screens/login/controller/welcome_controller.dart';
 import 'package:timxe/screens/login/views/history_view.dart';
 import 'package:timxe/screens/login/views/nav_info_detail_view.dart';
@@ -69,7 +70,45 @@ class NavInfoView extends GetView<WelcomeController> {
                 Icons.settings,
                 color: Colors.orange.shade200,
               ),
-              press: () {},
+              press: () {
+              SystemAlertWindow.showSystemWindow(
+                  margin: SystemWindowMargin(left: 50),
+                  gravity: SystemWindowGravity.TOP,
+                  header: SystemWindowHeader(
+                    padding: SystemWindowPadding(left: 20),
+                    decoration: SystemWindowDecoration(
+                        startColor: Colors.red, endColor: Colors.blueGrey),
+                    title: SystemWindowText(
+                        text: "Hi  this is header", textColor: Colors.white),
+                    subTitle: SystemWindowText(
+                        text: "Hi  this is header subtitle",
+                        textColor: Colors.white),
+                  ),
+                  body: SystemWindowBody(
+                      decoration: SystemWindowDecoration(
+                          startColor: Colors.red, endColor: Colors.blueGrey),
+                      padding: SystemWindowPadding(left: 20),
+                      rows: [
+                        EachRow(columns: [
+                          EachColumn(
+                            text: SystemWindowText(
+                                text: "Hi  this is body",
+                                textColor: Colors.white),
+                          )
+                        ])
+                      ]),
+                  footer: SystemWindowFooter(
+                    buttons: [
+                      SystemWindowButton(
+                          text: SystemWindowText(text: 'close'), tag: "close")
+                    ],
+                    decoration: SystemWindowDecoration(
+                      startColor: Colors.blue,
+                    ),
+                  ),
+                  height: 100,
+                );
+              },
               text: 'Cài đặt',
             ),
             ProfileMenu(
@@ -95,4 +134,5 @@ class NavInfoView extends GetView<WelcomeController> {
       ),
     );
   }
+
 }
