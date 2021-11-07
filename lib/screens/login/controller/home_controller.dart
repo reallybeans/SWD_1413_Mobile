@@ -71,7 +71,7 @@ final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     //   RemoteNotification? notification = message.notification;
     //   AndroidNotification? android = message.notification?.android;
     //   if (notification != null && android != null) {
-    //     // Get.offAllNamed(newRouteName)
+    //     Get.toNamed("/navnotify");
     //   }
     // });
   }
@@ -97,9 +97,8 @@ final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
 
   void handleAuthStateChanged(isLoggedIn) async {
     print("Token trong HAM: "+deviceId);
-    ApiService sv=new ApiService();
     if (isLoggedIn) {
-     currentDriver = await sv.apiCheckLogin(await firebaseAuth.currentUser!.getIdToken(),deviceId);
+     currentDriver = await ApiService().apiCheckLogin(await firebaseAuth.currentUser!.getIdToken(),deviceId);
       if (currentDriver!=null)
         Get.offAllNamed(Routes.WELCOME, arguments: firebaseAuth.currentUser);
       else {

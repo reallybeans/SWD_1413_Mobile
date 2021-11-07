@@ -21,7 +21,7 @@ class HistoryView extends GetView<HistoryController> {
             textAlign: TextAlign.center,
           )),
       backgroundColor: Colors.greenAccent[400],
-      body: _buildListCustomers(context),
+      body: Obx(()=>_buildListCustomers(context)),
     );
   }
 

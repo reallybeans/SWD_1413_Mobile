@@ -30,7 +30,6 @@ class HistoryController extends GetxController {
   void onClose() {}
   void fecthUsers() async {
     var history = await GetHistoryApi.fetchUser();
-
     if (history != null) {
       historyList.value = history;
     }

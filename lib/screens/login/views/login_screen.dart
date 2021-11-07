@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:timxe/routes/app_pages.dart';
@@ -19,7 +20,7 @@ class LoginScreen extends GetView<LoginController> {
         child: Column(
           children: [
             const Spacer(),
-            Image.asset("assets/images/logo.png"),
+           SvgPicture.asset("assets/icons/logo_welcome.svg"),
             const Spacer(),
             Align(
                 alignment: Alignment.bottomCenter,

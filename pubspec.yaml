@@ -59,13 +59,15 @@ dependencies:
   carousel_slider: ^4.0.0
   flutter_typeahead: ^3.2.1
   url_launcher: ^6.0.12
-  flutter_phone_direct_caller: ^2.0.0
+  # flutter_phone_direct_caller: ^2.0.0
   geocoder: ^0.2.1
   timer_builder: ^2.0.0
   flutter_speed_dial: ^4.4.0+2
   #State Management
   provider: ^5.0.0
   timelines: ^0.1.0
+  lottie: ^1.2.1
+  fluttertoast: ^8.0.8
 dev_dependencies:
   flutter_test:
     sdk: flutter

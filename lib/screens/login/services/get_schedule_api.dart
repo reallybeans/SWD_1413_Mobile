@@ -137,7 +137,6 @@ class GetScheduleApi {
       final listOfBookings_Accept = bookings_Accept.map<Booking>((json) {
         return Booking.fromJson(json);
       }).toList();
-      // print('object');
       return listOfBookings_Accept;
     }
   }

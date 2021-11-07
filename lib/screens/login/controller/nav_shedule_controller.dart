@@ -12,12 +12,12 @@ class NavSheduleController extends GetxController {
   HomeController homeController = Get.find<HomeController>();
   // ignore: deprecated_member_use
   var scheduleList = List<Booking>.empty().obs;
-
+  var isLoading = true.obs;
   @override
   void onInit() async {
     // Timer.periodic(Duration(seconds: 2), (Timer t) =>{
     //   print("TEST THỬ CHƠI TRONG NAVCONTROLLER"),
-      fetchSchedule();
+    fetchSchedule();
     //   });
 
     super.onInit();
@@ -32,9 +32,20 @@ class NavSheduleController extends GetxController {
   @override
   void onClose() {}
   void fetchSchedule() async {
-    var bookings_accept = await GetScheduleApi.fetchSchedule();
-    if (bookings_accept != null) {
-      scheduleList.value = bookings_accept;
+    try {
+      isLoading(true);
+      var bookingsAccept = await GetScheduleApi.fetchSchedule();
+      if (bookingsAccept != null) {
+        scheduleList.assignAll(bookingsAccept);
+      }
+    } finally {
+      isLoading(false);
     }
+
+    // isLoading(true);
+    // var bookingsAccept = await GetScheduleApi.fetchSchedule();
+    // if (bookingsAccept != null) {
+    //   scheduleList.value = bookingsAccept;
+    // }
   }
 }
