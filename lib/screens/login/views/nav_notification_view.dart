@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:timxe/screens/login/binding/nav_notify_binding.dart';
 import 'package:timxe/screens/login/controller/nav_notification_controller.dart';
-import 'package:timxe/screens/login/controller/nav_shedule_controller.dart';
-import 'package:timxe/screens/login/controller/welcome_controller.dart';
-import 'package:timxe/screens/login/views/detail_customer_view.dart';
+import 'package:timxe/screens/login/views/detail_customer_view_copy.dart';
 import 'package:timxe/screens/login/widgets/schedule_spash.dart';
 
 class NavNotifyView extends GetView<NavNotificationController> {
-
   //  NavNotificationController navNotificationController=Get.put(NavNotificationController());
   @override
   Widget build(BuildContext context) {
@@ -19,15 +15,17 @@ class NavNotifyView extends GetView<NavNotificationController> {
       body: Obx(() {
         if (controller.isLoading.value) {
           return Center(
-              child: CircularProgressIndicator(
-                color: Colors.yellowAccent,
-              ),
-            );
+            child: CircularProgressIndicator(
+              color: Colors.yellowAccent,
+            ),
+          );
         }
-        if(controller.isNotEmptyList.value){
+        if (controller.isNotEmptyList.value) {
           return _buildListCustomers(context);
-        }else{
-          return Center(child: SchedulePlash(),);
+        } else {
+          return Center(
+            child: SchedulePlash(),
+          );
         }
       }),
     );
@@ -72,7 +70,7 @@ class NavNotifyView extends GetView<NavNotificationController> {
                 ),
                 trailing: const Icon(Icons.arrow_forward),
                 onTap: () => Get.to(
-                    CustomerDetails(controller.bookingWaitProcessList[index])),
+                    CustomerDetails2(controller.bookingWaitProcessList[index])),
               ),
             ));
       },
