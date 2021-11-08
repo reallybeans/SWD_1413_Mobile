@@ -52,9 +52,11 @@ class NavSheduleView extends GetView<NavSheduleController> {
                     onChanged: (value) {
                       if (tmp.value) {
                         status = _off;
-                         Get.find<NavNotificationController>().onlineDriver(false);
+                        Get.find<NavNotificationController>()
+                            .onlineDriver(false);
                       } else {
-                        Get.find<NavNotificationController>().onlineDriver(true);
+                        Get.find<NavNotificationController>()
+                            .onlineDriver(true);
                         status = _online;
                       }
                       tmp.value = value;
@@ -78,7 +80,6 @@ class NavSheduleView extends GetView<NavSheduleController> {
               )),
         ),
         Obx(() {
-        
           if (controller.isLoading.value) {
             // return SchedulePlash();
             return Center(
@@ -88,24 +89,28 @@ class NavSheduleView extends GetView<NavSheduleController> {
             );
             // return Scaffold();
           } else {
-            return CarouselSlider.builder(
-              itemCount: controller.scheduleList.length,
-              itemBuilder: (context, index, realIndex) => OpenContainer(
-                openColor: Colors.transparent,
-                closedColor: Colors.greenAccent.shade400,
-                transitionType: transitionType,
-                transitionDuration: const Duration(seconds: 1),
-                openBuilder: (context, _) =>
-                    ScheduleDetails(controller.scheduleList[index]),
-                closedBuilder: (context, VoidCallback openContainer) =>
-                    ScheduleContainer(controller.scheduleList[index]),
-              ),
-              options: CarouselOptions(
-                height: size.height * 0.7,
-                enableInfiniteScroll: false,
-                enlargeCenterPage: true,
-              ),
-            );
+            if (controller.scheduleList.isNotEmpty) {
+              return CarouselSlider.builder(
+                itemCount: controller.scheduleList.length,
+                itemBuilder: (context, index, realIndex) => OpenContainer(
+                  openColor: Colors.transparent,
+                  closedColor: Colors.greenAccent.shade400,
+                  transitionType: transitionType,
+                  transitionDuration: const Duration(seconds: 1),
+                  openBuilder: (context, _) =>
+                      ScheduleDetails(controller.scheduleList[index]),
+                  closedBuilder: (context, VoidCallback openContainer) =>
+                      ScheduleContainer(controller.scheduleList[index]),
+                ),
+                options: CarouselOptions(
+                  height: size.height * 0.7,
+                  enableInfiniteScroll: false,
+                  enlargeCenterPage: true,
+                ),
+              );
+            } else {
+              return SchedulePlash();
+            }
           }
         }),
         const Spacer(),

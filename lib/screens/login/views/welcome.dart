@@ -43,7 +43,7 @@ class WelcomeView extends StatelessWidget {
     ];
     return Scaffold(
         extendBody: true,
-        backgroundColor: Colors.greenAccent[400],
+        backgroundColor: Colors.greenAccent[700],
         body: Obx(() {
           if (Get.find<NavNotificationController>().isNotEmptyList.value) {
             Future.delayed(

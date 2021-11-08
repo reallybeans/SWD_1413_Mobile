@@ -17,10 +17,10 @@ class ManageVehiclePage extends GetView<HistoryController> {
           backgroundColor: Colors.green[900],
           title: const Text(
             'Quản lý xe',
-            style: TextStyle(color: Colors.black, fontSize: 18),
+            style: TextStyle(color: Colors.white, fontSize: 18),
             textAlign: TextAlign.center,
           )),
-      backgroundColor: Colors.greenAccent[400],
+      backgroundColor: Colors.greenAccent[700],
       body: _buildListCustomers(context),
     );
   }
