@@ -3,12 +3,9 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:timelines/timelines.dart';
-import 'package:timxe/config.dart';
 import 'package:timxe/data/booking.dart';
 import 'package:timxe/screens/login/controller/nav_notification_controller.dart';
-
 import 'package:timxe/screens/login/controller/nav_shedule_controller.dart';
-import 'package:timxe/screens/login/services/checklogin_api.dart';
 import 'package:timxe/screens/login/services/update_booking_status_api.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -306,16 +303,28 @@ class ScheduleDetails extends StatelessWidget {
                       ),
                     ],
                   ),
-                  TextButton(
-                    onPressed: () async {
-                      await UpdateBookingStatusApi()
-                          .apiUpdateStatusBooking(scheduleItem.id, 3);
-                      Get.find<NavSheduleController>().fetchSchedule();
-                      Get.find<NavNotificationController>()
-                          .fecthBookingWaitProcess();
-                      Get.back();
-                    },
-                    child: Text("Hoàn thành"),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        onPrimary: Colors.black87,
+                        primary: Colors.green[300],
+                        minimumSize: Size(88, 36),
+                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(2)),
+                        ),
+                      ),
+                      onPressed: () async {
+                        await UpdateBookingStatusApi()
+                            .apiUpdateStatusBooking(scheduleItem.id, 3);
+                        Get.find<NavSheduleController>().fetchSchedule();
+                        Get.find<NavNotificationController>()
+                            .fecthBookingWaitProcess();
+                        Get.back();
+                      },
+                      child: Text("Hoàn thành"),
+                    ),
                   )
                 ],
               ),

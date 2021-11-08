@@ -1,8 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'package:timxe/routes/app_pages.dart';
 import 'package:timxe/screens/login/controller/home_controller.dart';
 
 class PhoneLoginController extends GetxController {

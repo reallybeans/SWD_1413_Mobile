@@ -5,24 +5,34 @@ import 'package:timxe/screens/login/views/detail_history_view.dart';
 
 class HistoryView extends GetView<HistoryController> {
   final HistoryController historyController = Get.put(HistoryController());
-
   HistoryView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    print('historyview');
     return Scaffold(
-      appBar: AppBar(
-          centerTitle: true,
-          backgroundColor: Colors.green[900],
-          title: const Text(
-            'Lịch sử',
-            style: TextStyle(color: Colors.black, fontSize: 16),
-            textAlign: TextAlign.center,
-          )),
-      backgroundColor: Colors.greenAccent[400],
-      body: Obx(()=>_buildListCustomers(context)),
-    );
+        appBar: AppBar(
+            centerTitle: true,
+            backgroundColor: Colors.green[900],
+            title: const Text(
+              'Lịch sử',
+              style: TextStyle(color: Colors.black, fontSize: 16),
+              textAlign: TextAlign.center,
+            )),
+        backgroundColor: Colors.greenAccent[400],
+        body: Obx(
+          () {
+            if (historyController.isLoading.value) {
+              // return SchedulePlash();
+              return Center(
+                child: CircularProgressIndicator(
+                  color: Colors.yellowAccent,
+                ),
+              );
+            } else {
+              return _buildListCustomers(context);
+            }
+          },
+        ));
   }
 
   ListView _buildListCustomers(BuildContext context) {

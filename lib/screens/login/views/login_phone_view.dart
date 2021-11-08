@@ -1,9 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:timxe/screens/login/controller/home_controller.dart';
 import 'package:timxe/screens/login/controller/phone_login_controller.dart';
-import 'package:timxe/screens/login/services/checklogin_api.dart';
 
 class PhoneLoginView extends GetView<PhoneLoginController> {
   final phoneController = TextEditingController();

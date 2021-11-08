@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:timelines/timelines.dart';
 import 'package:timxe/data/history.dart';
@@ -142,7 +141,9 @@ class HistoryDetail extends StatelessWidget {
                       Expanded(
                         child: FixedTimeline.tileBuilder(
                           builder: TimelineTileBuilder.connectedFromStyle(
-                            contentsAlign: ContentsAlign.reverse,
+                            firstConnectorStyle: ConnectorStyle.transparent,
+                            lastConnectorStyle: ConnectorStyle.transparent,
+                            contentsAlign: ContentsAlign.alternating,
                             oppositeContentsBuilder: (context, index) =>
                                 Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -150,22 +151,19 @@ class HistoryDetail extends StatelessWidget {
                                   historyItem.schedule.address.waypoint[index]),
                             ),
                             contentsBuilder: (context, index) => Card(
-                              child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: ElevatedButton.icon(
-                                    label: const Text(""),
-                                    onPressed: () async {
-                                      String googleUrl =
-                                          'https://www.google.com/maps/search/?api=1&query=${historyItem.schedule.address.waypoint[index]}';
-                                      if (await canLaunch(googleUrl)) {
-                                        await launch(googleUrl);
-                                      } else {
-                                        throw 'Could not open the map.';
-                                      }
-                                    },
-                                    icon:
-                                        const Icon(Icons.location_on_outlined),
-                                  )),
+                              child: IconButton(
+                                onPressed: () async {
+                                  String googleUrl =
+                                      'https://www.google.com/maps/search/?api=1&query=${historyItem.schedule.address.waypoint[index]}';
+                                  if (await canLaunch(googleUrl)) {
+                                    await launch(googleUrl);
+                                  } else {
+                                    throw 'Could not open the map.';
+                                  }
+                                },
+                                icon:
+                                    const Icon(Icons.location_on_outlined),
+                              ),
                             ),
                             connectorStyleBuilder: (context, index) =>
                                 ConnectorStyle.solidLine,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:system_alert_window/system_alert_window.dart';
 import 'package:timxe/screens/login/controller/welcome_controller.dart';
 import 'package:timxe/screens/login/views/history_view.dart';
 import 'package:timxe/screens/login/views/manage_vehicle_view.dart';
@@ -19,7 +18,7 @@ class NavInfoView extends GetView<WelcomeController> {
           backgroundColor: Colors.green[900],
           title: const Text(
             'Cá nhân',
-            style: TextStyle(color: Colors.black, fontSize: 18),
+            style: TextStyle(color: Colors.white, fontSize: 18),
             textAlign: TextAlign.center,
           )),
       body: Container(

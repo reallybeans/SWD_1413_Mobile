@@ -10,12 +10,10 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   HomeBinding().dependencies();
-  //  NavSheduleBinding().dependencies();
   Get.put(LifeCycleController());
   runApp(
     GetMaterialApp(
       title: "Application",
-      // initialBinding: AllBinding(),
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
       debugShowCheckedModeBanner: false,

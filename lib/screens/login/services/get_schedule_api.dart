@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:timxe/config.dart';
@@ -43,11 +44,11 @@ class GetScheduleApi {
       var jsonString = response.body;
       Iterable list = json.decode(jsonString);
 
-      final bookings_Accept = list.cast<Map<String, dynamic>>();
-      final listOfBookings_Accept = bookings_Accept.map<Booking>((json) {
+      final bookingsAccept = list.cast<Map<String, dynamic>>();
+      final listOfBookingsAccept = bookingsAccept.map<Booking>((json) {
         return Booking.fromJson(json);
       }).toList();
-      return listOfBookings_Accept;
+      return listOfBookingsAccept;
     }
   }
    Future<String> getToken(String channelName) async {

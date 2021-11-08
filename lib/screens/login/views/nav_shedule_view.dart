@@ -2,16 +2,12 @@ import 'package:animations/animations.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:timxe/screens/login/binding/nav_notify_binding.dart';
-import 'package:timxe/screens/login/binding/nav_shedule_binding.dart';
 import 'package:timxe/screens/login/controller/nav_notification_controller.dart';
 import 'package:timxe/screens/login/controller/nav_shedule_controller.dart';
-import 'package:timxe/screens/login/controller/welcome_controller.dart';
-import 'package:timxe/screens/login/views/detail_customer_view_copy.dart';
 import 'package:timxe/screens/login/widgets/schedule_container.dart';
 import 'package:timxe/screens/login/widgets/schedule_spash.dart';
+
 import 'detail_schedule.dart';
 
 // ignore: must_be_immutable
@@ -48,9 +44,9 @@ class NavSheduleView extends GetView<NavSheduleController> {
                   ),
                   CupertinoSwitch(
                     trackColor: Colors.black,
-                    value: tmp.value,
+                    value:  Get.find<NavNotificationController>().onlineDriver.value,
                     onChanged: (value) {
-                      if (tmp.value) {
+                      if (Get.find<NavNotificationController>().onlineDriver.value) {
                         status = _off;
                         Get.find<NavNotificationController>()
                             .onlineDriver(false);
@@ -59,7 +55,7 @@ class NavSheduleView extends GetView<NavSheduleController> {
                             .onlineDriver(true);
                         status = _online;
                       }
-                      tmp.value = value;
+                      // tmp.value = value;
                     },
                   ),
                 ],

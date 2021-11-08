@@ -4,7 +4,6 @@ import 'dart:async';
 import 'package:get/get.dart';
 
 import 'package:get/state_manager.dart';
-import 'package:system_alert_window/system_alert_window.dart';
 import 'package:timxe/data/booking.dart';
 import 'package:timxe/screens/login/controller/home_controller.dart';
 import 'package:timxe/screens/login/services/get_schedule_api.dart';
@@ -18,16 +17,7 @@ class NavSheduleController extends GetxController {
 
   @override
   void onInit() async {
-    // Timer.periodic(Duration(seconds: 2), (Timer t) =>{
-    //   print("TEST THỬ CHƠI TRONG NAVCONTROLLER"),
     fetchSchedule();
-    // _requestPermissions();
-    // SystemAlertWindow.registerOnClickListener(callBack);
-
-    //   });
-    // Timer.periodic(Duration(seconds: 2), (Timer t) =>{
-    //   print("TEST THỬ CHƠI TRONG NAVCONTROLLER"),
-    //   });
     super.onInit();
   }
 
@@ -50,22 +40,6 @@ class NavSheduleController extends GetxController {
     } finally {
       isLoading(false);
     }
-
-    // isLoading(true);
-    // var bookingsAccept = await GetScheduleApi.fetchSchedule();
-    // if (bookingsAccept != null) {
-    //   scheduleList.value = bookingsAccept;
-    // }
   }
-
-  // Future<void> _requestPermissions() async {
-  //   await SystemAlertWindow.requestPermissions(prefMode: prefMode);
-  // }
-
-  // void callBack(tag) {
-  //   print("tag ne" + tag);
-  //   if (tag == "close") {
-  //     SystemAlertWindow.closeSystemWindow();
-  //   }
-  // }
 }
+

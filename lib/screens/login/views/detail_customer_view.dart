@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:timelines/timelines.dart';
 import 'package:timxe/data/booking.dart';
-import 'package:timxe/routes/app_pages.dart';
 import 'package:timxe/screens/login/controller/nav_notification_controller.dart';
 import 'package:timxe/screens/login/controller/nav_shedule_controller.dart';
-import 'package:timxe/screens/login/services/get_schedule_api.dart';
 import 'package:timxe/screens/login/services/update_booking_status_api.dart';
-import 'package:timxe/screens/login/widgets/schedule_spash.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CustomerDetails extends StatelessWidget {

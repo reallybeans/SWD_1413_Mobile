@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:timxe/screens/login/binding/nav_notify_binding.dart';
 import 'package:timxe/screens/login/controller/nav_notification_controller.dart';
-import 'package:timxe/screens/login/controller/nav_shedule_controller.dart';
 import 'package:timxe/screens/login/views/detail_customer_view_copy.dart';
 import 'package:timxe/screens/login/widgets/schedule_spash.dart';
 
