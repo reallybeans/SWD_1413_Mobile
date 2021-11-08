@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:timxe/screens/login/binding/nav_notify_binding.dart';
 import 'package:timxe/screens/login/controller/nav_notification_controller.dart';
+import 'package:timxe/screens/login/controller/nav_shedule_controller.dart';
 import 'package:timxe/screens/login/views/detail_customer_view_copy.dart';
 import 'package:timxe/screens/login/widgets/schedule_spash.dart';
 
@@ -9,7 +10,6 @@ class NavNotifyView extends GetView<NavNotificationController> {
   //  NavNotificationController navNotificationController=Get.put(NavNotificationController());
   @override
   Widget build(BuildContext context) {
-    NavNotifyBinding().dependencies();
     return Scaffold(
       backgroundColor: Colors.greenAccent.shade400,
       body: Obx(() {
@@ -35,6 +35,7 @@ class NavNotifyView extends GetView<NavNotificationController> {
     return ListView.builder(
       itemCount: controller.bookingWaitProcessList.value.length,
       itemBuilder: (_, index) {
+       NavNotificationController nav=Get.put(NavNotificationController(),tag: "${controller.bookingWaitProcessList[index].id}");
         return Obx(() => Card(
               child: ListTile(
                 title: Text(
@@ -69,8 +70,12 @@ class NavNotifyView extends GetView<NavNotificationController> {
                   width: 60,
                 ),
                 trailing: const Icon(Icons.arrow_forward),
-                onTap: () => Get.to(
+                onTap: () => {
+              
+                  Get.to(
                     CustomerDetails2(controller.bookingWaitProcessList[index])),
+                    
+                    }
               ),
             ));
       },

@@ -4,9 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:timxe/screens/login/binding/nav_notify_binding.dart';
 import 'package:timxe/screens/login/binding/nav_shedule_binding.dart';
+import 'package:timxe/screens/login/controller/nav_notification_controller.dart';
 import 'package:timxe/screens/login/controller/nav_shedule_controller.dart';
 import 'package:timxe/screens/login/controller/welcome_controller.dart';
+import 'package:timxe/screens/login/views/detail_customer_view_copy.dart';
 import 'package:timxe/screens/login/widgets/schedule_container.dart';
 import 'package:timxe/screens/login/widgets/schedule_spash.dart';
 import 'detail_schedule.dart';
@@ -22,7 +25,6 @@ class NavSheduleView extends GetView<NavSheduleController> {
   var status = 'Ngoại tuyến';
   @override
   Widget build(BuildContext context) {
-    NavSheduleBinding().dependencies();
     Size size = MediaQuery.of(context).size;
     const transitionType = ContainerTransitionType.fade;
     return Column(
@@ -50,10 +52,11 @@ class NavSheduleView extends GetView<NavSheduleController> {
                     onChanged: (value) {
                       if (tmp.value) {
                         status = _off;
+                         Get.find<NavNotificationController>().onlineDriver(false);
                       } else {
+                        Get.find<NavNotificationController>().onlineDriver(true);
                         status = _online;
                       }
-
                       tmp.value = value;
                     },
                   ),
@@ -75,6 +78,7 @@ class NavSheduleView extends GetView<NavSheduleController> {
               )),
         ),
         Obx(() {
+        
           if (controller.isLoading.value) {
             // return SchedulePlash();
             return Center(
@@ -82,6 +86,7 @@ class NavSheduleView extends GetView<NavSheduleController> {
                 color: Colors.yellowAccent,
               ),
             );
+            // return Scaffold();
           } else {
             return CarouselSlider.builder(
               itemCount: controller.scheduleList.length,

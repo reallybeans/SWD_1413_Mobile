@@ -2,7 +2,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:system_alert_window/system_alert_window.dart';
 import 'package:timxe/routes/app_pages.dart';
 import 'package:timxe/screens/login/binding/home_binding.dart';
 import 'package:timxe/screens/login/controller/lifecycle_controller.dart';

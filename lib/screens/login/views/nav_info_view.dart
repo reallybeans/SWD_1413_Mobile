@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:system_alert_window/system_alert_window.dart';
 import 'package:timxe/screens/login/controller/welcome_controller.dart';
 import 'package:timxe/screens/login/views/history_view.dart';
+import 'package:timxe/screens/login/views/manage_vehicle_view.dart';
 import 'package:timxe/screens/login/views/nav_info_detail_view.dart';
 import 'package:timxe/screens/login/widgets/profile_menu.dart';
 
@@ -70,7 +71,9 @@ class NavInfoView extends GetView<WelcomeController> {
                 Icons.settings,
                 color: Colors.orange.shade200,
               ),
-              press: () {},
+              press: () {
+                Get.to(ManageVehiclePage());
+              },
               text: 'Cài đặt',
             ),
             ProfileMenu(

@@ -146,7 +146,12 @@ class ScheduleDetails extends StatelessWidget {
                       Expanded(
                         child: FixedTimeline.tileBuilder(
                           builder: TimelineTileBuilder.connectedFromStyle(
-                            contentsAlign: ContentsAlign.reverse,
+                            contentsAlign: ContentsAlign.alternating,
+                            firstConnectorStyle: ConnectorStyle.transparent,
+                            lastConnectorStyle: ConnectorStyle.transparent,
+                              // nodePositionBuilder: (context, index) {
+                              //             return 1;
+                              //           },
                             oppositeContentsBuilder: (context, index) =>
                                 Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -154,9 +159,10 @@ class ScheduleDetails extends StatelessWidget {
                                   .schedule.address.waypoint[index]),
                             ),
                             contentsBuilder: (context, index) => Card(
-                              child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: IconButton(
+                              // child: Padding(
+                                  // padding: const EdgeInsets.all(8.0),
+                                  child: IconButton( 
+                                    // disabledColor: true,
                                     onPressed: () async {
                                       String googleUrl =
                                           'https://www.google.com/maps/search/?api=1&query=${scheduleItem.schedule.address.waypoint[index]}';
@@ -168,12 +174,13 @@ class ScheduleDetails extends StatelessWidget {
                                     },
                                     icon:
                                         const Icon(Icons.location_on_outlined),
-                                  )),
+                                  )
+                                  // ),
                             ),
                             connectorStyleBuilder: (context, index) =>
                                 ConnectorStyle.solidLine,
-                            indicatorStyleBuilder: (context, index) =>
-                                IndicatorStyle.dot,
+                            // indicatorStyleBuilder: (context, index) =>
+                            //     IndicatorStyle.dot,
                             itemCount:
                                 scheduleItem.schedule.address.waypoint.length,
                                 // firstConnectorStyle: Conn

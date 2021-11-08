@@ -4,6 +4,6 @@ import 'package:timxe/screens/login/controller/home_controller.dart';
 class HomeBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put<HomeController>(HomeController());
+    Get.put<HomeController>(HomeController(),permanent: true);
   }
 }
