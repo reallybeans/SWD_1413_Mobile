@@ -18,8 +18,8 @@ class NavInfoView extends GetView<WelcomeController> {
           centerTitle: true,
           backgroundColor: Colors.green[900],
           title: const Text(
-            'Profile',
-            style: TextStyle(color: Colors.black, fontSize: 16),
+            'Cá nhân',
+            style: TextStyle(color: Colors.black, fontSize: 18),
             textAlign: TextAlign.center,
           )),
       body: Container(
@@ -68,13 +68,13 @@ class NavInfoView extends GetView<WelcomeController> {
             ),
             ProfileMenu(
               icon: Icon(
-                Icons.settings,
+                Icons.car_rental,
                 color: Colors.orange.shade200,
               ),
               press: () {
                 Get.to(ManageVehiclePage());
               },
-              text: 'Cài đặt',
+              text: 'Quản lý xe',
             ),
             ProfileMenu(
               icon: Icon(
