@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:timelines/timelines.dart';
 import 'package:timxe/config.dart';
 import 'package:timxe/data/booking.dart';
+import 'package:timxe/screens/login/controller/nav_notification_controller.dart';
 
 import 'package:timxe/screens/login/controller/nav_shedule_controller.dart';
+import 'package:timxe/screens/login/services/checklogin_api.dart';
+import 'package:timxe/screens/login/services/update_booking_status_api.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ScheduleDetails extends StatelessWidget {
@@ -15,8 +19,6 @@ class ScheduleDetails extends StatelessWidget {
   ScheduleDetails(this.scheduleItem, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    // final scheduleItem = navSheduleController.scheduleList[0];
-
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -83,7 +85,9 @@ class ScheduleDetails extends StatelessWidget {
                         style: const TextStyle(
                             fontSize: 16, fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(width:30,),
+                      SizedBox(
+                        width: 30,
+                      ),
                       Text(
                         '${scheduleItem.startAt.hour}' +
                             "h" +
@@ -91,13 +95,6 @@ class ScheduleDetails extends StatelessWidget {
                         style: const TextStyle(
                             fontSize: 16, fontWeight: FontWeight.bold),
                       ),
-                      // Text(
-                      //   scheduleItem.startAt.toString(),
-                      //   style: const TextStyle(
-                      //     color: Colors.black,
-                      //     fontSize: 18,
-                      //   ),
-                      // ),
                     ],
                   ),
                   Row(
@@ -149,9 +146,6 @@ class ScheduleDetails extends StatelessWidget {
                             contentsAlign: ContentsAlign.alternating,
                             firstConnectorStyle: ConnectorStyle.transparent,
                             lastConnectorStyle: ConnectorStyle.transparent,
-                              // nodePositionBuilder: (context, index) {
-                              //             return 1;
-                              //           },
                             oppositeContentsBuilder: (context, index) =>
                                 Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -159,37 +153,37 @@ class ScheduleDetails extends StatelessWidget {
                                   .schedule.address.waypoint[index]),
                             ),
                             contentsBuilder: (context, index) => Card(
-                              // child: Padding(
-                                  // padding: const EdgeInsets.all(8.0),
-                                  child: IconButton( 
-                                    // disabledColor: true,
-                                    onPressed: () async {
-                                      String googleUrl =
-                                          'https://www.google.com/maps/search/?api=1&query=${scheduleItem.schedule.address.waypoint[index]}';
-                                      if (await canLaunch(googleUrl)) {
-                                        await launch(googleUrl);
-                                      } else {
-                                        throw 'Could not open the map.';
-                                      }
-                                    },
-                                    icon:
-                                        const Icon(Icons.location_on_outlined),
-                                  )
-                                  // ),
-                            ),
+                                // child: Padding(
+                                // padding: const EdgeInsets.all(8.0),
+                                child: IconButton(
+                              // disabledColor: true,
+                              onPressed: () async {
+                                String googleUrl =
+                                    'https://www.google.com/maps/search/?api=1&query=${scheduleItem.schedule.address.waypoint[index]}';
+                                if (await canLaunch(googleUrl)) {
+                                  await launch(googleUrl);
+                                } else {
+                                  throw 'Could not open the map.';
+                                }
+                              },
+                              icon: const Icon(Icons.location_on_outlined),
+                            )
+                                // ),
+                                ),
                             connectorStyleBuilder: (context, index) =>
                                 ConnectorStyle.solidLine,
                             // indicatorStyleBuilder: (context, index) =>
                             //     IndicatorStyle.dot,
                             itemCount:
                                 scheduleItem.schedule.address.waypoint.length,
-                                // firstConnectorStyle: Conn
+                            // firstConnectorStyle: Conn
                           ),
                         ),
                       ),
-                      SizedBox(width: MediaQueryData().size.width*1,)
+                      SizedBox(
+                        width: MediaQueryData().size.width * 1,
+                      )
                     ],
-                    
                   ),
                   Row(
                     // ignore: prefer_const_literals_to_create_immutables
@@ -312,6 +306,17 @@ class ScheduleDetails extends StatelessWidget {
                       ),
                     ],
                   ),
+                  TextButton(
+                    onPressed: () async {
+                      await UpdateBookingStatusApi()
+                          .apiUpdateStatusBooking(scheduleItem.id, 3);
+                      Get.find<NavSheduleController>().fetchSchedule();
+                      Get.find<NavNotificationController>()
+                          .fecthBookingWaitProcess();
+                      Get.back();
+                    },
+                    child: Text("Hoàn thành"),
+                  )
                 ],
               ),
             ),

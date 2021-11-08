@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:get/get.dart';
 import 'package:timxe/data/booking.dart';
+import 'package:timxe/screens/login/controller/home_controller.dart';
 import 'package:timxe/screens/login/services/get_schedule_api.dart';
+import 'package:timxe/screens/login/services/update_driver_api.dart';
 
 class NavNotificationController extends GetxController {
   var bookingWaitProcessList = List<Booking>.empty().obs;
@@ -10,7 +12,7 @@ class NavNotificationController extends GetxController {
   var isNotEmptyList = true.obs;
   var returnResponseBooking = false.obs;
   var onlineDriver = false.obs;
-  late Timer  timerScanBooking;
+  late Timer timerScanBooking;
   @override
   void onInit() async {
     // Timer.periodic(
@@ -19,9 +21,19 @@ class NavNotificationController extends GetxController {
     //         {print("TEST THỬ CHƠI TRONG NAVCONTROLLER"), fecthBookingWaitProcess()});
     ever(
         onlineDriver,
-        (callback) => {
-          print("${onlineDriver}"),
-              if (onlineDriver.value) {fecthBookingWaitProcess()} else{}
+        (callback) async => {
+              // print("${onlineDriver}"),
+              if (onlineDriver.value)
+                {
+                  await UpdateDriverApi().updateStatusDriver(
+                      Get.find<HomeController>().currentDriver.id, "on"),
+                  fecthBookingWaitProcess()
+                }
+              else
+                {
+                  await UpdateDriverApi().updateStatusDriver(
+                      Get.find<HomeController>().currentDriver.id, "off"),
+                }
             });
     //     ever(driverBusy,(callback)=>{
     //   if(driverBusy.value){
@@ -30,18 +42,23 @@ class NavNotificationController extends GetxController {
     //     print('GOI API DOI DRIVER THANH FREE')
     //   }
     // });
+    //on off bussy
+    //xe la unuse  inuse
+    //
     ever(
         isNotEmptyList,
-        (callback) => {
+        (callback) async => {
               print('Change' + '${isNotEmptyList.value}'),
               if (!isNotEmptyList.value && onlineDriver.value)
                 {
-                  print('GOI API DOI DRIVER THANH FREE'),
+                  await UpdateDriverApi().updateStatusDriver(
+                      Get.find<HomeController>().currentDriver.id, "on"),
                   scanBooking(),
                 }
               else
                 {
-                  print('GOI API DOI DRIVER THANH BUSY'),
+                  await UpdateDriverApi().updateStatusDriver(
+                      Get.find<HomeController>().currentDriver.id, "busy"),
                 }
             });
 
@@ -72,7 +89,7 @@ class NavNotificationController extends GetxController {
   }
 
   void scanBooking() async {
-  timerScanBooking=  Timer.periodic(
+    timerScanBooking = Timer.periodic(
         const Duration(seconds: 2),
         (Timer t) => {
               fecthBookingWaitProcess(),
