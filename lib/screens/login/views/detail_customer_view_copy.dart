@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
+import 'package:sticky_headers/sticky_headers.dart';
 import 'package:timelines/timelines.dart';
 import 'package:timxe/data/booking.dart';
 import 'package:timxe/screens/login/controller/nav_notification_controller.dart';
@@ -10,27 +13,394 @@ import 'package:url_launcher/url_launcher.dart';
 
 class CustomerDetails2 extends StatelessWidget {
   final Booking scheduleItem;
+
   const CustomerDetails2(this.scheduleItem, {Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    var countdown = 10.obs;
+    Timer.periodic(
+        Duration(seconds: 1),
+        (Timer t) => {
+              if (countdown == 0)
+                {
+                  print('time out'),
+                  Get.find<NavNotificationController>().isNotEmptyList(false),
+                  t.cancel(),
+                  Get.back()
+                }
+              else
+                {
+                  print('time count'),
+                  countdown.value--,
+                  print(
+                      "${Get.find<NavNotificationController>().isNotEmptyList.value}")
+                }
+            });
     return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.greenAccent.shade400,
-        // appBar: AppBar(
-        //   backgroundColor: Colors.green[900],
-        //   title: const Text('Thông tin chi tiết'),
-        // ),
-        body: ListView(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: CircleAvatar(
-                      radius: 20,
+        child: Scaffold(
+            backgroundColor: Colors.greenAccent.shade400,
+            // appBar: AppBar(
+            //   backgroundColor: Colors.green[900],
+            //   title: Obx(()=> Text('${countdown.value}')),
+            // ),
+            body: Stack(children: [
+              Positioned(
+                child: ListView(children: [
+                  Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          // Align(
+                          //   alignment: Alignment.topRight,
+                          //   child: Row(
+                          //     children: [
+                          //       Spacer(),
+                          //       CircleAvatar(
+                          //         child: Obx(() => Text('${countdown.value}')),
+                          //       ),
+                          //       CircleAvatar(
+                          //         radius: 20,
+                          //         backgroundColor: Colors.grey,
+                          //         child: IconButton(
+                          //           onPressed: () {
+                          //             Get.back();
+                          //           },
+                          //           icon: Icon(
+                          //             Icons.close_outlined,
+                          //             color: Colors.black,
+                          //           ),
+                          //         ),
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            height: MediaQuery.of(context).size.height * 0.17,
+                            decoration: BoxDecoration(
+                              color: Colors.white70,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text(
+                                  ' ' + scheduleItem.nameCustomer,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline5!
+                                      .copyWith(
+                                        color: Colors.black,
+                                        fontSize: 30,
+                                      ),
+                                ),
+                                const SizedBox(height: 10),
+                                Row(
+                                  children: [
+                                    const Text(
+                                      ' Ngày đón: ',
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Text(
+                                      '${scheduleItem.startAt.day}' +
+                                          "/" +
+                                          '${scheduleItem.startAt.month}' +
+                                          "/" +
+                                          '${scheduleItem.startAt.year}',
+                                      style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          'Thoi gian',
+                                          style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                          Text(
+                                          ' ${scheduleItem.startAt.hour}' +
+                                              "h" +
+                                              '${scheduleItem.startAt.minute}',
+                                          style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
+                                    ),
+                                    // Text(
+                                    //   scheduleItem.startAt.toString(),
+                                    //   style: const TextStyle(
+                                    //     color: Colors.black,
+                                    //     fontSize: 18,
+                                    //   ),
+                                    // ),
+                                  ],
+                                ),
+                                Text(
+                                  '${scheduleItem.priceBooking.toString()}'
+                                  ' VNĐ',
+                                  style: TextStyle(
+                                    color: Colors.greenAccent[700],
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold
+                                  ),
+                                ),
+
+                                const SizedBox(height: 10),
+                                // SDT
+                                // Row(
+                                //   children: [
+                                //     const Text(
+                                //       ' Số điện thoại: ',
+                                //       style: TextStyle(
+                                //           fontSize: 18,
+                                //           fontWeight: FontWeight.bold),
+                                //     ),
+                                //     Text(
+                                //       scheduleItem.phoneCustomer.toString(),
+                                //       style: const TextStyle(
+                                //         color: Colors.black,
+                                //         fontSize: 18,
+                                //       ),
+                                //     ),
+                                //   ],
+                                // ),
+                              ],
+                            ),
+                          ),
+
+                          //Ngày đón
+
+                          Row(
+                            // ignore: prefer_const_literals_to_create_immutables
+                            children: [
+                              const Expanded(
+                                  child: Divider(
+                                height: 40,
+                                color: Colors.black,
+                              )),
+                            ],
+                          ),
+                          // Điểm đón
+                          Row(
+                            children: [
+                              const Text(
+                                'Điểm đón: ',
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
+                              ),
+                              Expanded(
+                                child: Text(
+                                  scheduleItem.schedule.address.origin
+                                      .toString(),
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            // ignore: prefer_const_literals_to_create_immutables
+                            children: [
+                              const Expanded(
+                                  child: Divider(
+                                height: 40,
+                                color: Colors.black,
+                              )),
+                            ],
+                          ),
+                          // Điểm dừng chân
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: FixedTimeline.tileBuilder(
+                                  builder:
+                                      TimelineTileBuilder.connectedFromStyle(
+                                        firstConnectorStyle: ConnectorStyle.transparent,
+                                        lastConnectorStyle: ConnectorStyle.transparent,
+                                        // nodePositionBuilder: (context, index) {
+                                        //   return 20;
+                                        // },
+                                        // itemExtent: 0.4,
+                                    contentsAlign: ContentsAlign.alternating,
+                                    oppositeContentsBuilder: (context, index) =>
+                                        Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(scheduleItem
+                                          .schedule.address.waypoint[index]),
+                                    ),
+                                    contentsBuilder: (context, index) =>(
+                                      Icon(
+                                          Icons.location_on_outlined)
+                                    ),
+                                    connectorStyleBuilder: (context, index) =>
+                                        ConnectorStyle.solidLine,
+                                    // indicatorStyleBuilder: (context, index) =>
+                                    //     IndicatorStyle.dot,
+                                    itemCount: scheduleItem
+                                        .schedule.address.waypoint.length,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            // ignore: prefer_const_literals_to_create_immutables
+                            children: [
+                              const Expanded(
+                                  child: Divider(
+                                height: 40,
+                                color: Colors.black,
+                              )),
+                            ],
+                          ),
+                          // điểm đến
+                          Row(
+                            children: [
+                              const Text(
+                                'Điểm đến: ',
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
+                              ),
+                              Expanded(
+                                child: Text(
+                                  scheduleItem.schedule.address.destination
+                                      .toString(),
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            // ignore: prefer_const_literals_to_create_immutables
+                            children: [
+                              const Expanded(
+                                  child: Divider(
+                                height: 40,
+                                color: Colors.black,
+                              )),
+                            ],
+                          ),
+                          // 2 chiều
+                          Row(
+                            children: [
+                              const Text(
+                                'Khứ hồi: ',
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
+                              ),
+                              Checkbox(
+                                value: scheduleItem.mode,
+                                onChanged: (bool) {},
+                                activeColor: Colors.green,
+                              ),
+                            ],
+                          ),
+                          scheduleItem.mode
+                              ? Row(
+                                  // ignore: prefer_const_literals_to_create_immutables
+                                  children: [
+                                    const Expanded(
+                                        child: Divider(
+                                      height: 40,
+                                      color: Colors.black,
+                                    )),
+                                  ],
+                                )
+                              :
+                              // Thời gian chờ
+                              scheduleItem.mode
+                                  ? Row(
+                                      children: [
+                                        const Text(
+                                          'Thời gian chờ: ',
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        Text(
+                                          scheduleItem.timeWait.toString(),
+                                          style: const TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 18,
+                                          ),
+                                        ),
+                                        const Text(
+                                          " Ngày",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 18,
+                                          ),
+                                        )
+                                      ],
+                                    )
+                                  : Row(
+                                      // ignore: prefer_const_literals_to_create_immutables
+                                      children: [
+                                        const Expanded(
+                                            child: Divider(
+                                          height: 40,
+                                          color: Colors.black,
+                                        )),
+                                      ],
+                                    ),
+                          // Tổng giá chuyến đi
+                          // Row(
+                          //   children: [
+                          //     const Text(
+                          //       'Tổng giá chuyến đi: ',
+                          //       style: TextStyle(
+                          //         color: Colors.black,
+                          //         fontWeight: FontWeight.bold,
+                          //         fontSize: 18,
+                          //       ),
+                          //     ),
+                          //     Text(
+                          //       '${scheduleItem.priceBooking.toString()}'
+                          //       ' VNĐ',
+                          //       style: TextStyle(
+                          //         color: Colors.green[900],
+                          //         fontSize: 18,
+                          //       ),
+                          //     ),
+                          //   ],
+                          // ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 1 / 10,
+                          )
+                          // Align(
+                          //   alignment: Alignment.bottomRight,
+                          //   child:
+                          // )
+                        ]),
+                  )
+                ]),
+              ),
+              Positioned(
+                top: 0,
+                right: 0,
+                left: 0,
+                child: Row(
+                  children: [
+                    Spacer(),
+                    CircleAvatar(
+                      radius: 25,
                       backgroundColor: Colors.grey,
                       child: IconButton(
                         onPressed: () {
@@ -42,352 +412,79 @@ class CustomerDetails2 extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    height: MediaQuery.of(context).size.height * 0.15,
-                    decoration: BoxDecoration(
-                      color: Colors.white70,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text(
-                          ' ' + scheduleItem.nameCustomer,
-                          style:
-                              Theme.of(context).textTheme.headline5!.copyWith(
-                                    color: Colors.black,
-                                    fontSize: 30,
-                                  ),
-                        ),
-                        const SizedBox(height: 10),
-                        // SDT
-                        Row(
+                  ],
+                ),
+              ),
+              Positioned(
+                bottom: 0,
+                right: 0,
+                left: 0,
+                child: Row(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(17),
+                      // ignore: deprecated_member_use
+                      child: FlatButton(
+                        minWidth: MediaQuery.of(context).size.width,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 20),
+                        color: Colors.greenAccent[700],
+                        onPressed: () async {
+                          //Status 2 là chấp nhận Cuốc
+                          await UpdateBookingStatusApi()
+                              .apiUpdateStatusBooking(scheduleItem.id, 2);
+                          Get.find<NavSheduleController>().fetchSchedule();
+                          Get.find<NavNotificationController>()
+                              .fecthBookingWaitProcess();
+                          Get.back();
+                        },
+                        child: Row(
                           children: [
                             const Text(
-                              ' Số điện thoại: ',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              scheduleItem.phoneCustomer.toString(),
-                              style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            const Text(
-                              ' Ngày đón: ',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              '${scheduleItem.startAt.day}' +
-                                  "/" +
-                                  '${scheduleItem.startAt.month}' +
-                                  "/" +
-                                  '${scheduleItem.startAt.year}',
-                              style: const TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              ' ${scheduleItem.startAt.hour}' +
-                                  "h" +
-                                  '${scheduleItem.startAt.minute}',
-                              style: const TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold),
-                            ),
-                            // Text(
-                            //   scheduleItem.startAt.toString(),
-                            //   style: const TextStyle(
-                            //     color: Colors.black,
-                            //     fontSize: 18,
-                            //   ),
-                            // ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  //Ngày đón
-
-                  Row(
-                    // ignore: prefer_const_literals_to_create_immutables
-                    children: [
-                      const Expanded(
-                          child: Divider(
-                        height: 40,
-                        color: Colors.black,
-                      )),
-                    ],
-                  ),
-                  // Điểm đón
-                  Row(
-                    children: [
-                      const Text(
-                        'Điểm đón: ',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      Expanded(
-                        child: Text(
-                          scheduleItem.schedule.address.origin.toString(),
-                          style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 18,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    // ignore: prefer_const_literals_to_create_immutables
-                    children: [
-                      const Expanded(
-                          child: Divider(
-                        height: 40,
-                        color: Colors.black,
-                      )),
-                    ],
-                  ),
-                  // Điểm dừng chân
-                  Row(
-                    children: [
-                      Expanded(
-                        child: FixedTimeline.tileBuilder(
-                          builder: TimelineTileBuilder.connectedFromStyle(
-                            contentsAlign: ContentsAlign.reverse,
-                            oppositeContentsBuilder: (context, index) =>
-                                Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(scheduleItem
-                                  .schedule.address.waypoint[index]),
-                            ),
-                            contentsBuilder: (context, index) => Card(
-                              child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: ElevatedButton.icon(
-                                    label: const Text(""),
-                                    onPressed: () async {
-                                      String googleUrl =
-                                          'https://www.google.com/maps/search/?api=1&query=${scheduleItem.schedule.address.waypoint[index]}';
-                                      if (await canLaunch(googleUrl)) {
-                                        await launch(googleUrl);
-                                      } else {
-                                        throw 'Could not open the map.';
-                                      }
-                                    },
-                                    icon:
-                                        const Icon(Icons.location_on_outlined),
-                                  )),
-                            ),
-                            connectorStyleBuilder: (context, index) =>
-                                ConnectorStyle.solidLine,
-                            indicatorStyleBuilder: (context, index) =>
-                                IndicatorStyle.dot,
-                            itemCount:
-                                scheduleItem.schedule.address.waypoint.length,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    // ignore: prefer_const_literals_to_create_immutables
-                    children: [
-                      const Expanded(
-                          child: Divider(
-                        height: 40,
-                        color: Colors.black,
-                      )),
-                    ],
-                  ),
-                  // điểm đến
-                  Row(
-                    children: [
-                      const Text(
-                        'Điểm đến: ',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      Expanded(
-                        child: Text(
-                          scheduleItem.schedule.address.destination.toString(),
-                          style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 18,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    // ignore: prefer_const_literals_to_create_immutables
-                    children: [
-                      const Expanded(
-                          child: Divider(
-                        height: 40,
-                        color: Colors.black,
-                      )),
-                    ],
-                  ),
-                  // 2 chiều
-                  Row(
-                    children: [
-                      const Text(
-                        'Khứ hồi: ',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      Checkbox(
-                        value: scheduleItem.mode,
-                        onChanged: (bool) {},
-                        activeColor: Colors.green,
-                      ),
-                    ],
-                  ),
-                  scheduleItem.mode
-                      ? Row(
-                          // ignore: prefer_const_literals_to_create_immutables
-                          children: [
-                            const Expanded(
-                                child: Divider(
-                              height: 40,
-                              color: Colors.black,
-                            )),
-                          ],
-                        )
-                      :
-                      // Thời gian chờ
-                      scheduleItem.mode
-                          ? Row(
-                              children: [
-                                const Text(
-                                  'Thời gian chờ: ',
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  scheduleItem.timeWait.toString(),
-                                  style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 18,
-                                  ),
-                                ),
-                                const Text(
-                                  " Ngày",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 18,
-                                  ),
-                                )
-                              ],
-                            )
-                          : Row(
-                              // ignore: prefer_const_literals_to_create_immutables
-                              children: [
-                                const Expanded(
-                                    child: Divider(
-                                  height: 40,
-                                  color: Colors.black,
-                                )),
-                              ],
-                            ),
-                  // Tổng giá chuyến đi
-                  Row(
-                    children: [
-                      const Text(
-                        'Tổng giá chuyến đi: ',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                        ),
-                      ),
-                      Text(
-                        '${scheduleItem.priceBooking.toString()}' ' VNĐ',
-                        style: TextStyle(
-                          color: Colors.green[900],
-                          fontSize: 18,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(17),
-                          // ignore: deprecated_member_use
-                          child: FlatButton(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 20),
-                            color: Colors.greenAccent[700],
-                            onPressed: () async {
-                              //Status 2 là chấp nhận Cuốc
-                              await UpdateBookingStatusApi()
-                                  .apiUpdateStatusBooking(scheduleItem.id, 2);
-                              Get.find<NavSheduleController>().fetchSchedule();
-                              Get.find<NavNotificationController>()
-                                  .fecthBookingWaitProcess();
-                              Get.back();
-                            },
-                            child: const Text(
                               'Chấp nhận',
                               style:
                                   TextStyle(color: Colors.white, fontSize: 20),
                             ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(17),
-                          // ignore: deprecated_member_use
-                          child: FlatButton(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 20),
-                            color: Colors.amber.shade300,
-                            onPressed: () async {
-                              //Status 4 là từ chối Cuốc
-                              await UpdateBookingStatusApi()
-                                  .apiUpdateStatusBooking(scheduleItem.id, 4);
-                              // Get.find<NavSheduleController>().fetchSchedule();
-                              Get.find<NavNotificationController>()
-                                  .fecthBookingWaitProcess();
-                              Get.back();
-                            },
-                            child: const Text(
-                              'Từ chối',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 20),
+                            SizedBox(
+                              width: 30,
                             ),
-                          ),
+                            CircleAvatar(
+                              backgroundColor: Colors.white,
+                              radius: 15,
+                              child: Obx(() => Text('${countdown.value}')),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                  )
-                ],
+                    // const SizedBox(
+                    //   width: 10,
+                    // ),
+                    // ClipRRect(
+                    //   borderRadius: BorderRadius.circular(17),
+                    //   // ignore: deprecated_member_use
+                    //   child: FlatButton(
+                    //     padding: const EdgeInsets.symmetric(
+                    //         vertical: 10, horizontal: 20),
+                    //     color: Colors.amber.shade300,
+                    //     onPressed: () async {
+                    //       //Status 4 là từ chối Cuốc
+                    //       await UpdateBookingStatusApi()
+                    //           .apiUpdateStatusBooking(scheduleItem.id, 4);
+                    //       // Get.find<NavSheduleController>().fetchSchedule();
+                    //       Get.find<NavNotificationController>()
+                    //           .fecthBookingWaitProcess();
+                    //       Get.back();
+                    //     },
+                    //     child: const Text(
+                    //       'Từ chối',
+                    //       style: TextStyle(color: Colors.white, fontSize: 20),
+                    //     ),
+                    //   ),
+                    // ),
+                  ],
+                ),
               ),
-            ),
-          ],
-        ),
-      ),
-    );
+            ])));
   }
 }

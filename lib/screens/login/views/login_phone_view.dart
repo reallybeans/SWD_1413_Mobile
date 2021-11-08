@@ -38,8 +38,8 @@ class PhoneLoginView extends GetView<PhoneLoginController> {
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
               color: Colors.greenAccent[400],
               onPressed: () async {
-                Get.put(HomeController()).currentDriver =
-                    await ApiService().apiCheckLoginPhone(phoneController.text);
+                // Get.put(HomeController()).currentDriver =
+                //     await ApiService().apiCheckLoginPhone(phoneController.text);
                 if (Get.find<HomeController>().currentDriver != null) {
                   controller.login(phoneController);
                 } else {
@@ -72,7 +72,7 @@ class PhoneLoginView extends GetView<PhoneLoginController> {
         // ignore: deprecated_member_use
         FlatButton(
           onPressed: () {
-            controller.otp(otpController);
+            controller.verifyOtp(otpController);
           },
           child: const Text('Đăng Nhập'),
           color: Colors.blue,

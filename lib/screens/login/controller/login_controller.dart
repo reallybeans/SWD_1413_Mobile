@@ -38,4 +38,8 @@ class LoginController extends GetxController {
       CustomFullScreenDialog.cancelDialog();
     }
   }
+  //   void logout() async {
+  //   await homeController.googleSign.disconnect();
+  //   await homeController.firebaseAuth.signOut();
+  // }
 }
