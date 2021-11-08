@@ -4,10 +4,8 @@ import 'package:get/get.dart';
 import 'package:timxe/screens/login/binding/nav_notify_binding.dart';
 import 'package:timxe/screens/login/binding/nav_shedule_binding.dart';
 import 'package:timxe/screens/login/controller/nav_notification_controller.dart';
-import 'package:timxe/screens/login/controller/welcome_controller.dart';
 import 'package:timxe/screens/login/views/detail_customer_view_copy.dart';
 import 'package:timxe/screens/login/views/nav_info_view.dart';
-import 'package:timxe/screens/login/views/nav_notification_view.dart';
 import 'package:timxe/screens/login/views/nav_shedule_view.dart';
 import 'package:timxe/screens/login/views/nav_video_call_view.dart';
 
@@ -19,7 +17,7 @@ class WelcomeView extends StatelessWidget {
     var index = 0.obs;
     final iconItems = <Widget>[
       const Icon(
-        Icons.schedule,
+        Icons.bookmark,
         size: 30,
       ),
       // const Icon(

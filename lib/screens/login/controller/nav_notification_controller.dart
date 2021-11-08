@@ -9,20 +9,15 @@ import 'package:timxe/screens/login/services/update_driver_api.dart';
 class NavNotificationController extends GetxController {
   var bookingWaitProcessList = List<Booking>.empty().obs;
   var isLoading = true.obs;
-  var isNotEmptyList = true.obs;
+  var isNotEmptyList = false.obs;
   var returnResponseBooking = false.obs;
   var onlineDriver = false.obs;
   late Timer timerScanBooking;
   @override
   void onInit() async {
-    // Timer.periodic(
-    //     Duration(seconds: 2),
-    //     (Timer t) =>
-    //         {print("TEST THỬ CHƠI TRONG NAVCONTROLLER"), fecthBookingWaitProcess()});
     ever(
         onlineDriver,
         (callback) async => {
-              // print("${onlineDriver}"),
               if (onlineDriver.value)
                 {
                   await UpdateDriverApi().updateStatusDriver(
@@ -35,16 +30,6 @@ class NavNotificationController extends GetxController {
                       Get.find<HomeController>().currentDriver.id, "off"),
                 }
             });
-    //     ever(driverBusy,(callback)=>{
-    //   if(driverBusy.value){
-    //     print('GOI API DOI DRIVER THANH BUSY')
-    //   }else{
-    //     print('GOI API DOI DRIVER THANH FREE')
-    //   }
-    // });
-    //on off bussy
-    //xe la unuse  inuse
-    //
     ever(
         isNotEmptyList,
         (callback) async => {

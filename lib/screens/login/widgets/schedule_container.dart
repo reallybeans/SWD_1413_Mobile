@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:timxe/data/booking.dart';
-import 'package:timxe/screens/login/widgets/circularfabwidget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ScheduleContainer extends StatelessWidget {
@@ -159,8 +158,16 @@ class ScheduleContainer extends StatelessWidget {
               SpeedDialChild(
                   child: IconButton(
                       onPressed: () async {
+                        String waitpoints="waypoints=";
+                        for (var i = 0; i < scheduleItem.schedule.address.waypoint.length; i++) {
+                         if(i==(scheduleItem.schedule.address.waypoint.length-1)){
+                           waitpoints=waitpoints+scheduleItem.schedule.address.waypoint[i];
+                         }else{
+                             waitpoints=waitpoints+scheduleItem.schedule.address.waypoint[i]+"|";
+                         }
+                        }
                         String googleUrl =
-                            'https://www.google.com/maps/dir/?api=1&origin=${scheduleItem.schedule.address.origin}&waypoints=${scheduleItem.schedule.address.waypoint[0]}|${scheduleItem.schedule.address.waypoint[1]}&destination=${scheduleItem.schedule.address.destination}&travelmode=driving&dir_action=navigate';
+                            'https://www.google.com/maps/dir/?api=1&origin=${scheduleItem.schedule.address.origin}&${waitpoints}&destination=${scheduleItem.schedule.address.destination}&travelmode=driving&dir_action=navigate';
                         if (await canLaunch(googleUrl)) {
                           await launch(googleUrl);
                         } else {

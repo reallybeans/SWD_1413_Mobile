@@ -3,13 +3,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
-import 'package:sticky_headers/sticky_headers.dart';
 import 'package:timelines/timelines.dart';
 import 'package:timxe/data/booking.dart';
 import 'package:timxe/screens/login/controller/nav_notification_controller.dart';
 import 'package:timxe/screens/login/controller/nav_shedule_controller.dart';
 import 'package:timxe/screens/login/services/update_booking_status_api.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class CustomerDetails2 extends StatelessWidget {
   final Booking scheduleItem;
@@ -19,18 +17,23 @@ class CustomerDetails2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var countdown = 30.obs;
-    Timer.periodic(
+     Timer.periodic(
         Duration(seconds: 1),
-        (Timer t) => {
+        (Timer t) async => {
               if (countdown == 0)
                 {
                   print('time out'),
-                  Get.find<NavNotificationController>().isNotEmptyList(false),
+                    Get.find<NavNotificationController>().isNotEmptyList(false),
+                  await UpdateBookingStatusApi()
+                      .apiUpdateStatusBooking(scheduleItem.id, 4),
                   t.cancel(),
                   Get.back()
                 }
               else
                 {
+                  if(!Get.find<NavNotificationController>().isNotEmptyList.value){
+                     t.cancel(),
+                  },
                   print('time count'),
                   countdown.value--,
                   print(
@@ -52,30 +55,6 @@ class CustomerDetails2 extends StatelessWidget {
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          // Align(
-                          //   alignment: Alignment.topRight,
-                          //   child: Row(
-                          //     children: [
-                          //       Spacer(),
-                          //       CircleAvatar(
-                          //         child: Obx(() => Text('${countdown.value}')),
-                          //       ),
-                          //       CircleAvatar(
-                          //         radius: 20,
-                          //         backgroundColor: Colors.grey,
-                          //         child: IconButton(
-                          //           onPressed: () {
-                          //             Get.back();
-                          //           },
-                          //           icon: Icon(
-                          //             Icons.close_outlined,
-                          //             color: Colors.black,
-                          //           ),
-                          //         ),
-                          //       ),
-                          //     ],
-                          //   ),
-                          // ),
                           SizedBox(
                             height: 10,
                           ),
@@ -119,7 +98,8 @@ class CustomerDetails2 extends StatelessWidget {
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
                                           'Thoi gian',
@@ -127,7 +107,7 @@ class CustomerDetails2 extends StatelessWidget {
                                               fontSize: 16,
                                               fontWeight: FontWeight.bold),
                                         ),
-                                          Text(
+                                        Text(
                                           ' ${scheduleItem.startAt.hour}' +
                                               "h" +
                                               '${scheduleItem.startAt.minute}',
@@ -150,10 +130,9 @@ class CustomerDetails2 extends StatelessWidget {
                                   '${scheduleItem.priceBooking.toString()}'
                                   ' VNĐ',
                                   style: TextStyle(
-                                    color: Colors.greenAccent[700],
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold
-                                  ),
+                                      color: Colors.greenAccent[700],
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
                                 ),
 
                                 const SizedBox(height: 10),
@@ -229,12 +208,10 @@ class CustomerDetails2 extends StatelessWidget {
                                 child: FixedTimeline.tileBuilder(
                                   builder:
                                       TimelineTileBuilder.connectedFromStyle(
-                                        firstConnectorStyle: ConnectorStyle.transparent,
-                                        lastConnectorStyle: ConnectorStyle.transparent,
-                                        // nodePositionBuilder: (context, index) {
-                                        //   return 20;
-                                        // },
-                                        // itemExtent: 0.4,
+                                    firstConnectorStyle:
+                                        ConnectorStyle.transparent,
+                                    lastConnectorStyle:
+                                        ConnectorStyle.transparent,
                                     contentsAlign: ContentsAlign.alternating,
                                     oppositeContentsBuilder: (context, index) =>
                                         Padding(
@@ -242,14 +219,10 @@ class CustomerDetails2 extends StatelessWidget {
                                       child: Text(scheduleItem
                                           .schedule.address.waypoint[index]),
                                     ),
-                                    contentsBuilder: (context, index) =>(
-                                      Icon(
-                                          Icons.location_on_outlined)
-                                    ),
+                                    contentsBuilder: (context, index) =>
+                                        (Icon(Icons.location_on_outlined)),
                                     connectorStyleBuilder: (context, index) =>
                                         ConnectorStyle.solidLine,
-                                    // indicatorStyleBuilder: (context, index) =>
-                                    //     IndicatorStyle.dot,
                                     itemCount: scheduleItem
                                         .schedule.address.waypoint.length,
                                   ),
@@ -360,27 +333,7 @@ class CustomerDetails2 extends StatelessWidget {
                                         )),
                                       ],
                                     ),
-                          // Tổng giá chuyến đi
-                          // Row(
-                          //   children: [
-                          //     const Text(
-                          //       'Tổng giá chuyến đi: ',
-                          //       style: TextStyle(
-                          //         color: Colors.black,
-                          //         fontWeight: FontWeight.bold,
-                          //         fontSize: 18,
-                          //       ),
-                          //     ),
-                          //     Text(
-                          //       '${scheduleItem.priceBooking.toString()}'
-                          //       ' VNĐ',
-                          //       style: TextStyle(
-                          //         color: Colors.green[900],
-                          //         fontSize: 18,
-                          //       ),
-                          //     ),
-                          //   ],
-                          // ),
+
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 1 / 10,
                           )
@@ -403,7 +356,10 @@ class CustomerDetails2 extends StatelessWidget {
                       radius: 25,
                       backgroundColor: Colors.grey,
                       child: IconButton(
-                        onPressed: () {
+                        onPressed: () async {
+                          Get.find<NavNotificationController>().isNotEmptyList(false);
+                          await UpdateBookingStatusApi()
+                              .apiUpdateStatusBooking(scheduleItem.id, 4);
                           Get.back();
                         },
                         icon: Icon(
@@ -457,31 +413,6 @@ class CustomerDetails2 extends StatelessWidget {
                         ),
                       ),
                     ),
-                    // const SizedBox(
-                    //   width: 10,
-                    // ),
-                    // ClipRRect(
-                    //   borderRadius: BorderRadius.circular(17),
-                    //   // ignore: deprecated_member_use
-                    //   child: FlatButton(
-                    //     padding: const EdgeInsets.symmetric(
-                    //         vertical: 10, horizontal: 20),
-                    //     color: Colors.amber.shade300,
-                    //     onPressed: () async {
-                    //       //Status 4 là từ chối Cuốc
-                    //       await UpdateBookingStatusApi()
-                    //           .apiUpdateStatusBooking(scheduleItem.id, 4);
-                    //       // Get.find<NavSheduleController>().fetchSchedule();
-                    //       Get.find<NavNotificationController>()
-                    //           .fecthBookingWaitProcess();
-                    //       Get.back();
-                    //     },
-                    //     child: const Text(
-                    //       'Từ chối',
-                    //       style: TextStyle(color: Colors.white, fontSize: 20),
-                    //     ),
-                    //   ),
-                    // ),
                   ],
                 ),
               ),

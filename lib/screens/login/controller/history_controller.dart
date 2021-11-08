@@ -7,14 +7,10 @@ import 'package:timxe/screens/login/services/get_schedule_api.dart';
 
 class HistoryController extends GetxController {
   var historyList = List<History>.empty().obs;
-
+  var isLoading = false.obs;
   @override
   void onInit() async {
-    // Timer.periodic(
-    //     Duration(seconds: 2),
-    //     (Timer t) =>
-    //         {print("TEST THỬ CHƠI TRONG NAVCONTROLLER"), fetchUsers()});
-    fecthUsers();
+     fectHistories();
     print('init cua historyController CHU IN HOA NE DUOC CHUA');
     super.onInit();
   }
@@ -28,10 +24,15 @@ class HistoryController extends GetxController {
 
   @override
   void onClose() {}
-  void fecthUsers() async {
-    var history = await GetHistoryApi.fetchUser();
-    if (history != null) {
-      historyList.value = history;
+  void fectHistories() async {
+    try {
+      isLoading(true);
+      var histories = await GetHistoryApi.fetchHistory();
+      if (histories != null) {
+        historyList.assignAll(histories);
+      }
+    } finally {
+      isLoading(false);
     }
   }
 }

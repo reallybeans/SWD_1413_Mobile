@@ -1,6 +1,6 @@
 // To parse this JSON data, do
 //
-//     final History = HistoryFromJson(jsonString);
+//     final history = historyFromJson(jsonString);
 
 import 'dart:convert';
 
@@ -13,6 +13,9 @@ String historyToJson(List<History> data) =>
 class History {
   History({
     required this.id,
+    required this.bookingDriverId,
+    required this.customerId,
+    required this.driverId,
     required this.customerName,
     required this.phoneCustomer,
     required this.mode,
@@ -21,10 +24,14 @@ class History {
     required this.status,
     required this.date,
     required this.startDate,
+    required this.description,
     required this.schedule,
   });
 
   int id;
+  int bookingDriverId;
+  dynamic customerId;
+  int driverId;
   String customerName;
   String phoneCustomer;
   bool mode;
@@ -33,10 +40,14 @@ class History {
   String status;
   DateTime date;
   DateTime startDate;
+  String description;
   Schedule schedule;
 
   factory History.fromJson(Map<String, dynamic> json) => History(
         id: json["id"],
+        bookingDriverId: json["bookingDriverId"],
+        customerId: json["customerId"],
+        driverId: json["driverId"],
         customerName: json["customerName"],
         phoneCustomer: json["phoneCustomer"],
         mode: json["mode"],
@@ -45,11 +56,15 @@ class History {
         status: json["status"],
         date: DateTime.parse(json["date"]),
         startDate: DateTime.parse(json["startDate"]),
+        description: json["description"],
         schedule: Schedule.fromJson(json["schedule"]),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "bookingDriverId": bookingDriverId,
+        "customerId": customerId,
+        "driverId": driverId,
         "customerName": customerName,
         "phoneCustomer": phoneCustomer,
         "mode": mode,
@@ -58,18 +73,19 @@ class History {
         "status": status,
         "date": date.toIso8601String(),
         "startDate": startDate.toIso8601String(),
+        "description": description,
         "schedule": schedule.toJson(),
       };
 }
 
 class Schedule {
   Schedule({
-    this.total,
+    required this.total,
     required this.address,
     required this.latlng,
   });
 
-  dynamic total;
+  int total;
   Address address;
   Latlng latlng;
 
@@ -115,7 +131,7 @@ class Latlng {
     required this.origin,
     required this.destination,
     required this.waypoint,
-    this.listWaypoint,
+    required this.listWaypoint,
   });
 
   String origin;

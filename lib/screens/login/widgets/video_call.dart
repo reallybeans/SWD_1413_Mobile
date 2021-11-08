@@ -1,7 +1,6 @@
-import 'dart:convert';
+
 import 'package:agora_uikit/agora_uikit.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 
 // ignore: must_be_immutable
 class VideoCall extends StatefulWidget {
@@ -56,7 +55,7 @@ class _VideoCallState extends State<VideoCall> {
       agoraConnectionData: AgoraConnectionData(
         appId: "c0361d4447854ba8b277b52880484530",
         tempToken:
-            '006c0361d4447854ba8b277b52880484530IAAtTZGoxL25qxqw7ld/420kolujS1YjAUGVnVWpiQXJpAx+f9gAAAAAEADiW+Wx6pyDYQEAAQDnnINh',
+            '006c0361d4447854ba8b277b52880484530IAAFv6vXnpK7Sx3SWxvn1OFwEb3jbLFuMH9e56QvI9pwfAx+f9gAAAAAEACkCrtyvauKYQEAAQC5q4ph',
         channelName: 'test',
       ),
       enabledPermission: [Permission.camera, Permission.microphone]);

@@ -16,37 +16,33 @@ class HomeController extends GetxController {
   late GoogleSignIn googleSign;
   var isSignIn = false.obs;
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-  String deviceId = "";
-  late Driver currentDriver;
+  String deviceId="";
+   late Driver currentDriver;
 
   static const AndroidNotificationChannel channel = AndroidNotificationChannel(
-      'high_importance_channel', // id
-      'High Importance Notifications', // title
-      description:
-          'This channel is used for important notifications.', // description
-      importance: Importance.high,
-      playSound: true);
+    'high_importance_channel', // id
+    'High Importance Notifications', // title
+   description:  'This channel is used for important notifications.', // description
+    importance: Importance.min,
+    playSound: true);
 
-  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
   @override
   void onInit() {
     super.onInit();
 
-    flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
-        ?.createNotificationChannel(channel);
-    FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
-      alert: true,
-      badge: true,
-      sound: true,
-    );
-    final FirebaseMessaging _fcm = FirebaseMessaging.instance;
-    _fcm
-        .getToken()
-        .then((token) => {print('The token||' + token!), deviceId = token});
-
+   flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+      ?.createNotificationChannel(channel);
+   FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+    alert: true,
+    badge: true,
+    sound: true,
+  );
+   final FirebaseMessaging _fcm = FirebaseMessaging.instance;
+    _fcm.getToken().then((token) => {print('The token||' + token!),deviceId=token});
+    
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = message.notification?.android;
@@ -67,9 +63,9 @@ class HomeController extends GetxController {
             ));
       }
     });
-
+    
 //Listen to open app redirect to view
-
+ 
     // FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
     //   print('A new onMessageOpenedApp event was published!');
     //   RemoteNotification? notification = message.notification;
@@ -100,20 +96,14 @@ class HomeController extends GetxController {
   void onClose() {}
 
   void handleAuthStateChanged(isLoggedIn) async {
-    print("Token trong HAM: " + deviceId);
+    print("Token trong HAM: "+deviceId);
     if (isLoggedIn) {
-      if (firebaseAuth.currentUser!.email != null) {
-        currentDriver = await ApiService().apiCheckLogin(
-            await firebaseAuth.currentUser!.getIdToken(), deviceId);
-      } else {
-        currentDriver = await ApiService()
-            .apiCheckLoginPhone(await firebaseAuth.currentUser!.getIdToken());
-      }
-      if (currentDriver != null) {
+     currentDriver = await ApiService().apiCheckLogin(await firebaseAuth.currentUser!.getIdToken(),deviceId);
+      if (currentDriver!=null)
         Get.offAllNamed(Routes.WELCOME, arguments: firebaseAuth.currentUser);
-      } else {
-        await googleSign.disconnect();
-        await firebaseAuth.signOut();
+      else {
+          await googleSign.disconnect();
+          await firebaseAuth.signOut();
       }
     } else {
       Get.offAllNamed(Routes.START);
