@@ -25,24 +25,6 @@ class ScheduleContainer extends StatelessWidget {
               )),
           child: Column(
             children: [
-              // Container(
-              //   padding: const EdgeInsets.only(right: 20, top: 20),
-              //   height: 80,
-              //   child: Align(
-              //     alignment: Alignment.topRight,
-              //     child: Text(
-              //       scheduleItem.startAt.toString(),
-              //       style: const TextStyle(
-              //           fontSize: 16, fontWeight: FontWeight.bold),
-              //     ),
-              //   ),
-              // ),
-              // Text(
-              //      "Ngày đón"+'${scheduleItem.startAt.day}'+"/"+'${scheduleItem.startAt.month}'+"/"+'${scheduleItem.startAt.year}',
-              //       style: const TextStyle(
-              //           fontSize: 16, fontWeight: FontWeight.bold),
-              //     ),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -76,21 +58,6 @@ class ScheduleContainer extends StatelessWidget {
               const SizedBox(
                 height: 5,
               ),
-             
-              // const SizedBox(
-              //   height: 5,
-              // ),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //   children: [
-              //     Text(
-              //       "Vào lúc: " +
-              //           '${scheduleItem.startAt.hour}' +
-              //           ":" +
-              //           '${scheduleItem.startAt.minute}',
-              //     )
-              //   ],
-              // ),
               const Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -174,33 +141,11 @@ class ScheduleContainer extends StatelessWidget {
                 ],
               ),
               const Spacer(),
-              // SizedBox(
-              //   height: 30,
-              // ),
               const Spacer(),
             ],
           ),
         ),
       ),
-      // Positioned(
-      //   top: 0,
-      //   left: 30,
-      //   child: CircleAvatar(
-      //       backgroundColor: Colors.white60.withOpacity(0.3),
-      //       radius: 40,
-      //       // child: CircleAvatar(
-      //       //   backgroundColor: Colors.transparent,
-      //       //   backgroundImage: AssetImage("assets/images/iconMoney.png"),
-      //       //   radius: 40,
-      //       // ),
-      //       child: ClipOval(
-      //           child: SvgPicture.asset(
-      //         "assets/icons/money.svg",
-      //         fit: BoxFit.cover,
-      //         width: 50.0,
-      //         height: 50.0,
-      //       ))),
-      // ),
       Positioned(
           bottom: -10,
           right: 10,
@@ -214,9 +159,6 @@ class ScheduleContainer extends StatelessWidget {
               SpeedDialChild(
                   child: IconButton(
                       onPressed: () async {
-                        // launch('tel://${scheduleItem.phone}');
-                        // await FlutterPhoneDirectCaller.callNumber('0794219080');
-                        //  String googleUrl = 'https://www.google.com/maps/search/?api=1&query=11.084732443891067, 107.68383795664876';
                         String googleUrl =
                             'https://www.google.com/maps/dir/?api=1&origin=${scheduleItem.schedule.address.origin}&waypoints=${scheduleItem.schedule.address.waypoint[0]}|${scheduleItem.schedule.address.waypoint[1]}&destination=${scheduleItem.schedule.address.destination}&travelmode=driving&dir_action=navigate';
                         if (await canLaunch(googleUrl)) {
@@ -238,43 +180,6 @@ class ScheduleContainer extends StatelessWidget {
             ],
           )
           ),
-      // Positioned(
-      //     // bottom: -10,
-      //     // right: -10,
-      //     top: 0,
-      //     left: 10,
-      //     // ignore: deprecated_member_use
-      //     child: FlatButton(
-      //       onPressed: () async {
-      //         // launch('tel://${scheduleItem.phone}');
-      //         // await FlutterPhoneDirectCaller.callNumber('0794219080');
-      //         //  String googleUrl = 'https://www.google.com/maps/search/?api=1&query=11.084732443891067, 107.68383795664876';
-      //         String googleUrl =
-      //             'https://www.google.com/maps/dir/?api=1&origin=${scheduleItem.schedule.address.origin}&waypoints=${scheduleItem.schedule.address.waypoint[0]}|${scheduleItem.schedule.address.waypoint[1]}&destination=${scheduleItem.schedule.address.destination}&travelmode=driving&dir_action=navigate';
-      //         if (await canLaunch(googleUrl)) {
-      //           await launch(googleUrl);
-      //         } else {
-      //           throw 'Could not open the map.';
-      //         }
-      //       },
-      //       child: CircleAvatar(
-      //         backgroundColor: Colors.grey.withOpacity(0.7),
-      //         radius: 40,
-      //         child: Container(
-      //           width: 60,
-      //           height: 60,
-      //           // color: Colors.greenAccent[400],
-      //           decoration: BoxDecoration(
-      //               color: Colors.greenAccent[400],
-      //               borderRadius: const BorderRadius.all(Radius.circular(50))),
-      //           child: const Icon(
-      //             Icons.map_sharp,
-      //             color: Colors.white,
-      //             size: 30,
-      //           ),
-      //         ),
-      //       ),
-      //     )),
     ]);
   }
 

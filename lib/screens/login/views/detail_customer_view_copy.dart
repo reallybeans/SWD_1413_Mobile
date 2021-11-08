@@ -18,7 +18,7 @@ class CustomerDetails2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var countdown = 10.obs;
+    var countdown = 30.obs;
     Timer.periodic(
         Duration(seconds: 1),
         (Timer t) => {

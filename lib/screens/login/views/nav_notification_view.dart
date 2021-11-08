@@ -35,12 +35,11 @@ class NavNotifyView extends GetView<NavNotificationController> {
     return ListView.builder(
       itemCount: controller.bookingWaitProcessList.value.length,
       itemBuilder: (_, index) {
-       NavNotificationController nav=Get.put(NavNotificationController(),tag: "${controller.bookingWaitProcessList[index].id}");
         return Obx(() => Card(
               child: ListTile(
                 title: Text(
                   controller.bookingWaitProcessList[index].nameCustomer,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
                 subtitle: Align(
                   alignment: Alignment.topLeft,
@@ -71,10 +70,8 @@ class NavNotifyView extends GetView<NavNotificationController> {
                 ),
                 trailing: const Icon(Icons.arrow_forward),
                 onTap: () => {
-              
                   Get.to(
-                    CustomerDetails2(controller.bookingWaitProcessList[index])),
-                    
+                    CustomerDetails2(controller.bookingWaitProcessList[index])),  
                     }
               ),
             ));
