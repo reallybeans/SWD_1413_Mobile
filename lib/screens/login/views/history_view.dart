@@ -4,11 +4,11 @@ import 'package:timxe/screens/login/controller/history_controller.dart';
 import 'package:timxe/screens/login/views/detail_history_view.dart';
 
 class HistoryView extends GetView<HistoryController> {
-  final HistoryController historyController = Get.put(HistoryController());
   HistoryView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+  final HistoryController historyController = Get.put(HistoryController());
     return Scaffold(
         appBar: AppBar(
             centerTitle: true,
@@ -21,7 +21,7 @@ class HistoryView extends GetView<HistoryController> {
         backgroundColor: Colors.greenAccent[400],
         body: Obx(
           () {
-            if (historyController.isLoading.value) {
+            if (controller.isLoading.value) {
               // return SchedulePlash();
               return Center(
                 child: CircularProgressIndicator(
@@ -37,12 +37,12 @@ class HistoryView extends GetView<HistoryController> {
 
   ListView _buildListCustomers(BuildContext context) {
     return ListView.builder(
-      itemCount: historyController.historyList.length,
+      itemCount: controller.historyList.length,
       itemBuilder: (_, index) {
         return Card(
           child: ListTile(
             title: Text(
-              historyController.historyList[index].customerName,
+              controller.historyList[index].customerName,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
             subtitle: Column(
@@ -51,7 +51,7 @@ class HistoryView extends GetView<HistoryController> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Số điện thoại: ${historyController.historyList[index].phoneCustomer}',
+                      'Số điện thoại: ${controller.historyList[index].phoneCustomer}',
                       style: const TextStyle(color: Colors.black, fontSize: 17),
                     ),
                   ],
@@ -60,17 +60,17 @@ class HistoryView extends GetView<HistoryController> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Ngày đón: ${historyController.historyList[index].startDate.day}/${historyController.historyList[index].startDate.month}/${historyController.historyList[index].startDate.year}',
+                      'Ngày đón: ${controller.historyList[index].startDate.day}/${controller.historyList[index].startDate.month}/${controller.historyList[index].startDate.year}',
                       style: const TextStyle(color: Colors.black, fontSize: 17),
                     ),
                   ],
                 ),
                 Row(
                   children: [
-                    historyController.historyList[index].status == "Cancel"
+                    controller.historyList[index].status == "Cancel"
                         ? const Text('')
                         : Text(
-                            'Tổng tiền: ${historyController.historyList[index].price.toString()}',
+                            'Tổng tiền: ${controller.historyList[index].price.toString()}',
                             style: TextStyle(
                                 color: Colors.green.shade800, fontSize: 17),
                           ),
@@ -78,7 +78,7 @@ class HistoryView extends GetView<HistoryController> {
                 ),
               ],
             ),
-            leading: historyController.historyList[index].status == "Cancel"
+            leading: controller.historyList[index].status == "Cancel"
                 ? const Icon(
                     Icons.cancel_outlined,
                     color: Colors.red,
@@ -91,7 +91,7 @@ class HistoryView extends GetView<HistoryController> {
                   ),
             trailing: const Icon(Icons.arrow_forward),
             onTap: () =>
-                Get.to(HistoryDetail(historyController.historyList[index])),
+                Get.to(HistoryDetail(controller.historyList[index])),
           ),
         );
       },

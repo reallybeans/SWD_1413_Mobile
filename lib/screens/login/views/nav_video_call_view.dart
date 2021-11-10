@@ -16,6 +16,7 @@ class _NavVideoCallViewState extends State<NavVideoCallView> {
 
   @override
   void initState() {
+  // ignore: avoid_print
     var uuid = Uuid();
     _meetingCode = uuid.v1().substring(0, 8);
     super.initState();
@@ -23,6 +24,7 @@ class _NavVideoCallViewState extends State<NavVideoCallView> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
        appBar: AppBar(
           centerTitle: true,

@@ -8,7 +8,6 @@ import 'package:timxe/screens/login/binding/welcome_binding.dart';
 import 'package:timxe/screens/login/views/home_view.dart';
 import 'package:timxe/screens/login/views/login_phone_view.dart';
 import 'package:timxe/screens/login/views/login_screen.dart';
-import 'package:timxe/screens/login/views/nav_notification_view.dart';
 import 'package:timxe/screens/login/views/start_view.dart';
 import 'package:timxe/screens/login/views/welcome.dart';
 
@@ -44,10 +43,6 @@ class AppPages {
       name: _Paths.PHONELOGIN,
       page: () => PhoneLoginView(),
       binding: PhoneLoginBinding(),
-    ),  GetPage(
-      name: _Paths.NAV_NOTIFY,
-      page: () => NavNotifyView(),
-      binding: NavNotifyBinding(),
-    ),
+    ),  
   ];
 }

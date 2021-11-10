@@ -13,7 +13,6 @@ class CustomerDetails extends StatelessWidget {
   const CustomerDetails(this.scheduleItem, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    String appBarTitle = 'Thông tin chi tiết';
 
     return SafeArea(
       child: Scaffold(
@@ -315,8 +314,8 @@ class CustomerDetails extends StatelessWidget {
                               await UpdateBookingStatusApi()
                                   .apiUpdateStatusBooking(scheduleItem.id, 2);
                               Get.find<NavSheduleController>().fetchSchedule();
-                              Get.find<NavNotificationController>()
-                                  .fecthBookingWaitProcess();
+                              // Get.find<NavNotificationController>()
+                              //     .fecthBookingWaitProcess();
                               Get.back();
                             },
                             child: const Text(
@@ -341,8 +340,8 @@ class CustomerDetails extends StatelessWidget {
                               await UpdateBookingStatusApi()
                                   .apiUpdateStatusBooking(scheduleItem.id, 4);
                               // Get.find<NavSheduleController>().fetchSchedule();
-                              Get.find<NavNotificationController>()
-                                  .fecthBookingWaitProcess();
+                              // Get.find<NavNotificationController>()
+                              //     .fecthBookingWaitProcess();
                               Get.back();
                             },
                             child: const Text(

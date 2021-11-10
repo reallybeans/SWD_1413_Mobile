@@ -5,8 +5,9 @@ import 'package:get/get.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:timelines/timelines.dart';
 import 'package:timxe/data/booking.dart';
-import 'package:timxe/screens/login/controller/nav_notification_controller.dart';
 import 'package:timxe/screens/login/controller/nav_shedule_controller.dart';
+import 'package:timxe/screens/login/controller/new_booking_controller.dart';
+import 'package:timxe/screens/login/services/get_schedule_api.dart';
 import 'package:timxe/screens/login/services/update_booking_status_api.dart';
 
 class CustomerDetails2 extends StatelessWidget {
@@ -17,13 +18,16 @@ class CustomerDetails2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var countdown = 30.obs;
-     Timer.periodic(
+    var isCancel=false.obs;
+    Get.delete<NewBookingController>();
+  Timer.periodic(
         Duration(seconds: 1),
         (Timer t) async => {
+          isCancel(false),
               if (countdown == 0)
                 {
+                  // ignore: avoid_print
                   print('time out'),
-                    Get.find<NavNotificationController>().isNotEmptyList(false),
                   await UpdateBookingStatusApi()
                       .apiUpdateStatusBooking(scheduleItem.id, 4),
                   t.cancel(),
@@ -31,22 +35,23 @@ class CustomerDetails2 extends StatelessWidget {
                 }
               else
                 {
-                  if(!Get.find<NavNotificationController>().isNotEmptyList.value){
-                     t.cancel(),
+                  //check bên kia hủy thì ngắt
+                  isCancel.value=await GetScheduleApi.checkCustomerCancelBooking("${scheduleItem.code}"),
+                  if(isCancel.value){
+                    // ignore: avoid_print
+                    print('Hủy Cuốc'),
+                    // Get.back(),
+                    t.cancel(),
+                     Get.back()
                   },
-                  print('time count'),
+                  // ignore: avoid_print
+                  // print('time count'),
                   countdown.value--,
-                  print(
-                      "${Get.find<NavNotificationController>().isNotEmptyList.value}")
                 }
             });
     return SafeArea(
         child: Scaffold(
             backgroundColor: Colors.greenAccent.shade400,
-            // appBar: AppBar(
-            //   backgroundColor: Colors.green[900],
-            //   title: Obx(()=> Text('${countdown.value}')),
-            // ),
             body: Stack(children: [
               Positioned(
                 child: ListView(children: [
@@ -102,7 +107,7 @@ class CustomerDetails2 extends StatelessWidget {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          'Thoi gian',
+                                          'Thời gian',
                                           style: const TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.bold),
@@ -117,13 +122,6 @@ class CustomerDetails2 extends StatelessWidget {
                                         ),
                                       ],
                                     ),
-                                    // Text(
-                                    //   scheduleItem.startAt.toString(),
-                                    //   style: const TextStyle(
-                                    //     color: Colors.black,
-                                    //     fontSize: 18,
-                                    //   ),
-                                    // ),
                                   ],
                                 ),
                                 Text(
@@ -136,24 +134,7 @@ class CustomerDetails2 extends StatelessWidget {
                                 ),
 
                                 const SizedBox(height: 10),
-                                // SDT
-                                // Row(
-                                //   children: [
-                                //     const Text(
-                                //       ' Số điện thoại: ',
-                                //       style: TextStyle(
-                                //           fontSize: 18,
-                                //           fontWeight: FontWeight.bold),
-                                //     ),
-                                //     Text(
-                                //       scheduleItem.phoneCustomer.toString(),
-                                //       style: const TextStyle(
-                                //         color: Colors.black,
-                                //         fontSize: 18,
-                                //       ),
-                                //     ),
-                                //   ],
-                                // ),
+                             
                               ],
                             ),
                           ),
@@ -270,6 +251,25 @@ class CustomerDetails2 extends StatelessWidget {
                               )),
                             ],
                           ),
+                           Row(
+                            children: [
+                              const Text(
+                                'Loại xe: ',
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
+                              ),
+                              Expanded(
+                                child: Text(
+                                  "${scheduleItem.typeVehicle}"" chỗ"
+                                     ,
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                           // 2 chiều
                           Row(
                             children: [
@@ -357,7 +357,7 @@ class CustomerDetails2 extends StatelessWidget {
                       backgroundColor: Colors.grey,
                       child: IconButton(
                         onPressed: () async {
-                          Get.find<NavNotificationController>().isNotEmptyList(false);
+                          // Get.find<NavNotificationController>().isNotEmptyList(false);
                           await UpdateBookingStatusApi()
                               .apiUpdateStatusBooking(scheduleItem.id, 4);
                           Get.back();
@@ -390,8 +390,6 @@ class CustomerDetails2 extends StatelessWidget {
                           await UpdateBookingStatusApi()
                               .apiUpdateStatusBooking(scheduleItem.id, 2);
                           Get.find<NavSheduleController>().fetchSchedule();
-                          Get.find<NavNotificationController>()
-                              .fecthBookingWaitProcess();
                           Get.back();
                         },
                         child: Row(

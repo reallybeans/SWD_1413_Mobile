@@ -1,9 +1,7 @@
-import 'dart:async';
 
 import 'package:get/get.dart';
 import 'package:timxe/data/history.dart';
 import 'package:timxe/screens/login/services/get_history_api.dart';
-import 'package:timxe/screens/login/services/get_schedule_api.dart';
 
 class HistoryController extends GetxController {
   var historyList = List<History>.empty().obs;

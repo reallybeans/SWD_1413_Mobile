@@ -11,6 +11,7 @@ class UpdateDriverApi {
           "Accept": "application/json",
           "content-type": "application/json"
         });
+    // ignore: avoid_print
     print('updateStatusDriver API: '+'${response.statusCode}');
     if (response.statusCode == 200) {
       return Future<bool>.value(true);

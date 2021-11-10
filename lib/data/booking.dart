@@ -20,6 +20,10 @@ class Booking {
     required this.timeWait,
     required this.mode,
     required this.priceBooking,
+    required this.dateEnd,
+    required this.city,
+    required this.code,
+    required this.typeVehicle,
     required this.schedule,
   });
 
@@ -31,6 +35,10 @@ class Booking {
   int timeWait;
   bool mode;
   int priceBooking;
+  DateTime dateEnd;
+  String city;
+  String code;
+  int typeVehicle;
   Schedule schedule;
 
   factory Booking.fromJson(Map<String, dynamic> json) => Booking(
@@ -42,6 +50,10 @@ class Booking {
         timeWait: json["timeWait"],
         mode: json["mode"],
         priceBooking: json["priceBooking"],
+        dateEnd: DateTime.parse(json["dateEnd"]),
+        city: json["city"],
+        code: json["code"],
+        typeVehicle: json["typeVehicle"],
         schedule: Schedule.fromJson(json["schedule"]),
       );
 
@@ -54,6 +66,10 @@ class Booking {
         "timeWait": timeWait,
         "mode": mode,
         "priceBooking": priceBooking,
+        "dateEnd": dateEnd.toIso8601String(),
+        "city": city,
+        "code": code,
+        "typeVehicle": typeVehicle,
         "schedule": schedule.toJson(),
       };
 }

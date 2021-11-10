@@ -10,7 +10,7 @@ class ApiService {
   Future<Driver> apiCheckLogin(String token, String deviceId) async {
     Driver rs;
     // ignore: avoid_print
-    print("CheckLogin_Api TokenGG: " + token);
+    print("CheckLogin_Api TokenGG: " + deviceId);
     var body = jsonEncode({'token': token, 'diviceId': deviceId});
     var response = await http.post(
         Uri.parse("http://3.138.105.45/api/v1/auth/login-driver"),

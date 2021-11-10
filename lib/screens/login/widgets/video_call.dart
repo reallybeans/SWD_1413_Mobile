@@ -15,9 +15,10 @@ class _VideoCallState extends State<VideoCall> {
   // late final AgoraClient _client;
   bool _loading = true;
   String tempToken = "";
-
+ 
   @override
   void initState() {
+    
     initAgora();
     super.initState();
   }
@@ -55,7 +56,7 @@ class _VideoCallState extends State<VideoCall> {
       agoraConnectionData: AgoraConnectionData(
         appId: "c0361d4447854ba8b277b52880484530",
         tempToken:
-            '006c0361d4447854ba8b277b52880484530IAAFv6vXnpK7Sx3SWxvn1OFwEb3jbLFuMH9e56QvI9pwfAx+f9gAAAAAEACkCrtyvauKYQEAAQC5q4ph',
+            '006c0361d4447854ba8b277b52880484530IADNNBBEszgk4xbaxYXCz0WsfmNhhsNlRtmeiY23ZVyNqAx+f9gAAAAAEACkCrtyuxaMYQEAAQC3Foxh',
         channelName: 'test',
       ),
       enabledPermission: [Permission.camera, Permission.microphone]);
