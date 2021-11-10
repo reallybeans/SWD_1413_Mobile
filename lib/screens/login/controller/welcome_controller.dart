@@ -20,6 +20,7 @@ class WelcomeController extends GetxController {
   void onClose() {}
 
   void logout() async {
+    await homeController.onlineDriver(false);
     await homeController.googleSign.disconnect();
     await homeController.firebaseAuth.signOut();
   }

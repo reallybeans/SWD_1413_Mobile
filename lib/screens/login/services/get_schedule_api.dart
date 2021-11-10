@@ -18,7 +18,7 @@ class GetScheduleApi {
           "Accept": "application/json",
           "content-type": "application/json"
         });
-    print("API SCHEDULE Status_code: "'${response.statusCode}');
+    print("API SCHEDULE Status_code: " '${response.statusCode}');
     if (response.statusCode == 200) {
       var jsonString = response.body;
       Iterable list = json.decode(jsonString);
@@ -51,12 +51,22 @@ class GetScheduleApi {
       return listOfBookingsAccept;
     }
   }
-   Future<String> getToken(String channelName) async {
-    String link =
-        "https://agora-node-tokenserver-1.davidcaleb.repl.co/access_token?channelName=${channelName}";
-    var _response = await http.get(Uri.parse(link));
-    Map data = jsonDecode(_response.body);
-      String rsToken = data["token"];
-      return Future<String>.value(rsToken);
+
+  static Future<bool> checkCustomerCancelBooking(String code) async {
+    var response = await http.get(
+        Uri.parse(
+            'http://3.138.105.45/api/v1/booking/get-status-by-code/${code}'),
+        headers: {
+          "Accept": "application/json",
+          "content-type": "application/json"
+        });
+    // if (response.statusCode == 200) {
+    var jsonString = response.body;
+    if (jsonString == "4") {
+      return Future<bool>.value(true);
+    }
+    // ignore: avoid_print
+    print(jsonString);
+    return Future<bool>.value(false);
   }
 }

@@ -84,23 +84,15 @@ class ManageVehiclePage extends GetView<ManageVehicleController> {
                   try {
                     _switchValues[index] = value;
                     if(value){
-                    //  await ManageVehicleApi().updateStatusVehicle(controller.vehiclesList[index].id, "inuse");
+                     await ManageVehicleApi().updateStatusVehicle(controller.vehiclesList[index].id, "inuse");
                     }else {
-                    // await  ManageVehicleApi().updateStatusVehicle(controller.vehiclesList[index].id, "unuse");
+                    await  ManageVehicleApi().updateStatusVehicle(controller.vehiclesList[index].id, "unuse");
                     }
                   } finally {
-                    // controller.reLoading(true);
+                    controller.reLoading(true);
                   }
                 },
               ),
-              // CupertinoSwitch(
-              //   trackColor: Colors.black,
-              //   value: tmp.value,
-              //   onChanged: (value) {
-              //     tmp.value = value;
-              //     print('${controller.switchValue.value} fsdf');
-              //   },
-              // ),
             ],
           )),
         );

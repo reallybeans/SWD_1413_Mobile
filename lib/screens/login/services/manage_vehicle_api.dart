@@ -24,22 +24,22 @@ class ManageVehicleApi {
     }).toList();
     return listofvehicles;
   }
-  //   Future<bool> updateStatusVehicle(int vehicleId,String status) async {
+    Future<bool> updateStatusVehicle(int vehicleId,String status) async {
   
-  //   var body = jsonEncode({'id': vehicleId,'status':status});
-  //   var response = await http.put(
-  //       Uri.parse("http://3.138.105.45/api/v1/vehicles/update-status?id=${vehicleId}&status=${status}"),
-  //       headers: {
-  //         "Accept": "application/json",
-  //         "content-type": "application/json"
-  //       });
+    var body = jsonEncode({'id': vehicleId,'status':status});
+    var response = await http.put(
+        Uri.parse("http://3.138.105.45/api/v1/vehicles/update-status?id=${vehicleId}&status=${status}"),
+        headers: {
+          "Accept": "application/json",
+          "content-type": "application/json"
+        });
       
-  //   // ignore: avoid_print
-  //   print(response.statusCode);
-  //   if (response.statusCode == 200) {
-  //     return Future<bool>.value(true);
-  //   } else {
-  //     return Future<bool>.value(false);
-  //   }
-  // }
+    // ignore: avoid_print
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      return Future<bool>.value(true);
+    } else {
+      return Future<bool>.value(false);
+    }
+  }
 }

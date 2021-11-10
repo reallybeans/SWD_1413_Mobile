@@ -33,25 +33,29 @@ class ScheduleContainer extends StatelessWidget {
                       style: const TextStyle(
                           fontSize: 21, fontWeight: FontWeight.bold),
                     ),
-                    
                   ),
-                  Expanded(child:  Column(
-                children: [
-                  Text(
-                        '${scheduleItem.startAt.day}' +
-                        "/" +
-                        '${scheduleItem.startAt.month}' +
-                        "/" +
-                        '${scheduleItem.startAt.year}', style: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.bold),
-                  ), Text(
-                        '${scheduleItem.startAt.hour}' +
-                        ":" +
-                        '${scheduleItem.startAt.minute}',style: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.bold),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Text(
+                          '${scheduleItem.startAt.day}' +
+                              "/" +
+                              '${scheduleItem.startAt.month}' +
+                              "/" +
+                              '${scheduleItem.startAt.year}',
+                          style: const TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          '${scheduleItem.startAt.hour}' +
+                              ":" +
+                              '${scheduleItem.startAt.minute}',
+                          style: const TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    ),
                   )
-                ],
-              ),)
                 ],
               ),
               const SizedBox(
@@ -113,7 +117,6 @@ class ScheduleContainer extends StatelessWidget {
               const SizedBox(
                 height: 5,
               ),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -136,7 +139,7 @@ class ScheduleContainer extends StatelessWidget {
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
                           color: Colors.greenAccent.shade400)),
-                          Spacer()
+                  Spacer()
                 ],
               ),
               const Spacer(),
@@ -148,8 +151,7 @@ class ScheduleContainer extends StatelessWidget {
       Positioned(
           bottom: -10,
           right: 10,
-          child:
-           SpeedDial(
+          child: SpeedDial(
             icon: Icons.menu,
             backgroundColor: Colors.greenAccent,
             overlayColor: Colors.transparent,
@@ -158,13 +160,20 @@ class ScheduleContainer extends StatelessWidget {
               SpeedDialChild(
                   child: IconButton(
                       onPressed: () async {
-                        String waitpoints="waypoints=";
-                        for (var i = 0; i < scheduleItem.schedule.address.waypoint.length; i++) {
-                         if(i==(scheduleItem.schedule.address.waypoint.length-1)){
-                           waitpoints=waitpoints+scheduleItem.schedule.address.waypoint[i];
-                         }else{
-                             waitpoints=waitpoints+scheduleItem.schedule.address.waypoint[i]+"|";
-                         }
+                        String waitpoints = "waypoints=";
+                        for (var i = 0;
+                            i < scheduleItem.schedule.address.waypoint.length;
+                            i++) {
+                          if (i ==
+                              (scheduleItem.schedule.address.waypoint.length -
+                                  1)) {
+                            waitpoints = waitpoints +
+                                scheduleItem.schedule.address.waypoint[i];
+                          } else {
+                            waitpoints = waitpoints +
+                                scheduleItem.schedule.address.waypoint[i] +
+                                "|";
+                          }
                         }
                         String googleUrl =
                             'https://www.google.com/maps/dir/?api=1&origin=${scheduleItem.schedule.address.origin}&${waitpoints}&destination=${scheduleItem.schedule.address.destination}&travelmode=driving&dir_action=navigate';
@@ -185,14 +194,12 @@ class ScheduleContainer extends StatelessWidget {
                   ),
                   label: "Điện thoại")
             ],
-          )
-          ),
+          )),
+      Positioned(
+        top: 0,
+        right: 0,
+        child: CircleAvatar(radius: 25,backgroundColor: Colors.amber,child: Text("${scheduleItem.typeVehicle}",style: TextStyle(fontWeight: FontWeight.bold),)),
+      )
     ]);
   }
-
-
-
-
-
 }
-

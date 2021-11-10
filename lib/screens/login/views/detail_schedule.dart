@@ -319,8 +319,8 @@ class ScheduleDetails extends StatelessWidget {
                         await UpdateBookingStatusApi()
                             .apiUpdateStatusBooking(scheduleItem.id, 3);
                         Get.find<NavSheduleController>().fetchSchedule();
-                        Get.find<NavNotificationController>()
-                            .fecthBookingWaitProcess();
+                        // Get.find<NavNotificationController>()
+                        //     .fecthBookingWaitProcess();
                         Get.back();
                       },
                       child: Text("Hoàn thành"),

@@ -1,6 +1,8 @@
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:timxe/screens/login/controller/welcome_controller.dart';
+import 'package:timxe/screens/login/services/get_schedule_api.dart';
 import 'package:timxe/screens/login/views/history_view.dart';
 import 'package:timxe/screens/login/views/manage_vehicle_view.dart';
 import 'package:timxe/screens/login/views/nav_info_detail_view.dart';
@@ -59,10 +61,6 @@ class NavInfoView extends GetView<WelcomeController> {
                 color: Colors.orange.shade200,
               ),
               press: () => Get.to(HistoryView()),
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => HistoryView()),
-              // ),
               text: 'Lịch sử',
             ),
             ProfileMenu(
@@ -80,7 +78,8 @@ class NavInfoView extends GetView<WelcomeController> {
                 Icons.headset_mic_outlined,
                 color: Colors.orange.shade200,
               ),
-              press: () {},
+              press: () {
+              },
               text: 'Hỗ trợ',
             ),
             ProfileMenu(
